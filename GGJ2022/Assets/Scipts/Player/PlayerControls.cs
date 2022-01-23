@@ -20,7 +20,7 @@ public class PlayerControls : MonoBehaviour
         float movement = Input.GetAxisRaw("Horizontal");
         //se il giocatore vuole muoversi, si muove
         if (movement != 0) { pm.MovePlayer(new Vector2(movement, 0)); }
-
+        //se il giocatore preme il tasto di salto, lo fa saltare se può
         if (Input.GetButtonDown("Jump")) { pm.Jump(); }
 
     }

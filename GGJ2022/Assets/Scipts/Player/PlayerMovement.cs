@@ -1,7 +1,7 @@
 //Si occupa del movimento del giocatore
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, INeedGroundCheck
 {
     //riferimento al Rigidbody2D del giocatore
     private Rigidbody2D playerRb;
@@ -13,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 1, //indica la velocità di movimento del giocatore
         jumpForce = 1; //indica quanto potente è il salto del giocatore
 
-    //indica la rotazione del giocatore
-    private bool facingRight = true;
+    private bool facingRight = true, //indica la rotazione del giocatore
+        canJump = true; //indica se il giocatore può saltare o meno
 
 
     private void Start()
@@ -58,14 +58,27 @@ public class PlayerMovement : MonoBehaviour
         if (checkedRotation != facingRight) { playerSprite.eulerAngles = newRotation; }
 
     }
-
+    /// <summary>
+    /// Fa saltare il giocatore
+    /// </summary>
     public void Jump()
     {
+        //se può saltare...
+        if (canJump)
+        {
+            //...calcola la forza da aggiungere per far saltare il giocatore...
+            Vector2 jumpVelocity = new Vector2(0, jumpForce);
+            //...aggiunge la forza calcolata, facendo saltare il giocatore...
+            playerRb.AddForce(jumpVelocity);
+            //...e comunica che non può più saltare
+            canJump = false;
 
-        Vector2 jumpVelocity = new Vector2(0, jumpForce);
-
-        playerRb.AddForce(jumpVelocity);
+        }
 
     }
+    /// <summary>
+    /// Permette al giocatore di saltare di nuovo
+    /// </summary>
+    public void HasLanded() { canJump = true; }
 
 }
