@@ -21,6 +21,8 @@ public class PlayerControls : MonoBehaviour
         //se il giocatore vuole muoversi, si muove
         if (movement != 0) { pm.MovePlayer(new Vector2(movement, 0)); }
 
+        if (Input.GetButtonDown("Jump")) { pm.Jump(); }
+
     }
 
 }

@@ -8,9 +8,11 @@ public class PlayerMovement : MonoBehaviour
     //riferimento allo sprite del giocatore
     [SerializeField]
     private Transform playerSprite = default;
-    //indica la velocità di movimento del giocatore
+    
     [SerializeField]
-    private float speed = 1;
+    private float speed = 1, //indica la velocità di movimento del giocatore
+        jumpForce = 1; //indica quanto potente è il salto del giocatore
+
     //indica la rotazione del giocatore
     private bool facingRight = true;
 
@@ -54,6 +56,15 @@ public class PlayerMovement : MonoBehaviour
         }
         //se la rotazione è cambiata, cambia la rotazione del giocatore con quella calcolata
         if (checkedRotation != facingRight) { playerSprite.eulerAngles = newRotation; }
+
+    }
+
+    public void Jump()
+    {
+
+        Vector2 jumpVelocity = new Vector2(0, jumpForce);
+
+        playerRb.AddForce(jumpVelocity);
 
     }
 
