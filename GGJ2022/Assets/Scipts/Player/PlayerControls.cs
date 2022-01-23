@@ -1,6 +1,4 @@
 //Si occupa di controllare gli input del giocatore
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
@@ -16,12 +14,11 @@ public class PlayerControls : MonoBehaviour
 
     }
 
-    
     private void Update()
     {
-
+        //controlla se il giocatore si sta muovendo
         float movement = Input.GetAxisRaw("Horizontal");
-
+        //se il giocatore vuole muoversi, si muove
         if (movement != 0) { pm.MovePlayer(new Vector2(movement, 0)); }
 
     }
