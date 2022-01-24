@@ -24,4 +24,11 @@ public class GroundCheck : MonoBehaviour
 
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //se non si tocca più il terreno, comunica allo script da informare che non si è più a terra
+        if (collision.CompareTag("Ground")) { toInform.HasLanded(false); }
+
+    }
+
 }

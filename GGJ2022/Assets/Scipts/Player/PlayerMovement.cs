@@ -107,6 +107,8 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
         //se può saltare...
         if (canJump)
         {
+            //...rimuove ogni forza di movimento nell'asse Y...
+            playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
             //...calcola la forza da aggiungere per far saltare il giocatore...
             Vector2 jumpVelocity = new Vector2(0, jumpForce);
             //...aggiunge la forza calcolata, facendo saltare il giocatore...
@@ -118,8 +120,8 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
 
     }
     /// <summary>
-    /// Permette al giocatore di saltare di nuovo
+    /// Permette di impostare se il giocatore può saltare o meno
     /// </summary>
-    public void HasLanded() { canJump = true; }
+    public void HasLanded(bool landed) { canJump = landed; }
 
 }
