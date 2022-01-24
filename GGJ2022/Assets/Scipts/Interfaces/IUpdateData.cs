@@ -1,4 +1,6 @@
-﻿//Interfaccia per tutti gli script che devono aggiornare dei dati nel GameManag prima del salvataggio dei dati
+﻿/// <summary>
+/// Interfaccia per tutti gli script che devono aggiornare dei dati nel GameManag prima del salvataggio dei dati
+/// </summary>
 
 public interface IUpdateData
 {
