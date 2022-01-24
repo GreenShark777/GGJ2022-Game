@@ -4,13 +4,12 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     //riferimento allo script che si occupa del movimento del giocatore
-    private PlayerMovement pm;
-
-
+    private CharacterMovement pm;
+    
     private void Start()
     {
         //ottiene il riferimento allo script che si occupa del movimento del giocatore
-        pm = GetComponent<PlayerMovement>();
+        pm = GetComponent<CharacterMovement>();
 
     }
 
@@ -19,7 +18,7 @@ public class PlayerControls : MonoBehaviour
         //controlla se il giocatore si sta muovendo
         float movement = Input.GetAxisRaw("Horizontal");
         //se il giocatore vuole muoversi, si muove
-        if (movement != 0) { pm.MovePlayer(new Vector2(movement, 0)); }
+        if (movement != 0) { pm.Move(new Vector2(movement, 0)); }
         //se il giocatore preme il tasto di salto, lo fa saltare se può
         if (Input.GetButtonDown("Jump")) { pm.Jump(); }
 

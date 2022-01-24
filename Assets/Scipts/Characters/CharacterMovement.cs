@@ -1,34 +1,39 @@
 //Si occupa del movimento del giocatore
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour, INeedGroundCheck
+public class CharacterMovement : MonoBehaviour, INeedGroundCheck
 {
     //riferimento al Rigidbody2D del giocatore
-    private Rigidbody2D playerRb;
+    private Rigidbody2D rb;
     //riferimento allo sprite del giocatore
     [SerializeField]
-    private Transform playerSprite = default;
+    private Transform characterBody = default;
 
     [SerializeField]
-    private float speed = 1, //indica la velocit‡ di movimento del giocatore
-        maxVelocity = 5, //indica la velocit‡ massima a cui puÚ andare il giocatore
-        maxFallSpeed = 7, //indica quanto velocemente puÚ cadere al massimo il giocatore
-        jumpForce = 1; //indica quanto potente Ë il salto del giocatore
+    private float speed = 1, //indica la velocit√† di movimento del giocatore
+        maxVelocity = 5, //indica la velocit√† massima a cui pu√≤ andare il giocatore
+        maxFallSpeed = 7, //indica quanto velocemente pu√≤ cadere al massimo il giocatore
+        jumpForce = 1; //indica quanto potente √® il salto del giocatore
 
+    [SerializeField] 
+    private float jumpFallMultiplier = 2.5f, // Aggiungi un moltiplicatore alla gravit√† durante la discesa
+        lowJumpMultiplier = 2f; // Aggiungi un moltiplicatore al salto, durante la prima met√† 
+    
     private bool facingRight = true, //indica la rotazione del giocatore
-        canJump = true; //indica se il giocatore puÚ saltare o meno
+        canJump = true; //indica se il giocatore pu√≤ saltare o meno
 
 
     private void Start()
     {
         //ottiene il riferimento al Rigidbody2D del giocatore
-        playerRb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
     }
 
     private void FixedUpdate()
     {
-        //se il giocatore Ë in salto, controlla se non sta cadendo troppo velocemente
+        //se il giocatore √® in salto, controlla se non sta cadendo troppo velocemente
         if (!canJump) { CorrectVelocity(); }
 
     }
@@ -37,36 +42,39 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
     /// Muove il giocatore in base alla direzione ricevuta come parametro
     /// </summary>
     /// <param name="newVelocity"></param>
-    public void MovePlayer(Vector2 newVelocity)
+    public void Move(Vector2 newVelocity)
     {
-        //muove il giocatore, aggiungendo forza al Rigidbody del giocatore in base alla direzione ricevuta per la velocit‡
-        playerRb.AddForce(newVelocity * speed);
-        //corregge problemi nella nuova velocit‡ del Rigidbody del giocatore
+        //muove il giocatore, aggiungendo forza al Rigidbody del giocatore in base alla direzione ricevuta per la velocit√†
+        rb.AddForce(newVelocity * speed);
+        //corregge problemi nella nuova velocit√† del Rigidbody del giocatore
         CorrectVelocity();
+        
         //crea una variabile locale che indica la nuova rotazione che deve avere il giocatore
         Vector3 newRotation = transform.eulerAngles;
         //crea una variabile locale che indica la rotazione del giocatore prima del controllo
         bool checkedRotation = facingRight;
-        //se il giocatore va verso destra e il giocatore non Ë gi‡ ruotato verso destra...
+        //se il giocatore va verso destra e il giocatore non √® gi√† ruotato verso destra...
         if (newVelocity.x > 0 && !facingRight)
         {
             //...il giocatore viene ruotato verso destra...
             newRotation = new Vector3(0, 0);
-            //...e comunica che il giocatore Ë voltato a destra
+            //...e comunica che il giocatore √® voltato a destra
             facingRight = true;
             //Debug.Log("Destra");
         }
-        //altrimenti, se va verso sinistra e non Ë gi‡ voltato a sinistra...
+        //altrimenti, se va verso sinistra e non √® gi√† voltato a sinistra...
         else if (newVelocity.x < 0 && facingRight)
         {
             //...il giocatore viene ruotato a sinistra...
             newRotation = new Vector3(0, 180);
-            //...e comunica che il giocatore Ë voltato a sinistra
+            //...e comunica che il giocatore √® voltato a sinistra
             facingRight = false;
             //Debug.Log("Sinistra");
         }
-        //se la rotazione Ë cambiata, cambia la rotazione del giocatore con quella calcolata
-        if (checkedRotation != facingRight) { playerSprite.eulerAngles = newRotation; }
+        //se la rotazione √® cambiata, cambia la rotazione del giocatore con quella calcolata
+        if (checkedRotation != facingRight) { characterBody.eulerAngles = newRotation; }
+        
+        // rb.velocity = Vector2.SmoothDamp(rb.velocity, movement, ref m_Velocity, m_MovementSmoothing);
 
     }
     /// <summary>
@@ -75,28 +83,43 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
     private void CorrectVelocity()
     {
         //ottiene la velocity attuale del giocatore in entrambi assi
-        float XVelocity = playerRb.velocity.x;
-        float YVelocity = playerRb.velocity.y;
-        //impedisce al giocatore di superare la velocit‡ massima sia a destra che a sinistra
+        float XVelocity = rb.velocity.x;
+        float YVelocity = rb.velocity.y;
+        
+        //impedisce al giocatore di superare la velocit√† massima sia a destra che a sinistra
         if (XVelocity > maxVelocity) { SetNewVelocity(maxVelocity, true); }
         if (XVelocity < -maxVelocity) { SetNewVelocity(-maxVelocity, true); }
+        
         //impedisce al giocatore di cadere troppo velocemente
         if (YVelocity < -maxFallSpeed) { SetNewVelocity(-maxFallSpeed, false); }
 
+        // Se siamo in caduta (seconda met√† del salto)
+        if (rb.velocity.y < 0)
+        {
+            // Applica l'effetto del moltiplicatore
+            rb.velocity += Vector2.up * Physics2D.gravity * (jumpFallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0)
+        {
+            Debug.Log("Current: " + rb.velocity);
+            
+            // Applica l'effetto del moltiplicatore durante la prima met√† del salto
+            rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
     }
     /// <summary>
-    /// Imposta la velocit‡ del Rigidbody del giocatore a quella indicata e nell'asse indicato
+    /// Imposta la velocit√† del Rigidbody del giocatore a quella indicata e nell'asse indicato
     /// </summary>
     /// <param name="minus"></param>
     private void SetNewVelocity(float newVelocity, bool horizontal)
     {
         //crea un vettore locale, inizializzato alla velocity del Rigidbody del giocatore
-        Vector2 velocityToSet = playerRb.velocity;
+        Vector2 velocityToSet = rb.velocity;
         //in base all'asse indicato, viene cambiata la velocity con il parametro ricevuto
         if (horizontal) velocityToSet.x = newVelocity; //ASSE X
         else velocityToSet.y = newVelocity; //ASSE Y
         //infine, imposta la nuova velocity al Rigidbody del giocatore
-        playerRb.velocity = velocityToSet;
+        rb.velocity = velocityToSet;
 
     }
     /// <summary>
@@ -104,23 +127,22 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
     /// </summary>
     public void Jump()
     {
-        //se puÚ saltare...
+        //se pu√≤ saltare...
         if (canJump)
         {
             //...rimuove ogni forza di movimento nell'asse Y...
-            playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
+            rb.velocity = new Vector2(rb.velocity.x, 0);
             //...calcola la forza da aggiungere per far saltare il giocatore...
             Vector2 jumpVelocity = new Vector2(0, jumpForce);
             //...aggiunge la forza calcolata, facendo saltare il giocatore...
-            playerRb.AddForce(jumpVelocity);
-            //...e comunica che non puÚ pi˘ saltare
+            rb.AddForce(jumpVelocity);
+            //...e comunica che non pu√≤ pi√π saltare
             canJump = false;
-
         }
 
     }
     /// <summary>
-    /// Permette di impostare se il giocatore puÚ saltare o meno
+    /// Permette di impostare se il giocatore pu√≤ saltare o meno
     /// </summary>
     public void HasLanded(bool landed) { canJump = landed; }
 
