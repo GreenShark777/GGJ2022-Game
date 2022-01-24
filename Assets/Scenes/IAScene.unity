@@ -585,11 +585,6 @@ Transform:
   m_Father: {fileID: 1894146742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1137404179 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8731005624747928263, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-  m_PrefabInstance: {fileID: 8731005624130698028}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1206663759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8731005625130238307, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
@@ -981,21 +976,9 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8731005625130238306, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: speed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731005625130238306, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: jumpForce
-      value: 750
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731005625130238306, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: maxFallSpeed
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 8731005625130238306, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: characterBody
-      value: 
-      objectReference: {fileID: 1137404179}
     - target: {fileID: 8731005625130238307, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: m_RootOrder
       value: 1
