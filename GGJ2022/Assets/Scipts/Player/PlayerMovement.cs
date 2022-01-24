@@ -8,9 +8,11 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
     //riferimento allo sprite del giocatore
     [SerializeField]
     private Transform playerSprite = default;
-    
+
     [SerializeField]
     private float speed = 1, //indica la velocità di movimento del giocatore
+        maxVelocity = 5, //indica la velocità massima a cui può andare il giocatore
+        maxFallSpeed = 7, //indica quanto velocemente può cadere al massimo il giocatore
         jumpForce = 1; //indica quanto potente è il salto del giocatore
 
     private bool facingRight = true, //indica la rotazione del giocatore
@@ -24,6 +26,13 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
 
     }
 
+    private void FixedUpdate()
+    {
+        //se il giocatore è in salto, controlla se non sta cadendo troppo velocemente
+        if (!canJump) { CorrectVelocity(); }
+
+    }
+
     /// <summary>
     /// Muove il giocatore in base alla direzione ricevuta come parametro
     /// </summary>
@@ -32,6 +41,8 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
     {
         //muove il giocatore, aggiungendo forza al Rigidbody del giocatore in base alla direzione ricevuta per la velocità
         playerRb.AddForce(newVelocity * speed);
+        //corregge problemi nella nuova velocità del Rigidbody del giocatore
+        CorrectVelocity();
         //crea una variabile locale che indica la nuova rotazione che deve avere il giocatore
         Vector3 newRotation = transform.eulerAngles;
         //crea una variabile locale che indica la rotazione del giocatore prima del controllo
@@ -56,6 +67,36 @@ public class PlayerMovement : MonoBehaviour, INeedGroundCheck
         }
         //se la rotazione è cambiata, cambia la rotazione del giocatore con quella calcolata
         if (checkedRotation != facingRight) { playerSprite.eulerAngles = newRotation; }
+
+    }
+    /// <summary>
+    /// Corregge errori nella velocity del giocatore
+    /// </summary>
+    private void CorrectVelocity()
+    {
+        //ottiene la velocity attuale del giocatore in entrambi assi
+        float XVelocity = playerRb.velocity.x;
+        float YVelocity = playerRb.velocity.y;
+        //impedisce al giocatore di superare la velocità massima sia a destra che a sinistra
+        if (XVelocity > maxVelocity) { SetNewVelocity(maxVelocity, true); }
+        if (XVelocity < -maxVelocity) { SetNewVelocity(-maxVelocity, true); }
+        //impedisce al giocatore di cadere troppo velocemente
+        if (YVelocity < -maxFallSpeed) { SetNewVelocity(-maxFallSpeed, false); }
+
+    }
+    /// <summary>
+    /// Imposta la velocità del Rigidbody del giocatore a quella indicata e nell'asse indicato
+    /// </summary>
+    /// <param name="minus"></param>
+    private void SetNewVelocity(float newVelocity, bool horizontal)
+    {
+        //crea un vettore locale, inizializzato alla velocity del Rigidbody del giocatore
+        Vector2 velocityToSet = playerRb.velocity;
+        //in base all'asse indicato, viene cambiata la velocity con il parametro ricevuto
+        if (horizontal) velocityToSet.x = newVelocity; //ASSE X
+        else velocityToSet.y = newVelocity; //ASSE Y
+        //infine, imposta la nuova velocity al Rigidbody del giocatore
+        playerRb.velocity = velocityToSet;
 
     }
     /// <summary>

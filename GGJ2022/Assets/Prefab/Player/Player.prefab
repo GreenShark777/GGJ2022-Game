@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e67786688c32894f82359a34f1cc608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objToGetInterfaceFrom: {fileID: 8731005625130238304}
 --- !u!61 &1692902381
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -308,7 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8731005624747928263}
   m_Layer: 0
-  m_Name: PlayerSprite
+  m_Name: PlayerSprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +383,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSprite: {fileID: 8731005624747928263}
   speed: 1.5
-  jumpForce: 550
+  maxVelocity: 5
+  jumpForce: 500
 --- !u!114 &8731005625130238332
 MonoBehaviour:
   m_ObjectHideFlags: 0
