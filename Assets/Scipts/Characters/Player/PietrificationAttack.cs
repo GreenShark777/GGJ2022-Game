@@ -170,9 +170,9 @@ public class PietrificationAttack : MonoBehaviour
             {
                 //...prende il riferimento al transform dell'oggetto con il collider trovato...
                 Transform objFound = collFound.transform;
-                //...se l'oggetto trovato ha un manager delle collisioni ed è un nemico...
-                CollisionsManager cm = objFound.GetComponent<CollisionsManager>();
-                if (cm && cm.GetCollType() == CollisionsManager.CollisionType.enemy)
+                //...se l'oggetto trovato è vulnerabile alla pietrificazione...
+                PetrificationVulnerability pv = objFound.GetComponent<PetrificationVulnerability>();
+                if (pv)
                 {
                     //...calcola la direzione tra il punto d'inizio dell'attacco e l'oggetto trovato e lo normalizza...
                     Vector3 directionBetween = (objFound.position - attackStartPoint.position).normalized;
@@ -184,7 +184,8 @@ public class PietrificationAttack : MonoBehaviour
                     if (Angle <= maxAngle)
                     {
                         //...il nemico viene pietrificato
-                        Debug.LogError("Pietrificato nemico: " + objFound.name);
+                        pv.TryToPetrify();
+                        Debug.LogError("Provato a pietrificare oggetto: " + objFound.name);
 
                     }
 
