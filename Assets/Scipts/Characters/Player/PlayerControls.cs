@@ -19,12 +19,17 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        //controlla se il giocatore si sta muovendo
-        float movement = Input.GetAxisRaw("Horizontal");
-        //se il giocatore vuole muoversi, si muove(se non sta attaccando)
-        if (movement != 0 && !am.IsAttacking()) { cm.Move(new Vector2(movement, 0)); }
-        //se il giocatore preme il tasto di salto, lo fa saltare se può
-        if (Input.GetButtonDown("Jump")) { cm.Jump(); }
+        //se il giocatore non sta attaccando...
+        if (!am.IsAttacking())
+        {
+            //...controlla se il giocatore si sta muovendo...
+            float movement = Input.GetAxisRaw("Horizontal");
+            //...e se vuole muoversi, si muove(se non sta attaccando)...
+            if (movement != 0) { cm.Move(new Vector2(movement, 0)); }
+            //...e se il giocatore preme il tasto di salto, lo fa saltare se può
+            if (Input.GetButtonDown("Jump")) { cm.Jump(); }
+
+        }
         //se il giocatore preme il tasto d'attacco, prova a farlo attaccare
         if (Input.GetButtonDown("Attack")) { am.WantsToAttack(); }
 
