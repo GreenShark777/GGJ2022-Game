@@ -4,7 +4,7 @@ using UnityEngine;
 public class CollisionsManager : MonoBehaviour
 {
     //definisce un tipo di variabile per differenziare il tipo di entità di cui si controllano le collisioni
-    private enum CollisionType { enemy, player }
+    public enum CollisionType { enemy, player }
     //indica l'entità di cui si controllano le collisioni
     [SerializeField]
     CollisionType thisCollType = default;
@@ -88,5 +88,7 @@ public class CollisionsManager : MonoBehaviour
         }
 
     }
+
+    public CollisionType GetCollType() { return thisCollType; }
 
 }

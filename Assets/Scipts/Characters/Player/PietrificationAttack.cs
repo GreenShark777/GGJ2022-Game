@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PietrificationAttack : MonoBehaviour
 {
+    //indica il numero massimo di collider da poter controllare con un singolo attacco
+    private int NCOLLIDERS = 50;
+
+    [Header("References")]
     //riferimento al manager delle animazioni dello sprite
     [SerializeField]
     private SpriteAnimationManager sam = default;
@@ -17,6 +21,11 @@ public class PietrificationAttack : MonoBehaviour
     //riferimento allo sprite da usare durante l'attacco per scurire la scena
     [SerializeField]
     private SpriteRenderer lightsOutSprite = default;
+    //riferimento al punto in cui deve iniziare l'attacco
+    [SerializeField]
+    private Transform attackStartPoint = default;
+
+    [Header("Animation")]
     //indica se la mossa speciale può essere usata o meno
     private bool canUse = false;
     //indica la carica che si deve avere per poter nuovamente usare l'attacco speciale
@@ -34,6 +43,14 @@ public class PietrificationAttack : MonoBehaviour
     //indica quanto velocemente avviene il fadeIn o fadeOut dell'immagine lightsOut
     [SerializeField]
     private float fadeInOutRatio = 0.08f;
+
+    [Header("Attack")]
+    //indica quanto lontano l'attacco di pietrificazione ha effetto
+    [SerializeField]
+    private float attackRange = 13.3f;
+    //variabile per stabilire l'angolo massimo di effetto dell'attacco
+    [SerializeField]
+    private float maxAngle = 75;
 
 
     private void Awake()
@@ -77,7 +94,7 @@ public class PietrificationAttack : MonoBehaviour
             //...scarica lo slider...
             specialAttackSlider.value = 0;
             //...e fa partire la coroutine d'attacco
-            StartCoroutine(ManagePietrificationAttack());
+            StartCoroutine(ManagePietrificationAttackTiming());
         
         }
 
@@ -86,7 +103,7 @@ public class PietrificationAttack : MonoBehaviour
     /// Si occupa delle tempistiche dell'attacco pietrificazione
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ManagePietrificationAttack()
+    private IEnumerator ManagePietrificationAttackTiming()
     {
         //mette il gioco in pausa
         PauseManager.SetPauseState(true);
@@ -94,8 +111,12 @@ public class PietrificationAttack : MonoBehaviour
         sam.StartNewAnimation(2, pietrificationAnimationLimits[0], pietrificationAnimationLimits[1], true);
         //fa partire una coroutine per il fadeIn dell'immagine di animazione
         StartCoroutine(FadeInOutImage(lightsOutAlpha, true));
+        //aspetta metà del tempo d'attacco
+        yield return new WaitForSecondsRealtime(attackDuration / 2);
+        //pietrifica i nemici di fronte al giocatore
+        PetrifyEnemies();
         //aspetta che finisca l'attacco
-        yield return new WaitForSecondsRealtime(attackDuration);
+        yield return new WaitForSecondsRealtime(attackDuration / 2);
         //toglie il gioco dalla pausa
         PauseManager.SetPauseState(false);
         //fa partire una coroutine per il fadeOut dell'immagine di animazione
@@ -128,6 +149,71 @@ public class PietrificationAttack : MonoBehaviour
 
         //se bisogna continuare il ciclo, fa ripartire la coroutine
         if (continueCycle) { StartCoroutine(FadeInOutImage(targetAlpha, fadeIn)); }
+
+    }
+    /// <summary>
+    /// Pietrifica tutti i nemici nel raggio d'azione dell'attacco
+    /// </summary>
+    private void PetrifyEnemies()
+    {
+        Debug.Log("Inizio pietrificazione");
+        //array locale che conterrà tutti i collider dentro il raggio d'azione dell'attacco
+        Collider2D[] overlaps = new Collider2D[NCOLLIDERS];
+        //prende tutti i collider degli oggetti vicini al punto d'inizio dell'attacco in un cerchio con come diametro il raggio d'azione dell'attacco
+        int count = Physics2D.OverlapCircleNonAlloc(attackStartPoint.position, attackRange, overlaps);
+        //cicla tra tutti i collider presenti nella vista del gameobject
+        for (int i = 0; i < count; i++)
+        {
+            //se il collider nell'indice i dell'array non è nullo...
+            Collider2D collFound = overlaps[i];
+            if (collFound)
+            {
+                //...prende il riferimento al transform dell'oggetto con il collider trovato...
+                Transform objFound = collFound.transform;
+                //...se l'oggetto trovato ha un manager delle collisioni ed è un nemico...
+                CollisionsManager cm = objFound.GetComponent<CollisionsManager>();
+                if (cm && cm.GetCollType() == CollisionsManager.CollisionType.enemy)
+                {
+                    //...calcola la direzione tra il punto d'inizio dell'attacco e l'oggetto trovato e lo normalizza...
+                    Vector3 directionBetween = (objFound.position - attackStartPoint.position).normalized;
+                    //...porta la z a 0 per avere maggiore accuratezza, in quanto potrebbe provocare errori nel calcolo dell'angolo...
+                    directionBetween.z *= 0;
+                    //...calcola l'angolo tra il centro del raggio d'attacco e l'oggetto trovato...
+                    float Angle = Vector3.Angle(attackStartPoint.right, directionBetween);
+                    //...se l'angolo è minore o uguale all' angolo massimo...
+                    if (Angle <= maxAngle)
+                    {
+                        //...il nemico viene pietrificato
+                        Debug.LogError("Pietrificato nemico: " + objFound.name);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        //se esiste il punto d'inizio dell'attacco, crea i gizmo
+        if (attackStartPoint)
+        {
+            //crea un gizmo che indica il raggio d'azione dell'attacco
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(attackStartPoint.position, attackRange);
+            //calcola come disegnare le linee che indicheranno l'angolo d'azione dell'attacco
+            Vector3 fovPoint1 = Quaternion.AngleAxis(maxAngle, attackStartPoint.forward) * attackStartPoint.right * attackRange;
+            Vector3 fovPoint2 = Quaternion.AngleAxis(-maxAngle, attackStartPoint.forward) * attackStartPoint.right * attackRange;
+            //crea le linee calcolate
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(attackStartPoint.position, fovPoint1);
+            Gizmos.DrawRay(attackStartPoint.position, fovPoint2);
+
+        }
 
     }
 
