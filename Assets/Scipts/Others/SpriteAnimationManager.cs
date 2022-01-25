@@ -42,18 +42,18 @@ public class SpriteAnimationManager : MonoBehaviour
             currentAnimationPriority = priority;
             //...e fa partire l'animazione richiesta
             if (currentAnimationRoutine != null) { StopCoroutine(currentAnimationRoutine); }
-            currentAnimationRoutine = StartCoroutine(ManageComboAnimation(nextAnimationIndex, lastAnimationIndex));
+            currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex, lastAnimationIndex));
 
         }
 
     }
     /// <summary>
-    /// Si occupa di mostrare l'animazione d'attacco all'indice indicato
+    /// Si occupa di mostrare l'animazione all'indice indicato
     /// </summary>
     /// <param name="nextAnimationIndex">Indice dello sprite a cui andare dello spritesheet d'attacco</param>
     /// <param name="lastAnimationIndex">Indice che indica la fine dell'animazione</param>
     /// <returns></returns>
-    private IEnumerator ManageComboAnimation(int nextAnimationIndex, int lastAnimationIndex)
+    private IEnumerator ManageAnimation(int nextAnimationIndex, int lastAnimationIndex)
     {
         //aspetta del tempo per rendere l'animazione fluida ma non troppo veloce
         yield return new WaitForSeconds(animationSpeed);
@@ -62,7 +62,7 @@ public class SpriteAnimationManager : MonoBehaviour
         //cambia lo sprite, continuando l'animazione
         spriteToChange.sprite = spriteSheet[nextAnimationIndex];
         //infine, fa continuare il ciclo d'animazione
-        currentAnimationRoutine = StartCoroutine(ManageComboAnimation(nextAnimationIndex + 1, lastAnimationIndex));
+        currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex + 1, lastAnimationIndex));
 
     }
     /// <summary>

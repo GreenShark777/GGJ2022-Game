@@ -99,7 +99,7 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
             // Applica l'effetto del moltiplicatore
             rb.velocity += Vector2.up * Physics2D.gravity * (jumpFallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0)
+        else if (rb.velocity.y < 0)
         {
             Debug.Log("Current: " + rb.velocity);
             

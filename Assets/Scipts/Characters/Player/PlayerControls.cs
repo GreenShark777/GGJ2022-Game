@@ -7,17 +7,32 @@ public class PlayerControls : MonoBehaviour
     private CharacterMovement cm;
     //riferimento allo script che si occupa dell'attacco del giocatore
     private AttacksManager am;
+    //riferimento allo script che si occupa dell'attacco speciale del giocatore
+    private PietrificationAttack pa;
     
+
     private void Start()
     {
         //ottiene il riferimento allo script che si occupa del movimento del giocatore
         cm = GetComponent<CharacterMovement>();
         //ottiene il riferimento allo script che si occupa dell'attacco del giocatore
         am = GetComponent<AttacksManager>();
+        //ottiene il riferimento allo script che si occupa dell'attacco speciale del giocatore
+        pa = GetComponent<PietrificationAttack>();
 
     }
 
     private void Update()
+    {
+        //se il gioco non è in pausa, controlla gli input
+        if (!PauseManager.IsGamePaused()) { CheckInputs(); }
+
+    }
+
+    /// <summary>
+    /// Controlla gli input del giocatore
+    /// </summary>
+    private void CheckInputs()
     {
         //se il giocatore non sta attaccando...
         if (!am.IsAttacking())
@@ -32,6 +47,8 @@ public class PlayerControls : MonoBehaviour
         }
         //se il giocatore preme il tasto d'attacco, prova a farlo attaccare
         if (Input.GetButtonDown("Attack")) { am.WantsToAttack(); }
+        //se il giocatore preme il tasto d'attacco speciale, prova a farglielo usare
+        if (Input.GetButtonDown("SpecialAttack")) { pa.UsePetrificationAttack(); }
 
     }
 
