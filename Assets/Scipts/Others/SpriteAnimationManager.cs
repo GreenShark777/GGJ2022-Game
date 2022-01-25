@@ -33,7 +33,7 @@ public class SpriteAnimationManager : MonoBehaviour
     /// <param name="priority"></param>
     /// <param name="nextAnimationIndex"></param>
     /// <param name="lastAnimationIndex"></param>
-    public void StartNewAnimation(int priority, int nextAnimationIndex, int lastAnimationIndex)
+    public void StartNewAnimation(int priority, int nextAnimationIndex, int lastAnimationIndex, bool realtime = false)
     {
         //se la priorità di questa animazione è abbastanza alta...
         if (priority >= currentAnimationPriority)
@@ -42,7 +42,7 @@ public class SpriteAnimationManager : MonoBehaviour
             currentAnimationPriority = priority;
             //...e fa partire l'animazione richiesta
             if (currentAnimationRoutine != null) { StopCoroutine(currentAnimationRoutine); }
-            currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex, lastAnimationIndex));
+            currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex, lastAnimationIndex, realtime));
 
         }
 
@@ -53,16 +53,18 @@ public class SpriteAnimationManager : MonoBehaviour
     /// <param name="nextAnimationIndex">Indice dello sprite a cui andare dello spritesheet d'attacco</param>
     /// <param name="lastAnimationIndex">Indice che indica la fine dell'animazione</param>
     /// <returns></returns>
-    private IEnumerator ManageAnimation(int nextAnimationIndex, int lastAnimationIndex)
+    private IEnumerator ManageAnimation(int nextAnimationIndex, int lastAnimationIndex, bool realtime)
     {
         //aspetta del tempo per rendere l'animazione fluida ma non troppo veloce
-        yield return new WaitForSeconds(animationSpeed);
+        if (!realtime) { yield return new WaitForSeconds(animationSpeed); }
+        else { yield return new WaitForSecondsRealtime(animationSpeed); }
+
         //se si è arrivati all'ultimo sprite d'animazione, fa terminare l'animazione e fa tornare la priorità a quella minima
         if (nextAnimationIndex > lastAnimationIndex) { currentAnimationPriority = -1; yield break; }
         //cambia lo sprite, continuando l'animazione
         spriteToChange.sprite = spriteSheet[nextAnimationIndex];
         //infine, fa continuare il ciclo d'animazione
-        currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex + 1, lastAnimationIndex));
+        currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex + 1, lastAnimationIndex, realtime));
 
     }
     /// <summary>

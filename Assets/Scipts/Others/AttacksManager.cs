@@ -39,15 +39,6 @@ public class AttacksManager : MonoBehaviour
         //ottiene il numero di combo d'attacco esistenti
         nCombos = attacksAnimationLimits.Length;
 
-
-        //DEBUG-----------------------------------------------------------------------------------------------------------------------------
-        //Corregge e comunica se l'indice finale dell'ultimo limitatore di sprite d'attacco è oltre i limiti
-        if (attacksAnimationLimits[nCombos - 1].y >= sam.GetNumberOfSprites())
-        {
-            attacksAnimationLimits[nCombos - 1].y = sam.GetNumberOfSprites() - 1;
-            Debug.LogError("L'indice finale del limitatore degli sprite d'attacco è oltre il numero di sprite nell'array!");
-        }
-
     }
     /// <summary>
     /// Esegue l'attacco se non ne è in corso già uno

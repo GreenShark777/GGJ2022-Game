@@ -8,6 +8,9 @@ public class PietrificationAttack : MonoBehaviour
     //riferimento al manager delle animazioni dello sprite
     [SerializeField]
     private SpriteAnimationManager sam = default;
+    //indica i limiti per l'animazione dell'attacco pietrificazione
+    [SerializeField]
+    private int[] pietrificationAnimationLimits = new int[2];
     //riferimento allo slider della carica per l'attacco speciale
     [SerializeField]
     private Slider specialAttackSlider = default;
@@ -87,6 +90,8 @@ public class PietrificationAttack : MonoBehaviour
     {
         //mette il gioco in pausa
         PauseManager.SetPauseState(true);
+        //fa partire l'animazione di attacco speciale del giocatore
+        sam.StartNewAnimation(2, pietrificationAnimationLimits[0], pietrificationAnimationLimits[1], true);
         //fa partire una coroutine per il fadeIn dell'immagine di animazione
         StartCoroutine(FadeInOutImage(lightsOutAlpha, true));
         //aspetta che finisca l'attacco
