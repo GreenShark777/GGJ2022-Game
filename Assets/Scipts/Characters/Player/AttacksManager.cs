@@ -2,17 +2,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class AttacksManager : MonoBehaviour
 {
     //riferimento al gameObject con il collider di danno
     [SerializeField]
     private GameObject attackColl = default;
-    //riferimento allo sprite da cambiare
+    //riferimento al manager delle animazioni dello sprite
     [SerializeField]
-    private SpriteRenderer spriteToChange = default;
-    //riferimenti a tutti gli sprite di tutti gli attacchi
-    [SerializeField]
-    private Sprite[] allAttacksSprites = default;
+    private SpriteAnimationManager sam = default;
     /*
      * Indica, per l'array di sprites d'attacco, dove ogni attacco inizia e finisce
      * x = inizio animazione
@@ -31,13 +28,8 @@ public class PlayerAttack : MonoBehaviour
     private int comboIndex = -1;
     //indica il numero di combo d'attacco esistenti
     private int nCombos;
-    //indica quanto velocemente va l'animazione
-    [SerializeField]
-    private float animationSpeed = 0.1f;
     //riferimento alla coroutine che si sta occupando delle tempistiche dell'attacco in corso
     private Coroutine currentAttackRoutine;
-    //riferimento alla coroutine che si sta occupando dell'animazione dell'attacco in corso
-    private Coroutine attackAnimationRoutine;
 
 
     private void Awake()
@@ -50,14 +42,16 @@ public class PlayerAttack : MonoBehaviour
 
         //DEBUG-----------------------------------------------------------------------------------------------------------------------------
         //Corregge e comunica se l'indice finale dell'ultimo limitatore di sprite d'attacco è oltre i limiti
-        if (attacksAnimationLimits[nCombos - 1].y >= allAttacksSprites.Length)
+        if (attacksAnimationLimits[nCombos - 1].y >= sam.GetNumberOfSprites())
         {
-            attacksAnimationLimits[nCombos - 1].y = allAttacksSprites.Length - 1;
+            attacksAnimationLimits[nCombos - 1].y = sam.GetNumberOfSprites() - 1;
             Debug.LogError("L'indice finale del limitatore degli sprite d'attacco è oltre il numero di sprite nell'array!");
         }
 
     }
-
+    /// <summary>
+    /// Esegue l'attacco se non ne è in corso già uno
+    /// </summary>
     public void WantsToAttack()
     {
         //se non è già in corso un attacco...
@@ -72,7 +66,10 @@ public class PlayerAttack : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// Si occupa delle tempistiche tra un attacco e l'altro, oltre all'interruzione della combo
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ManageAttacksTiming()
     {
         //si occupa delle animazioni di combo
@@ -103,27 +100,13 @@ public class PlayerAttack : MonoBehaviour
         //crea nua variabile locale che contiene l'indice iniziale dello spritesheet d'attacco per l'indice della combo
         int animationStartIndex = (int)attacksAnimationLimits[comboIndex].x;
         //infine, fa partire una nuova coroutine per l'animazione d'attacco attuale
-        if (attackAnimationRoutine != null) { StopCoroutine(attackAnimationRoutine); }
-        attackAnimationRoutine = StartCoroutine(ManageComboAnimation(animationStartIndex, comboIndex));
+        sam.StartNewAnimation(1, animationStartIndex, (int)attacksAnimationLimits[comboIndex].y);
 
     }
     /// <summary>
-    /// Si occupa di mostrare l'animazione d'attacco all'indice indicato
+    /// Ritorna se un attacco è in corso o meno
     /// </summary>
-    /// <param name="nextAnimationIndex">Indice dello sprite a cui andare dello spritesheet d'attacco</param>
-    /// <param name="attackIndex">Indice dell'attacco di cui si sta facendo l'animazione</param>
     /// <returns></returns>
-    private IEnumerator ManageComboAnimation(int nextAnimationIndex, int attackIndex)
-    {
-        //aspetta del tempo per rendere l'animazione fluida ma non troppo veloce
-        yield return new WaitForSeconds(animationSpeed);
-        //se lo sprite a cui si vuole andare fa parte dell'animazione di un altro attacco, fa terminare la coroutine
-        if (nextAnimationIndex > attacksAnimationLimits[attackIndex].y) { yield break; }
-        //cambia lo sprite, continuando l'animazione
-        spriteToChange.sprite = allAttacksSprites[nextAnimationIndex];
-        //infine, fa continuare il ciclo d'animazione
-        attackAnimationRoutine = StartCoroutine(ManageComboAnimation(nextAnimationIndex + 1, attackIndex));
-
-    }
+    public bool IsAttacking() { return isAttacking; }
 
 }
