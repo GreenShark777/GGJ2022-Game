@@ -3373,7 +3373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1742449810833471474, guid: 795bcae7b7e84994a91034913c524a85, type: 3}
       propertyPath: italianText
-      value: Volume Efetti Sonori
+      value: Volume Effetti Sonori
       objectReference: {fileID: 0}
     - target: {fileID: 7010279784814689169, guid: 795bcae7b7e84994a91034913c524a85, type: 3}
       propertyPath: m_Pivot.x

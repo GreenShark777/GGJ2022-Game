@@ -59,7 +59,7 @@ public class GameManag : MonoBehaviour
             savedSfxVolume = sd.savedSfxVolume;
             savedLanguage = sd.savedLanguage;
 
-            Debug.Log("Caricati dati salvati");
+            //Debug.Log("Caricati dati salvati");
         } //altrimenti, tutti i dati vengono messi al loro valore originale, in quanto non si è trovato un file di salvataggio
         else { DataErased(true); }
 
@@ -77,9 +77,9 @@ public class GameManag : MonoBehaviour
             savedMusicVolume = 0;
             savedSfxVolume = 0;
             savedLanguage = 0;
-            Debug.LogError("Cancellati anche dati intoccabili");
+            //Debug.LogError("Cancellati anche dati intoccabili");
         }
-        else { Debug.LogError("Cancellati solo dati di gameplay"); }
+        //else { Debug.LogError("Cancellati solo dati di gameplay"); }
 
         //tutti gli array vengono svuotati
         EmptyArrays();
@@ -113,7 +113,7 @@ public class GameManag : MonoBehaviour
         int n = 0;
         //viene richiamata la funzione dell'interfaccia per aggiornare i dati di ogni elemento nella lista
         foreach (IUpdateData elem in dataToSave) { elem.UpdateData(); n++; }
-        Debug.LogError("Aggiornati dati nel GameManag. Il numero di elementi aggiornati sono: " + n);
+        //Debug.LogWarning("Aggiornati dati nel GameManag. Il numero di elementi aggiornati sono: " + n);
     }
     /// <summary>
     /// Salva i dati dopo averli aggiornati
@@ -128,7 +128,7 @@ public class GameManag : MonoBehaviour
             //...e salva i dati
             SaveSystem.DataSave(this);
 
-            Debug.Log("Dati aggiornati e salvati");
+            //Debug.Log("Dati aggiornati e salvati");
         }
         //else Debug.LogError("Dati non aggiornati, perchè stanno venendo cancellati");
 
