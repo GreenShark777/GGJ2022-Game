@@ -84,14 +84,20 @@ public static class SaveSystem {
         {
             //cancella i dati nel GameManag
             g.DataErased(totalErase);
+
+            
             //comunica temporaneamente che non si stanno cancellando i dati(in questo modo può salvare i nuovi dati)
             isDeleting = false;
             //salva i nuovi dati(facendo così finta che sono stati cancellati i dati)
             DataSave(g);
+
+
             //comunica che si stanno cancellando i dati(in modo che altri script non provino a cancellare, salvare o caricare i dati)
-            isDeleting = true;
+            //isDeleting = true;
+            
+
             //cancella il file di salvataggio
-            File.Delete(path);
+            //File.Delete(path);
 
         }
         //else { Debug.LogError("File non esiste"); }

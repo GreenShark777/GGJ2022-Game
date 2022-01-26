@@ -1,4 +1,5 @@
 //Si occupa di come far iniziare a giocare il giocatore(se cancellando i dati o partendo da un checkpoint)
+using System.Collections;
 using UnityEngine;
 
 public class StartPlaying : MonoBehaviour

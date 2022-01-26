@@ -23,16 +23,22 @@ public class GameManag : MonoBehaviour
     private void Awake()
     {
         //se i dati stavano venendo cancellati, indica che il cancellamento è finito in quanto si stanno per caricare i dati
-        if (SaveSystem.isDeleting) { SaveSystem.isDeleting = false; }
+        //if (SaveSystem.isDeleting) { SaveSystem.isDeleting = false; }
+
         //carica i dati salvati
         if (loadData) OnGameLoad(SaveSystem.LoadGame());
-        //else { Debug.LogError("NON SONO STATI AGGIORNATI I DATI PERCHE' LOADDATA E' MESSO A FALSE"); }
+        else { Debug.LogError("NON SONO STATI AGGIORNATI I DATI PERCHE' LOADDATA E' MESSO A FALSE"); }
         //dopo il caricamento dei dati controlla se gli array sono vuoti, nel qual caso li inizializza
         InizializeEmptyArrays();
+
+    }
+
+    private void Start()
+    {
         //viene svuotata la lista di script che devono salvare i dati
         dataToSave.Clear();
         //viene creato un'array recipiente con tutti gli script che devono salvare dati(anche quelli inattivi)
-        var recipient = FindObjectsOfType<MonoBehaviour>().OfType<IUpdateData>();
+        var recipient = FindObjectsOfType<MonoBehaviour>(true).OfType<IUpdateData>();
         //inizializza la lista di script che devono salvare i dati, aggiungendo tutti gli elementi nella lista recipiente
         foreach (IUpdateData elem in recipient) { dataToSave.Add(elem); }
 
@@ -53,7 +59,7 @@ public class GameManag : MonoBehaviour
             savedSfxVolume = sd.savedSfxVolume;
             savedLanguage = sd.savedLanguage;
 
-            //Debug.Log("Caricati dati salvati");
+            Debug.Log("Caricati dati salvati");
         } //altrimenti, tutti i dati vengono messi al loro valore originale, in quanto non si è trovato un file di salvataggio
         else { DataErased(true); }
 
@@ -107,7 +113,7 @@ public class GameManag : MonoBehaviour
         int n = 0;
         //viene richiamata la funzione dell'interfaccia per aggiornare i dati di ogni elemento nella lista
         foreach (IUpdateData elem in dataToSave) { elem.UpdateData(); n++; }
-        //Debug.Log("Aggiornati dati nel GameManag. Il numero di elementi aggiornati sono: " + n);
+        Debug.LogError("Aggiornati dati nel GameManag. Il numero di elementi aggiornati sono: " + n);
     }
     /// <summary>
     /// Salva i dati dopo averli aggiornati
@@ -122,7 +128,7 @@ public class GameManag : MonoBehaviour
             //...e salva i dati
             SaveSystem.DataSave(this);
 
-            //Debug.Log("Dati aggiornati e salvati");
+            Debug.Log("Dati aggiornati e salvati");
         }
         //else Debug.LogError("Dati non aggiornati, perchè stanno venendo cancellati");
 

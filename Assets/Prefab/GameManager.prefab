@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadData: 1
   savedMasterVolume: 0
-  savedMusicVolume: -25
-  savedSfxVolume: -15
+  savedMusicVolume: 0
+  savedSfxVolume: 0
   savedLanguage: 0
