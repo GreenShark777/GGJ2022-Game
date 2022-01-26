@@ -32,7 +32,6 @@ public class CameraFollow : MonoBehaviour
         newCamPosition.z = camZPos;
         //la posizione della camera viene impostata a quella calcolata
         transform.position = newCamPosition;
-
     }
 
 }

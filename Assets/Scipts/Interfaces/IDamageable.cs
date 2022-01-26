@@ -7,6 +7,6 @@ public interface IDamageable
     /// Fa in modo che subisca danno
     /// </summary>
     /// <param name="dmgTaken"></param>
-    void TakeDmg(float dmgTaken);
+    void TakeDmg(int dmgTaken);
 
 }

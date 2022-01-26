@@ -33,9 +33,8 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
 
     private void FixedUpdate()
     {
-        //se il giocatore è in salto, controlla se non sta cadendo troppo velocemente
-        if (!canJump) { CorrectVelocity(); }
-
+        //corregge problemi nella nuova velocità del Rigidbody del giocatore
+        CorrectVelocity();
     }
 
     /// <summary>
@@ -46,8 +45,6 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
     {
         //muove il giocatore, aggiungendo forza al Rigidbody del giocatore in base alla direzione ricevuta per la velocità
         rb.AddForce(newVelocity * speed);
-        //corregge problemi nella nuova velocità del Rigidbody del giocatore
-        CorrectVelocity();
         
         //crea una variabile locale che indica la nuova rotazione che deve avere il giocatore
         Vector3 newRotation = transform.eulerAngles;
@@ -97,16 +94,15 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         if (rb.velocity.y < 0)
         {
             // Applica l'effetto del moltiplicatore
-            rb.velocity += Vector2.up * Physics2D.gravity * (jumpFallMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity * (jumpFallMultiplier - 1) * Time.fixedDeltaTime;
         }
-        else if (rb.velocity.y < 0)
+        else if (rb.velocity.y > 0)
         {
-            Debug.Log("Current: " + rb.velocity);
-            
             // Applica l'effetto del moltiplicatore durante la prima metà del salto
-            rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
     }
+
     /// <summary>
     /// Imposta la velocità del Rigidbody del giocatore a quella indicata e nell'asse indicato
     /// </summary>

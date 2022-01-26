@@ -9,24 +9,29 @@ public class PlayerControls : MonoBehaviour
     private AttacksManager am;
     //riferimento allo script che si occupa dell'attacco speciale del giocatore
     private PietrificationAttack pa;
-    
 
-    private void Start()
+    // Scipts references
+    private CharacterHealth ch;
+
+    private void Awake()
     {
+        // Get references
         //ottiene il riferimento allo script che si occupa del movimento del giocatore
         cm = GetComponent<CharacterMovement>();
         //ottiene il riferimento allo script che si occupa dell'attacco del giocatore
         am = GetComponent<AttacksManager>();
         //ottiene il riferimento allo script che si occupa dell'attacco speciale del giocatore
         pa = GetComponent<PietrificationAttack>();
+        ch = GetComponent<CharacterHealth>();
 
+        // Setup listeners
+        ch.onDeath += Death;
     }
 
     private void Update()
     {
-        //se il gioco non è in pausa, controlla gli input
+        //se il gioco non Ã¨ in pausa, controlla gli input
         if (!PauseManager.IsGamePaused()) { CheckInputs(); }
-
     }
 
     /// <summary>
@@ -41,7 +46,7 @@ public class PlayerControls : MonoBehaviour
             float movement = Input.GetAxisRaw("Horizontal");
             //...e se vuole muoversi, si muove(se non sta attaccando)...
             if (movement != 0) { cm.Move(new Vector2(movement, 0)); }
-            //...e se il giocatore preme il tasto di salto, lo fa saltare se può
+            //...e se il giocatore preme il tasto di salto, lo fa saltare se puÃ²
             if (Input.GetButtonDown("Jump")) { cm.Jump(); }
 
         }
@@ -52,4 +57,18 @@ public class PlayerControls : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Richiamato quando la vita scende a 0
+    /// </summary>
+    private void Death()
+    {
+        gameObject.SetActive(false);
+        Debug.Log("Hai perso!");
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from listeners
+        if(ch) ch.onDeath -= Death;
+    }
 }

@@ -24,6 +24,7 @@ public class CollisionsManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         //controlla la collisione appena subita
         CheckCollision(collision);
 
@@ -41,6 +42,7 @@ public class CollisionsManager : MonoBehaviour
         IGiveDamage dmgGiver = coll.GetComponent<IGiveDamage>();
         //crea una variabile locale che indica se quest'entità è il giocatore
         bool isPlayer = (thisCollType == CollisionType.player);
+
         //se il riferimento all'interfaccia di danno esiste...
         if (/*isDmg*/dmgGiver != null)
         {

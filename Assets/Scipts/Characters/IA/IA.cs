@@ -15,10 +15,22 @@ public class IA : MonoBehaviour
     private Vector2 movement;   // Vettore di movimento target
 
     private CharacterMovement characterMovement;    // Reference allo script del movimento
-    
+
+    // Scipts references
+    private CharacterHealth characterHealth;
+
+    private void Awake()
+    {
+        // Get references
+        characterMovement = GetComponent<CharacterMovement>();
+        characterHealth = GetComponent<CharacterHealth>();
+
+        // Setup listeners
+        characterHealth.onDeath += Death;
+    }
+
     private void Start()
     {
-        characterMovement = GetComponent<CharacterMovement>();
         
         // Se ci sono checkpoint, inizia il movimento
         isMoving = checkpoints.Length > 0;
@@ -30,7 +42,7 @@ public class IA : MonoBehaviour
 
     private void Update()
     {
-        if (isMoving)
+        if (isMoving && !PauseManager.IsGamePaused())
         {
             // Aggiorna il vettore di movimento
             CheckMovement();
@@ -82,5 +94,19 @@ public class IA : MonoBehaviour
         // Normalizza il movimento per non essere troppo elevato
         movement = diff.normalized;
         movement.y = 0;
+    }
+
+    /// <summary>
+    /// Richiamato quando la vita scende a 0
+    /// </summary>
+    private void Death()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from listeners
+        if (characterHealth) characterHealth.onDeath -= Death;
     }
 }
