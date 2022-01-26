@@ -7,7 +7,7 @@ public interface IGiveDamage
     /// Ritorna il danno che fa subire
     /// </summary>
     /// <returns></returns>
-    float GiveDamage();
+    int GiveDamage();
     /// <summary>
     /// Comunica se questo script di danno proviene da un nemico o trappola
     /// </summary>

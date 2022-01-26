@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyOrTrapAttack: 0
-  dmg: 0
+  dmg: 5
 --- !u!61 &2566543417071423255
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -664,6 +664,7 @@ GameObject:
   - component: {fileID: 7075149852685066865}
   - component: {fileID: 3078300578244952323}
   - component: {fileID: 8731005625130238332}
+  - component: {fileID: 4575795001643433994}
   - component: {fileID: 8731005625130238305}
   - component: {fileID: 8731005625130238333}
   m_Layer: 0
@@ -765,6 +766,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71fa8a3d28a8654ab84320621c81265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4575795001643433994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731005625130238304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942e9df4e2d962f49a7589b3381dffdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
+  maxHealth: 50
 --- !u!50 &8731005625130238305
 Rigidbody2D:
   serializedVersion: 4

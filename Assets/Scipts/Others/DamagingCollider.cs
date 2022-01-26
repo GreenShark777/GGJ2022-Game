@@ -8,7 +8,7 @@ public class DamagingCollider : MonoBehaviour, IGiveDamage
     private bool enemyOrTrapAttack = true;
     //indica quanto danno questo collider infligge agli elementi che prendono danni
     [SerializeField]
-    private float dmg = default;
+    private int dmg = default;
 
 
     private void Awake()
@@ -19,7 +19,7 @@ public class DamagingCollider : MonoBehaviour, IGiveDamage
     }
 
     //INTERFACCIA-------------------------------------------------------------------------------------------------------------
-    public float GiveDamage() { return dmg; }
+    public int GiveDamage() { return dmg; }
     public bool IsEnemyOrTrapAttack() { return enemyOrTrapAttack; }
 
 }
