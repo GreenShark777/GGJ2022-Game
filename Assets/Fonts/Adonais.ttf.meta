@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 2d78a79fb868efb44b1bf6ec378b3ca2
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Adonais
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 60cc6b107ce9da448b65fcaf188ac213, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -69,7 +69,7 @@ public static class SaveSystem {
     /// <summary>
     /// Cancella i dati salvati
     /// </summary>
-    public static void ClearData(GameManag g)
+    public static void ClearData(GameManag g, bool totalErase)
     {
         //comunica agli altri script che si stanno cancellando i dati di gioco
         isDeleting = true;
@@ -82,8 +82,8 @@ public static class SaveSystem {
         //invece di cancellare i dati li sovrascrive
         if (File.Exists(path))
         {
-            //cancella i dati nel GameManag(tranne le monete massime nei livelli)
-            g.DataErased();
+            //cancella i dati nel GameManag
+            g.DataErased(totalErase);
             //comunica temporaneamente che non si stanno cancellando i dati(in questo modo può salvare i nuovi dati)
             isDeleting = false;
             //salva i nuovi dati(facendo così finta che sono stati cancellati i dati)

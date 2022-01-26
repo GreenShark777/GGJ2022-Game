@@ -44,7 +44,7 @@ public class GameManag : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
            
-            SaveSystem.ClearData(this);
+            SaveSystem.ClearData(this, true);
 
             SceneChange.StaticGoToScene(gameObject.scene.name);
 
@@ -71,19 +71,26 @@ public class GameManag : MonoBehaviour
 
             //Debug.Log("Caricati dati salvati");
         } //altrimenti, tutti i dati vengono messi al loro valore originale, in quanto non si è trovato un file di salvataggio
-        else { DataErased(); }
+        else { DataErased(true); }
 
     }
     /// <summary>
     /// Riporta tutti i dati salvati al loro valore originale
     /// </summary>
-    public void DataErased()
+    public void DataErased(bool totalErase)
     {
-        //tutte le variabili vengono riportate al loro valore originale
-        savedMasterVolume = 0;
-        savedMusicVolume = 0;
-        savedSfxVolume = 0;
-        savedLanguage = 0;
+        //se bisogna cancellare tutti i dati...
+        if (totalErase)
+        {
+            //...vengono riportate al loro valore originale anche i dati intoccabili
+            savedMasterVolume = 0;
+            savedMusicVolume = 0;
+            savedSfxVolume = 0;
+            savedLanguage = 0;
+            Debug.LogError("Cancellati anche dati intoccabili");
+        }
+        else { Debug.LogError("Cancellati solo dati di gameplay"); }
+
         //tutti gli array vengono svuotati
         EmptyArrays();
 
