@@ -49,6 +49,8 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetButtonDown("Attack")) { am.WantsToAttack(); }
         //se il giocatore preme il tasto d'attacco speciale, prova a farglielo usare
         if (Input.GetButtonDown("SpecialAttack")) { pa.UsePetrificationAttack(); }
+        //se il giocatore preme il tasto per mettere il gioco in pausa, viene attivato il menù di pausa
+        if (Input.GetButtonDown("Pause")) { PauseManager.SetPauseMenuState(true); }
 
     }
 

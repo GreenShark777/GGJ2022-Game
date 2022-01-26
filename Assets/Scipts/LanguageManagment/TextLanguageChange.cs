@@ -1,4 +1,5 @@
 ﻿//Si occupa di cambiare la lingua del testo a cui questo script è attaccato in base al valore nel LanguageManager
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class TextLanguageChange : MonoBehaviour
     private static LanguageManager lm = default;
     //riferimento al testo da cambiare
     [SerializeField]
-    private Text textToChange = default;
+    private TextMeshProUGUI textToChange = default;
     //stringhe che indicano il testo da mostrare in base alla lingua scelta
     [SerializeField]
     private string italianText = default, //testo che deve essere scritto nel testo quando la lingua è italiana
@@ -28,7 +29,7 @@ public class TextLanguageChange : MonoBehaviour
     private void Awake()
     {
         //se questo script deve cambiare un testo e non è stato già messo come riferimento nell'editor, prende il componente Text dal gameObject
-        if (!isNoTextButton && textToChange == null) { textToChange = GetComponent<Text>(); }
+        if (!isNoTextButton && textToChange == null) { textToChange = GetComponent<TextMeshProUGUI>(); }
         //altrimenti, se bisogna cambiare l'immagine di un bottone e non è stato già messo nell'editor, prende il componenente Button dal gameObject
         else if(isNoTextButton && buttonImageToChange == null){ buttonImageToChange = GetComponent<Image>(); }
 
@@ -40,8 +41,6 @@ public class TextLanguageChange : MonoBehaviour
         if (lm == null) { lm = FindObjectOfType<LanguageManager>(); }
         //si aggiunge alla lista dei testi o bottoni da cambiare al cambio di lingua
         lm.textsToChangeLanguage.Add(this);
-        //se non si è messo il testo da cambiare come riferimento nell'editor, prende il componente Text dentro il gameObject
-        //if (textToChange == null) { textToChange = GetComponent<Text>(); }
         //infine, cambia il testo o il bottone in base alla lingua corrente
         ChangeLanguage(lm.GetCurrentLanguage());
 
@@ -102,8 +101,5 @@ public class TextLanguageChange : MonoBehaviour
         ChangeLanguage(lm.GetCurrentLanguage());
 
     }
-
-    //Ogni volta che viene attivato il gameObject con questo script, viene cambiato il testo in base alla lingua corrente
-    //private void OnEnable() { ChangeLanguage(lm.GetCurrentLanguage()); }
 
 }
