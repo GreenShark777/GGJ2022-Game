@@ -1579,6 +1579,7 @@ GameObject:
   - component: {fileID: 6227552298870979476}
   - component: {fileID: 310997950992643819}
   - component: {fileID: 4940649147788751618}
+  - component: {fileID: 3244161040277361376}
   m_Layer: 5
   m_Name: GameplayCanvas
   m_TagString: Untagged
@@ -1701,6 +1702,18 @@ MonoBehaviour:
   musicSlider: {fileID: 1935336286318716987}
   sfxSlider: {fileID: 2352584744398561170}
   globalSlider: {fileID: 5637362521380313343}
+--- !u!114 &3244161040277361376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6227552298870979475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f39893ce848804eae427ca1ff29aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6227552298960345396
 GameObject:
   m_ObjectHideFlags: 0
@@ -4185,6 +4198,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7981562079888382787}
     m_Modifications:
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3244161040277361376}
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneChange, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 260989056767381472, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3010909258075578442, guid: 57a556be80abcde47b66e8cc645561d7, type: 3}
       propertyPath: englishText
       value: Back to main menu
