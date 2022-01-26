@@ -37,22 +37,6 @@ public class GameManag : MonoBehaviour
         foreach (IUpdateData elem in recipient) { dataToSave.Add(elem); }
 
     }
-  
-    /*
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-           
-            SaveSystem.ClearData(this, true);
-
-            SceneChange.StaticGoToScene(gameObject.scene.name);
-
-            Debug.LogError("CANCELLATI DATI CON IL TASTO: O");
-        }
-
-    }
-    */
 
     /// <summary>
     /// Carica i dati salvati in SaveData
@@ -142,6 +126,18 @@ public class GameManag : MonoBehaviour
         }
         //else Debug.LogError("Dati non aggiornati, perchè stanno venendo cancellati");
 
+    }
+    /// <summary>
+    /// Cancella tutti i dati(viene richiamato da un bottone nel menù principale)
+    /// </summary>
+    public void EraseAllData()
+    {
+        //cancella tutti i dati
+        SaveSystem.ClearData(this, true);
+        //carica la scena del menù principale
+        SceneChange.StaticGoToScene("MainMenu");
+
+        Debug.LogError("CANCELLATI TUTTI I DATI!");
     }
 
     private void OnDestroy()
