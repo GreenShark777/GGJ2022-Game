@@ -1,7 +1,7 @@
 ﻿//si occupa del cambio della lingua nel gioco
+using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -19,31 +19,27 @@ public class LanguageManager : MonoBehaviour
 	//VARIABILI PRIVATE
 	//riferimento alla lista dropdown che si occupa del cambio di lingua
 	[SerializeField]
-	private Dropdown languageDropdownList = default;
+	private TMP_Dropdown languageDropdownList = default;
 	//riferimento al GameManag della scena
-	private GameManag g;
+	[SerializeField]
+	private GameManag g = default;
 
-
-    private void Awake()
-    {
-		//ottiene il riferimento al GameManag
-		g = GetComponent<GameManag>();
-
-	}
 
     //all'inizio della scena la lingua viene cambiata in base all'ultima lingua impostata dal giocatore nella scena precedente
     void Start()
 	{
+		//prende l'indice della lingua corrente(salvata nel GameManag)
+		int currentLanguage = g.savedLanguage;
 		//se esiste il riferimento alla dropdown list per il cambio della lingua...
 		if (languageDropdownList != null)
 		{
 			//...viene cambiato il suo valore in base al valore salvato
-			languageDropdownList.value = g.savedLanguage;
+			languageDropdownList.value = currentLanguage;
 
 		}
 		//Debug.Log("Lingua caricata: " + g.savedLanguage);
 		//viene cambiata la lingua in base al valore nella lista dropdown
-		LanguageChange();
+		LanguageChange(currentLanguage);
 	
 	}
 
@@ -73,17 +69,10 @@ public class LanguageManager : MonoBehaviour
     /// <summary>
     /// Cambia la lingua di tutti i testi che fanno parte della lista. Viene richiamata quando viene cambiato il valore della lista dropdown
     /// </summary>
-    public void LanguageChange()
+    public void LanguageChange(int language)
 	{
-		//se esiste il riferimento alla dropdown list per il cambio della lingua...
-		if (languageDropdownList != null)
-		{
-			//...aggiorna il valore del GameManag per la lingua selezionata...
-			g.savedLanguage = languageDropdownList.value;
-			//...e salva il valore appena aggiornato
-			SaveSystem.DataSave(g);
-			//Debug.Log("Lingua salvata: " + g.savedLanguage);
-		}
+		//aggiorna il valore del GameManag per la lingua selezionata
+		g.savedLanguage = language;
 		//cicla ogni oggetto nella lista dei testi da cambiare per cambiargli la lingua
 		for (int i = 0; i < textsToChangeLanguage.Count; i++)
         {
@@ -91,7 +80,7 @@ public class LanguageManager : MonoBehaviour
 			textsToChangeLanguage[i].ChangeLanguage(g.savedLanguage);
 
         }
-
+		Debug.Log("Lingua cambiata in: " + g.savedLanguage);
 	}
 	/// <summary>
 	/// Permette ad altri script di sapere la lingua corrente nel gioco

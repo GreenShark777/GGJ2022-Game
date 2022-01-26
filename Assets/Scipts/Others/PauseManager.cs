@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     private static GameObject pauseMenu;
 
 
-    private void Awake()
+    private void Start()
     {
         //ottiene il riferimento statico al menù di pausa
         if (!pauseMenu) { pauseMenu = gameObject; }

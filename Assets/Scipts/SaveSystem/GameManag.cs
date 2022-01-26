@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-//using UnityEngine.SceneManagement;
 
 public class GameManag : MonoBehaviour
 {
@@ -11,8 +10,8 @@ public class GameManag : MonoBehaviour
     private bool loadData = true;
 
     public float savedMasterVolume = 0, //indica il valore del volume generale scelto dal giocatore l'ultima volta che è stato salvato
-        savedMusicVolume = -25, //indica il valore del volume della musica scelto dal giocatore l'ultima volta che è stato salvato
-        savedSfxVolume = -15; //indica il valore del volume degli effetti sonori scelto dal giocatore l'ultima volta che è stato salvato
+        savedMusicVolume = 0, //indica il valore del volume della musica scelto dal giocatore l'ultima volta che è stato salvato
+        savedSfxVolume = -0; //indica il valore del volume degli effetti sonori scelto dal giocatore l'ultima volta che è stato salvato
 
     //indica la lingua che è stata messa l'ultima volta dal giocatore
     public int savedLanguage = 0;
@@ -46,9 +45,7 @@ public class GameManag : MonoBehaviour
         {
            
             SaveSystem.ClearData(this);
-            //SceneManager.LoadScene("Scena_Lobby");
 
-            //SceneChange.StaticGoToScene("Scena_Lobby");
             SceneChange.StaticGoToScene(gameObject.scene.name);
 
             Debug.LogError("CANCELLATI DATI CON IL TASTO: O");
@@ -84,8 +81,8 @@ public class GameManag : MonoBehaviour
     {
         //tutte le variabili vengono riportate al loro valore originale
         savedMasterVolume = 0;
-        savedMusicVolume = -25;
-        savedSfxVolume = -15;
+        savedMusicVolume = 0;
+        savedSfxVolume = 0;
         savedLanguage = 0;
         //tutti gli array vengono svuotati
         EmptyArrays();
