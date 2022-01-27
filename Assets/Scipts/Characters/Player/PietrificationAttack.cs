@@ -15,6 +15,9 @@ public class PietrificationAttack : MonoBehaviour
     //indica i limiti per l'animazione dell'attacco pietrificazione
     [SerializeField]
     private int[] pietrificationAnimationLimits = new int[2];
+    //indica i limiti per l'animazione della trasformazione
+    [SerializeField]
+    private int[] transformationAnimationLimits = new int[2];
     //riferimento allo slider della carica per l'attacco speciale
     [SerializeField]
     private Slider specialAttackSlider = default;
@@ -24,6 +27,8 @@ public class PietrificationAttack : MonoBehaviour
     //riferimento al punto in cui deve iniziare l'attacco
     [SerializeField]
     private Transform attackStartPoint = default;
+    //riferimento allo script che si occupa del karma del giocatore
+    private PlayerDuality pd;
 
     [Header("Animation")]
     //indica se la mossa speciale può essere usata o meno
@@ -63,6 +68,8 @@ public class PietrificationAttack : MonoBehaviour
         Color transparent = lightsOutSprite.material.color;
         transparent.a = 0;
         lightsOutSprite.material.color = transparent;
+        //ottiene il riferimento allo script che si occupa del karma del giocatore
+        pd = GetComponent<PlayerDuality>();
 
         //StartCoroutine(FadeInOutImage(0, false));
         //NON USARE QUESTO PERCHE' POTREBBE CREARE PROBLEMI NEL CASO IL GIOCATORE FACCIA LA MOSSA SPECIALE DURANTE IL FADE OUT
@@ -84,17 +91,17 @@ public class PietrificationAttack : MonoBehaviour
     /// <summary>
     /// Cerca di usare l'attacco di pietrificazione
     /// </summary>
-    public void UsePetrificationAttack()
+    public void UsePetrificationAttack(bool isTransforming = false)
     {
-        //se si può usare...
-        if (canUse)
+        //se si può usare(o ci si sta trasformando)...
+        if (canUse || isTransforming)
         {
             //...comunica che non si può più usare...
             canUse = false;
             //...scarica lo slider...
             specialAttackSlider.value = 0;
             //...e fa partire la coroutine d'attacco
-            StartCoroutine(ManagePietrificationAttackTiming());
+            StartCoroutine(ManagePietrificationAttackTiming(isTransforming));
         
         }
 
@@ -103,12 +110,14 @@ public class PietrificationAttack : MonoBehaviour
     /// Si occupa delle tempistiche dell'attacco pietrificazione
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ManagePietrificationAttackTiming()
+    private IEnumerator ManagePietrificationAttackTiming(bool isTransforming)
     {
         //mette il gioco in pausa
         PauseManager.SetPauseState(true);
+        //prende i limiti dell'animazione da far fare al giocatore in base al parametro ricevuto
+        int[] animationLimits = isTransforming ? pietrificationAnimationLimits : transformationAnimationLimits;
         //fa partire l'animazione di attacco speciale del giocatore
-        sam.StartNewAnimation(2, pietrificationAnimationLimits[0], pietrificationAnimationLimits[1], true);
+        sam.StartNewAnimation(2, animationLimits[0], animationLimits[1], true);
         //fa partire una coroutine per il fadeIn dell'immagine di animazione
         StartCoroutine(FadeInOutImage(lightsOutAlpha, true));
         //aspetta metà del tempo d'attacco
@@ -183,9 +192,11 @@ public class PietrificationAttack : MonoBehaviour
                     //...se l'angolo è minore o uguale all' angolo massimo...
                     if (Angle <= maxAngle)
                     {
-                        //...il nemico viene pietrificato
-                        pv.TryToPetrify();
                         Debug.LogError("Provato a pietrificare oggetto: " + objFound.name);
+                        //...si prova a pietrificare il nemico...
+                        bool petrified = pv.TryToPetrify();
+                        //...se il nemico è stato pietrificato, comunica che è stato ucciso un nemico
+                        if (petrified) { pd.KilledAnEnemy(); }
 
                     }
 
@@ -196,6 +207,11 @@ public class PietrificationAttack : MonoBehaviour
         }
 
     }
+    /// <summary>
+    /// Ritorna il tempo che impiega la mossa speciale a finire
+    /// </summary>
+    /// <returns></returns>
+    public float GetAttackDuration() { return attackDuration; }
 
 
     private void OnDrawGizmos()

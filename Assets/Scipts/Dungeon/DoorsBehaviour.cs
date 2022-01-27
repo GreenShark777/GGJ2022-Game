@@ -69,6 +69,11 @@ public class DoorsBehaviour : MonoBehaviour
     /// <param name="enemiesInRoom"></param>
     public void SetNumberOfEnemies(int enemiesInRoom) { nEnemies = enemiesInRoom; }
     /// <summary>
+    /// Permette di impostare l'ID della stanza in cui si trova questa porta
+    /// </summary>
+    /// <param name="roomID"></param>
+    public void SetOwnRoomID(int roomID) { ownRoomID = roomID; }
+    /// <summary>
     /// Controlla se ci sono nemici presenti con maschere e chiude o apre la porta di conseguenza
     /// </summary>
     public void CheckForEnemiesWithMasks()

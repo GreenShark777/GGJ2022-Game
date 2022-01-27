@@ -16,6 +16,8 @@ public class SaveData
     public int lastEnteredRoom = 0;
     //indica la vita che il giocatore aveva quando è stata salvata la partita
     public int savedHealth = 100;
+    //indica quanti nemici il giocatore ha pietrificato
+    public int enemiesPetrified = 0;
 
 
     public SaveData(GameManag g)
@@ -27,6 +29,7 @@ public class SaveData
         savedLanguage = g.savedLanguage;
         lastEnteredRoom = g.lastEnteredRoom;
         savedHealth = g.savedHealth;
+        enemiesPetrified = g.enemiesPetrified;
 
     }
 

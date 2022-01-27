@@ -1318,6 +1318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4652191419328333, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 310997950992643819, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
       propertyPath: g
       value: 
@@ -1450,6 +1454,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7583880349740964349, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214482200172424732, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
 --- !u!114 &6227552299819350513 stripped
@@ -1468,6 +1480,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5400405621128431965, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
   m_PrefabInstance: {fileID: 6227552299819350512}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6227552299819350515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2724468419799733772, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
+  m_PrefabInstance: {fileID: 6227552299819350512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8731005624130698028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1487,6 +1510,14 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 6227552299819350513}
+    - target: {fileID: 8684965353633929664, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
+      propertyPath: g
+      value: 
+      objectReference: {fileID: 1300311272}
+    - target: {fileID: 8684965353633929664, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
+      propertyPath: dualitySlider
+      value: 
+      objectReference: {fileID: 6227552299819350515}
     - target: {fileID: 8731005625130238304, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: m_Name
       value: Player

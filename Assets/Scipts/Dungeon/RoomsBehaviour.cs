@@ -26,6 +26,13 @@ public class RoomsBehaviour : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        //comunica alla porta di controllo la stanza in cui si trova
+        checkingDoor.SetOwnRoomID(roomID);
+
+    }
+
     /// <summary>
     /// Imposta il nuovo ID di questa stanza
     /// </summary>
