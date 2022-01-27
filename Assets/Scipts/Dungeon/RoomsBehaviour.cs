@@ -21,6 +21,8 @@ public class RoomsBehaviour : MonoBehaviour
     {
         //informa i nemici della stanza in cui si trovano
         InformEnemiesOfTheirRoom();
+        //la stanza viene disattivata, in modo che non sia visibile finchè il giocatore non ci entri
+        gameObject.SetActive(false);
 
     }
 
@@ -55,6 +57,8 @@ public class RoomsBehaviour : MonoBehaviour
     /// <param name="player"></param>
     public void PlayerEntered(Transform player)
     {
+        //riattiva questa stanza
+        gameObject.SetActive(true);
         //porta il giocatore alla porta d'entrata di questa stanza
         player.position = entrance.position;
         //fa controllare alla porta di controllo se ci sono nemici nella stanza

@@ -23,6 +23,12 @@ public class DoorsBehaviour : MonoBehaviour
     private int ownRoomID;
 
 
+    private void Awake()
+    {
+        //ottiene il riferimento al collider di questa porta
+        doorColl = GetComponent<Collider2D>();
+    }
+
     private void Start()
     {
         //se questa è la porta che deve controllare i nemici nella stanza...
@@ -30,10 +36,8 @@ public class DoorsBehaviour : MonoBehaviour
         {
             //...ottiene il riferimento al contenitore dei contatori di nemici...
             countersContainer = transform.GetChild(0);
-            //...riempe l'array di contatori di nemici prendendo dal contenitore
+            //...e riempe l'array di contatori di nemici prendendo dal contenitore
             allCounters = countersContainer.GetComponentsInChildren<EnemyCountersBehaviour>();
-            //...infine, ottiene il riferimento al collider di questa porta
-            doorColl = GetComponent<Collider2D>();
 
             //DEBUG-------------------------------------------------------------------------------------------------------------------------
             //se il numero di nemici non è uguale al numero di contatori, comunica l'errore

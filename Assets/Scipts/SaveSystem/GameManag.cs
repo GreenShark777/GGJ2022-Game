@@ -9,12 +9,17 @@ public class GameManag : MonoBehaviour
     [SerializeField]
     private bool loadData = true;
 
+    //VALORI DI IMPOSTAZIONI------------------------------------------------------------------------------------------------------------------
     public float savedMasterVolume = 0, //indica il valore del volume generale scelto dal giocatore l'ultima volta che è stato salvato
         savedMusicVolume = 0, //indica il valore del volume della musica scelto dal giocatore l'ultima volta che è stato salvato
         savedSfxVolume = -0; //indica il valore del volume degli effetti sonori scelto dal giocatore l'ultima volta che è stato salvato
 
     //indica la lingua che è stata messa l'ultima volta dal giocatore
     public int savedLanguage = 0;
+
+    //VALORI DI GAMEPLAY----------------------------------------------------------------------------------------------------------------------
+    //indica la stanza a cui il giocatore è arrivato
+    public int lastEnteredRoom = 0;
 
     //riferimento a tutti gli script che usano l'interfaccia per l'aggiornamento dei dati nel GameManag
     public static List<IUpdateData> dataToSave = new List<IUpdateData>();
@@ -58,6 +63,7 @@ public class GameManag : MonoBehaviour
             savedMusicVolume = sd.savedMusicVolume;
             savedSfxVolume = sd.savedSfxVolume;
             savedLanguage = sd.savedLanguage;
+            lastEnteredRoom = sd.lastEnteredRoom;
 
             //Debug.Log("Caricati dati salvati");
         } //altrimenti, tutti i dati vengono messi al loro valore originale, in quanto non si è trovato un file di salvataggio
@@ -80,6 +86,9 @@ public class GameManag : MonoBehaviour
             //Debug.LogError("Cancellati anche dati intoccabili");
         }
         //else { Debug.LogError("Cancellati solo dati di gameplay"); }
+
+        //cancella i dati di gameplay
+        lastEnteredRoom = 0;
 
         //tutti gli array vengono svuotati
         EmptyArrays();

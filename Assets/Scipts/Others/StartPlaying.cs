@@ -28,6 +28,6 @@ public class StartPlaying : MonoBehaviour
     /// <summary>
     /// Continua la partita salvata
     /// </summary>
-    private void LoadGame() { Debug.LogError("NON FA ANCORA NIENTE!"); }
+    public void LoadGame() { SceneChange.StaticGoToScene("Gameplay"); }
 
 }
