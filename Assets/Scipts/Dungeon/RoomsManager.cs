@@ -73,6 +73,8 @@ public class RoomsManager : MonoBehaviour, IUpdateData
         PauseManager.SetPauseState(false);
         //fa partire l'animazione di transizione in fadeOut
         transitionAnim.SetBool("FadeIn", false);
+        //infine, salva i dati
+        g.SaveDataAfterUpdate();
 
     }
 

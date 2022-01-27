@@ -14,6 +14,9 @@ public class SaveData
     //VALORI DI GAMEPLAY--------------------------------------------------------------------------------------------------------------------
     //indica la stanza a cui il giocatore è arrivato
     public int lastEnteredRoom = 0;
+    //indica la vita che il giocatore aveva quando è stata salvata la partita
+    public int savedHealth = 100;
+
 
     public SaveData(GameManag g)
     {
@@ -23,6 +26,7 @@ public class SaveData
         savedSfxVolume = g.savedSfxVolume;
         savedLanguage = g.savedLanguage;
         lastEnteredRoom = g.lastEnteredRoom;
+        savedHealth = g.savedHealth;
 
     }
 

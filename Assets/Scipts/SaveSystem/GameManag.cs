@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class GameManag : MonoBehaviour
 {
+    //riferimento all'Animator che comunica che i dati stanno venendo salvati
+    [SerializeField]
+    private Animator savingDataAnim = default;
     //indica se vogliamo caricare i dati ad inizio scena o meno(PER DEBUG, COMMENTARE A GIOCO FINITO)
     [SerializeField]
     private bool loadData = true;
 
-    //VALORI DI IMPOSTAZIONI------------------------------------------------------------------------------------------------------------------
+    //VALORI DI IMPOSTAZIONI----------------------------------------------------------------------------------------------------------------
     public float savedMasterVolume = 0, //indica il valore del volume generale scelto dal giocatore l'ultima volta che è stato salvato
         savedMusicVolume = 0, //indica il valore del volume della musica scelto dal giocatore l'ultima volta che è stato salvato
         savedSfxVolume = -0; //indica il valore del volume degli effetti sonori scelto dal giocatore l'ultima volta che è stato salvato
@@ -17,9 +20,11 @@ public class GameManag : MonoBehaviour
     //indica la lingua che è stata messa l'ultima volta dal giocatore
     public int savedLanguage = 0;
 
-    //VALORI DI GAMEPLAY----------------------------------------------------------------------------------------------------------------------
+    //VALORI DI GAMEPLAY--------------------------------------------------------------------------------------------------------------------
     //indica la stanza a cui il giocatore è arrivato
     public int lastEnteredRoom = 0;
+    //indica la vita che il giocatore aveva quando è stata salvata la partita
+    public int savedHealth = 100;
 
     //riferimento a tutti gli script che usano l'interfaccia per l'aggiornamento dei dati nel GameManag
     public static List<IUpdateData> dataToSave = new List<IUpdateData>();
@@ -64,6 +69,7 @@ public class GameManag : MonoBehaviour
             savedSfxVolume = sd.savedSfxVolume;
             savedLanguage = sd.savedLanguage;
             lastEnteredRoom = sd.lastEnteredRoom;
+            savedHealth = sd.savedHealth;
 
             //Debug.Log("Caricati dati salvati");
         } //altrimenti, tutti i dati vengono messi al loro valore originale, in quanto non si è trovato un file di salvataggio
@@ -89,6 +95,7 @@ public class GameManag : MonoBehaviour
 
         //cancella i dati di gameplay
         lastEnteredRoom = 0;
+        savedHealth = 100;
 
         //tutti gli array vengono svuotati
         EmptyArrays();
@@ -103,15 +110,17 @@ public class GameManag : MonoBehaviour
         //variabile di controllo che indicherà quanti cicli hanno fatto i cicli for sottostanti
         //int nControl = 0;
 
-        //Debug.Log("Cicli fatti per i frammenti ottenuti: " + nControl); nControl = 0;
+        //Debug.Log("Cicli fatti per svuotare questo array ottenuti: " + nControl); nControl = 0;
     }
     /// <summary>
     /// Controlla, per ogni array, se è nullo, nel qual caso inizializza l'array nel modo necessario
     /// </summary>
     private void InizializeEmptyArrays()
     {
+        //variabile di controllo che indicherà quanti cicli hanno fatto i cicli for sottostanti
+        //int nControl = 0;
 
-
+        //Debug.Log("Cicli fatti per inizializzare questo array ottenuti: " + nControl); nControl = 0;
     }
     /// <summary>
     /// Aggiorna i dati da salvare nel GameManag prima di salvare i dati
@@ -132,6 +141,8 @@ public class GameManag : MonoBehaviour
         //salva i dati ogni volta che si va da una scena all'altra, se i dati non stanno venendo cancellati...
         if (!SaveSystem.isDeleting)
         {
+            //...fa partire l'animazione del testo che indica che si stanno salvando i dati...
+            if (savingDataAnim) savingDataAnim.SetTrigger("Advise");
             //...aggiorna i dati se la scena non è un livello o, se lo è, se il livello è stato completato...
             UpdateDataBeforeSave();
             //...e salva i dati
@@ -157,8 +168,10 @@ public class GameManag : MonoBehaviour
 
     private void OnDestroy()
     {
-        //salva i dati di gioco dopo aver ottenuto gli aggiornamenti dalla lista di script che devono aggiornare i dati(solo se carica i dati)
-        if (loadData) SaveDataAfterUpdate();
+        //salva i dati di gioco dopo aver ottenuto gli aggiornamenti dalla lista di script che devono aggiornare i dati
+        //(solo se carica i dati e ci si trova nel menù principale)
+        if (loadData && gameObject.scene.buildIndex == 0) SaveDataAfterUpdate();
+
         //else { Debug.LogError("Dati non aggiornati, perchè non sono stati caricati i dati"); }
 
     }
