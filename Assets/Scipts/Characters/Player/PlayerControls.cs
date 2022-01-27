@@ -11,7 +11,9 @@ public class PlayerControls : MonoBehaviour
     private PietrificationAttack pa;
 
     // Scipts references
-    private CharacterHealth ch;
+    //private CharacterHealth ch;
+
+    //(GABRIELE)COMMENTATO PERCHE' ONDEATH ADESSO PRENDE RIFERIMENTO AD UN'ALTRA FUNZIONE NEL SUO START
 
     private void Awake()
     {
@@ -22,16 +24,18 @@ public class PlayerControls : MonoBehaviour
         am = GetComponent<AttacksManager>();
         //ottiene il riferimento allo script che si occupa dell'attacco speciale del giocatore
         pa = GetComponent<PietrificationAttack>();
-        ch = GetComponent<CharacterHealth>();
+
+
+        //ch = GetComponent<CharacterHealth>();
 
         // Setup listeners
-        ch.onDeath += Death;
+        //ch.onDeath += Death;
     }
 
     private void Update()
     {
-        //se il gioco non Ã¨ in pausa, controlla gli input
-        if (!PauseManager.IsGamePaused()) { CheckInputs(); }
+        //se il gioco non è in pausa e il giocatore non è morto, controlla gli input
+        if (!PauseManager.IsGamePaused() && !PlayerStateManager.isDead) { CheckInputs(); }
     }
 
     /// <summary>
@@ -71,6 +75,6 @@ public class PlayerControls : MonoBehaviour
     private void OnDestroy()
     {
         // Unsubscribe from listeners
-        if(ch) ch.onDeath -= Death;
+        //if(ch) ch.onDeath -= Death;
     }
 }
