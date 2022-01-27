@@ -7,7 +7,7 @@ public class CollisionsManager : MonoBehaviour
     public enum CollisionType { enemy, player }
     //indica l'entità di cui si controllano le collisioni
     [SerializeField]
-    CollisionType thisCollType = default;
+    private CollisionType thisCollType = default;
     //riferimento al gameObject che ha lo script con l'interfaccia a cui si vuole far prendere danno
     [SerializeField]
     private GameObject objToGetInterfaceFrom = default;
@@ -91,6 +91,6 @@ public class CollisionsManager : MonoBehaviour
 
     }
 
-    public CollisionType GetCollType() { return thisCollType; }
+    public bool IsPlayer() { return thisCollType == CollisionType.player; }
 
 }

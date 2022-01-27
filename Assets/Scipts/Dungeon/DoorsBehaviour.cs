@@ -1,6 +1,4 @@
 //Si occupa del comportamento delle porte nelle stanze
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorsBehaviour : MonoBehaviour
@@ -24,9 +22,11 @@ public class DoorsBehaviour : MonoBehaviour
     private bool checkingDoor = false;
     //indica il numero di nemici a cui è stata tolta la maschera in questa stanza
     private int removedMasks = 0;
+    //indica l'ID della stanza in cui si trova questa porta
+    private int ownRoomID;
 
 
-    void Start()
+    private void Awake()
     {
         //se questa è la porta che deve controllare i nemici nella stanza...
         if (checkingDoor)
@@ -40,8 +40,6 @@ public class DoorsBehaviour : MonoBehaviour
             //...infine, ottiene il riferimento al collider di questa porta
             doorColl = GetComponent<Collider2D>();
 
-
-
             //DEBUG-------------------------------------------------------------------------------------------------------------------------
             //se il numero di nemici non è uguale al numero di contatori, comunica l'errore
             if (nEnemies != countersContainer.childCount)
@@ -51,11 +49,27 @@ public class DoorsBehaviour : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        //ottiene l'ID della stanza in cui si trova questa porta
+        ownRoomID = GetComponentInParent<RoomsBehaviour>().GetRoomID();
+
+    }
+
     private void Update()
     {
         //DEBUG-----------------------------------------------------------------------------------------------------------------------------
-        if (Input.GetKeyDown(KeyCode.F1)) { RemovedMaskOfAnEnemy(); }
+        if (Input.GetKeyDown(KeyCode.F1) && checkingDoor) { RemovedMaskOfAnEnemy(); }
         //DEBUG-----------------------------------------------------------------------------------------------------------------------------
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //cerca di prendere riferimento al manager delle collisioni dell'oggetto con cui si è colliso
+        CollisionsManager cm = collision.GetComponent<CollisionsManager>();
+        //se esiste il riferimento al manager delle collisioni, ed è il giocatore, lo porta alla stanza dopo quella in cui ci si trova
+        if (cm && cm.IsPlayer()) { RoomsManager.instance.GoToNextRoom(ownRoomID); }
+        
     }
 
     /// <summary>
@@ -67,10 +81,10 @@ public class DoorsBehaviour : MonoBehaviour
         if ((nEnemies - removedMasks) > 0)
         {
             //...la porta si chiude(se non lo è già)
-            /*if (doorColl.enabled)*/ doorColl.enabled = false;
+            if (doorColl.enabled) doorColl.enabled = false;
 
         } //altrimenti...
-        else /*if (!doorColl.enabled)*/
+        else if (!doorColl.enabled)
         {
             //...la porta si apre...
             doorColl.enabled = true;
