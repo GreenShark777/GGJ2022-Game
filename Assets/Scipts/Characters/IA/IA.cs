@@ -7,17 +7,26 @@ public class IA : MonoBehaviour
     [SerializeField] private Transform[] checkpoints;   // Array di checkpoint che l'IA deve seguire
     [SerializeField] private float pauseAtCheckpoint = .5f; // Pausa ad ogni checkpoint
     [SerializeField] private float checkMinDist = .2f;  // Distanza minima prima di poter assicurare di aver raggiunto il checkpoint
-    
+    [SerializeField] private bool isMoveGrounded = true;
+
     private int index;  // Indice nell'array dei checkpoint da raggiungere
     private bool indexIncrease; // Indica se l'indice è crescente o decrescente
-    private bool isMoving;  // Se true passa il movimento
+    protected bool isPatrolMoving;  // Se true passa il movimento
 
     private Vector2 movement;   // Vettore di movimento target
 
-    private CharacterMovement characterMovement;    // Reference allo script del movimento
+    protected CharacterMovement characterMovement;    // Reference allo script del movimento
 
     // Scipts references
     private CharacterHealth characterHealth;
+
+    [Space]
+    [Header("Attack settings")]
+    [Tooltip("Distanza a cui il mostro vede il player")]
+    [SerializeField] private float spotRange = 5f;
+    protected Transform playerTransform;
+    protected bool isPlayerInRange = false;
+    protected bool isComputing;
 
     private void Awake()
     {
@@ -33,22 +42,80 @@ public class IA : MonoBehaviour
     {
         
         // Se ci sono checkpoint, inizia il movimento
-        isMoving = checkpoints.Length > 0;
+        isPatrolMoving = checkpoints.Length > 0;
 
         // Parti dal primo indice
         index = 0;
         indexIncrease = true;
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if(playerTransform is null)
+        {
+            Debug.LogWarning("Monster " + name + " can't find the player!");
+        }
+
+        isPlayerInRange = false;
+        isComputing = false;
     }
 
     private void Update()
     {
-        if (isMoving && !PauseManager.IsGamePaused())
+        if (PauseManager.IsGamePaused()) return;
+
+        // Check player distance
+        float dist = Vector2.Distance(playerTransform.position, transform.position);
+
+        // Verifichiamo se il giocatore sia in range oppure no
+        if (dist <= spotRange)
         {
-            // Aggiorna il vettore di movimento
-            CheckMovement();
+            if (!isPlayerInRange)
+            {
+                isPlayerInRange = true;
+                PlayerEnteredRange();
+            }
+        }
+        else if (isPlayerInRange)
+        {
+            isPlayerInRange = false;
+            PlayerExitRange();
+        }
+
+        if (isComputing)
+            InRangeUpdate();
+
+        if (isPatrolMoving)
+        {
+            CheckpointsMovement();
             // E passalo al componente
             characterMovement.Move(movement);
         }
+    }
+
+    /// <summary>
+    /// Update ereditato utilizzato quando il player è in range
+    /// </summary>
+    virtual protected void InRangeUpdate() { }
+
+    virtual protected void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, spotRange);
+    }
+
+    /// <summary>
+    /// Descrive cosa succede quando il player entra in range
+    /// </summary>
+    virtual protected void PlayerEnteredRange()
+    {
+        isPatrolMoving = false;
+    }
+
+    /// <summary>
+    /// Descrive cosa fare dopo che il player esce dal range
+    /// </summary>
+    virtual protected void PlayerExitRange()
+    {
+        isPatrolMoving = true;
     }
 
     /// <summary>
@@ -58,19 +125,21 @@ public class IA : MonoBehaviour
     private IEnumerator WaitToMove()
     {
         yield return new WaitForSeconds(pauseAtCheckpoint);
-        isMoving = true;
+        isPatrolMoving = true;
     }
 
     /// <summary>
     /// Effettua i controlli sulla distanza ai checkpoint e aggiorna il vettore di movimento
     /// </summary>
-    private void CheckMovement()
+    private void CheckpointsMovement()
     {
         // TODO: Check diff for different move types
         Vector2 diff = checkpoints[index].position - transform.position;
 
+        bool condition = isMoveGrounded ? (Mathf.Abs(diff.x) <= checkMinDist) : (diff.magnitude <= checkMinDist);
+
         // Se sull'asse x sei abbastanza vicino al checkpoint
-        if (Mathf.Abs(diff.x) <= checkMinDist)
+        if (condition)
         {
             // Aggiorna l'indice
             index = indexIncrease ? index + 1 : index - 1;
@@ -86,14 +155,16 @@ public class IA : MonoBehaviour
             }
             
             // Effettua la pausa
-            isMoving = false;
+            isPatrolMoving = false;
 
             StartCoroutine(WaitToMove());
         }
         
         // Normalizza il movimento per non essere troppo elevato
         movement = diff.normalized;
-        movement.y = 0;
+
+        if (isMoveGrounded)
+            movement.y = 0;
     }
 
     /// <summary>

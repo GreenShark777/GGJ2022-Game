@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 6984171933298399027}
   m_Layer: 0
   m_Name: EnemyCollisionsManager
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -489,6 +489,7 @@ MonoBehaviour:
   jumpForce: 500
   jumpFallMultiplier: 2.5
   lowJumpMultiplier: 2
+  isPhysiqueDriven: 1
 --- !u!114 &2097170213001112574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,9 +516,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c1160db2574ab4b28b2c32b37a9194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpoints: []
+  checkpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   pauseAtCheckpoint: 0.5
   checkMinDist: 0.4
+  isMoveGrounded: 1
+  spotRange: 5
 --- !u!50 &2743075167701147104
 Rigidbody2D:
   serializedVersion: 4
