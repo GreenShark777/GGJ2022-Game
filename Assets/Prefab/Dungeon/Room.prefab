@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6060506d47d1c7d4abde2d95d2f9b9a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesContainer: {fileID: 3908913538207449949}
   adviseTextAnim: {fileID: 0}
   checkingDoor: 1
 --- !u!212 &533923913
@@ -174,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6060506d47d1c7d4abde2d95d2f9b9a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesContainer: {fileID: 3908913538207449949}
   adviseTextAnim: {fileID: 0}
   checkingDoor: 0
 --- !u!212 &522535342885128379
@@ -415,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entrance: {fileID: 4251374319095126625}
+  enemiesContainer: {fileID: 3908913538207449949}
   checkingDoor: {fileID: 5080074209024051158}
 --- !u!1 &3019972897473904831
 GameObject:

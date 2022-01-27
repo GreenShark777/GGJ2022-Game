@@ -9,9 +9,6 @@ public class DoorsBehaviour : MonoBehaviour
     private EnemyCountersBehaviour[] allCounters;
     //riferimento al collider di questa porta
     private Collider2D doorColl;
-    //riferimento al contenitore di tutti i nemici nella stanza con maschere
-    [SerializeField]
-    private Transform enemiesContainer = default;
     //riferimento all'Animator del testo che indica che tutte le maschere sono state distrutte
     [SerializeField]
     private Animator adviseTextAnim = default;
@@ -26,13 +23,11 @@ public class DoorsBehaviour : MonoBehaviour
     private int ownRoomID;
 
 
-    private void Awake()
+    private void Start()
     {
         //se questa è la porta che deve controllare i nemici nella stanza...
         if (checkingDoor)
         {
-            //...ottiene il numero di nemici presenti inizialmente nella stanza...
-            nEnemies = enemiesContainer.childCount;
             //...ottiene il riferimento al contenitore dei contatori di nemici...
             countersContainer = transform.GetChild(0);
             //...riempe l'array di contatori di nemici prendendo dal contenitore
@@ -46,13 +41,6 @@ public class DoorsBehaviour : MonoBehaviour
             { Debug.LogError("IL NUMERO DI NEMICI NON E' UGUALE AL NUMERO DI CONTATORI PER LA STANZA: " + transform.parent.name); }
 
         }
-
-    }
-
-    private void Start()
-    {
-        //ottiene l'ID della stanza in cui si trova questa porta
-        ownRoomID = GetComponentInParent<RoomsBehaviour>().GetRoomID();
 
     }
 
@@ -71,7 +59,11 @@ public class DoorsBehaviour : MonoBehaviour
         if (cm && cm.IsPlayer()) { RoomsManager.instance.GoToNextRoom(ownRoomID); }
         
     }
-
+    /// <summary>
+    /// Permette di impostare il numero di nemici da controllare
+    /// </summary>
+    /// <param name="enemiesInRoom"></param>
+    public void SetNumberOfEnemies(int enemiesInRoom) { nEnemies = enemiesInRoom; }
     /// <summary>
     /// Controlla se ci sono nemici presenti con maschere e chiude o apre la porta di conseguenza
     /// </summary>

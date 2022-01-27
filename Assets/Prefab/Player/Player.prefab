@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 8981366417800696412}
   - component: {fileID: 3218655641519014997}
   - component: {fileID: 2566543417071423255}
+  - component: {fileID: 1443994559}
   m_Layer: 0
   m_Name: PlayerAttackCollision
   m_TagString: Untagged
@@ -282,6 +283,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1443994559
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023962816041899087}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &3879075564181477864
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
   maxHealth: 50
+  pv: {fileID: 0}
 --- !u!50 &8731005625130238305
 Rigidbody2D:
   serializedVersion: 4

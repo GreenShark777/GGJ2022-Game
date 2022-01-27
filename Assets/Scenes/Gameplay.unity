@@ -128,15 +128,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 235796103}
     m_Modifications:
+    - target: {fileID: 2097170213001112574, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
+      propertyPath: pv
+      value: 
+      objectReference: {fileID: 166907342}
     - target: {fileID: 2743075167701147105, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_Name
       value: IA
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalScale.x
@@ -152,11 +156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -156.9
+      value: 5.32
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -234
+      value: -3.16
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalPosition.z
@@ -168,15 +172,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2743075167701147106, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -280,6 +284,11 @@ MonoBehaviour:
   sr: {fileID: 0}
   petrifiedSprite: {fileID: 0}
   isVulnerable: 0
+--- !u!4 &235796103 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3908913538207449949, guid: 68987adba0e4ce74db8c07cfeb449154, type: 3}
+  m_PrefabInstance: {fileID: 3019972898553239981}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &250469882
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +792,17 @@ MonoBehaviour:
   toFollow: {fileID: 1206663759}
   followSpeed: 10
   camYPosOffset: 0.8
+--- !u!114 &562295989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3679570832527477672, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
+  m_PrefabInstance: {fileID: 8731005624130698028}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c057ee413fa3e479d64ecfb1c369ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &892310460 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2743075167701147116, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
@@ -979,10 +999,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 171897412555120565, guid: 68987adba0e4ce74db8c07cfeb449154, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3019972897362531381, guid: 68987adba0e4ce74db8c07cfeb449154, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1270,6 +1286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3831279187474212689, guid: cf8a8cbc69ae82248bc67d096b699e1e, type: 3}
+      propertyPath: playerSam
+      value: 
+      objectReference: {fileID: 562295989}
     - target: {fileID: 5751312053753628989, guid: cf8a8cbc69ae82248bc67d096b699e1e, type: 3}
       propertyPath: m_RootOrder
       value: 5

@@ -13,17 +13,14 @@ public class RoomsBehaviour : MonoBehaviour
     private DoorsBehaviour checkingDoor = default;
     //indica l'ID di questa stanza(nonchè la sua posizione nell'array di stanze nel RoomsManager)
     private int roomID = -1;
+    //indica il numero di nemici presenti in questa stanza
+    private int enemiesInRoom = 0;
 
 
     private void Awake()
     {
         //informa i nemici della stanza in cui si trovano
         InformEnemiesOfTheirRoom();
-
-
-
-        //DEBUG PER RICORDARE---------------------------------------------------------------------------------------------------------------
-        InformDoorOfMaskBreaking();
 
     }
 
@@ -32,16 +29,24 @@ public class RoomsBehaviour : MonoBehaviour
     /// </summary>
     /// <param name="newID"></param>
     public void SetRoomID(int newID) { roomID = newID; }
-
+    /// <summary>
+    /// Informa i nemici della stanza in cui sono e comunica il numero di nemici alla porta di controllo
+    /// </summary>
     public void InformEnemiesOfTheirRoom()
     {
+        //ottiene il riferimento a tutti gli script di vulnerabilità alla pietrificazione dei nemici nel contenitore
+        var allEnemies = enemiesContainer.GetComponentsInChildren<PetrificationVulnerability>();
+        //per ogni nemico nell'array appena ottenuto...
+        foreach (PetrificationVulnerability enemy in allEnemies)
+        {
+            //...incrementa il numero di nemici presenti...
+            enemiesInRoom++;
+            //...e informa il nemico della stanza in cui si trova
+            enemy.SetRoom(this);
 
-        //BISOGNA DARE AI NEMICI QUESTO SCRIPT COME RIFERIMENTO, IN MODO CHE QUANDO VENGONO SCONFITTI POSSANO DICHIARARLO ALLA STESSA STANZA
-        //CHE A SUA VOLTA INFORMERA' LA PORTA DI CONTROLLO
-
-        //var allEnemies = enemiesContainer.GetComponentsInChildren<PetrificationVulnerability>();
-
-        Debug.LogWarning("DA RICORDARE: I NEMICI NON VENGONO ANCORA INFORMATI DELLA STANZA IN CUI SONO");
+        }
+        //infine, indica alla porta il numero di nemici presenti nella stanza
+        checkingDoor.SetNumberOfEnemies(enemiesInRoom);
 
     }
     /// <summary>
@@ -59,12 +64,7 @@ public class RoomsBehaviour : MonoBehaviour
     /// <summary>
     /// Informa la porta di controllo che un nemico ha perso la maschera
     /// </summary>
-    public void InformDoorOfMaskBreaking()
-    {
-        
-        checkingDoor.RemovedMaskOfAnEnemy();
-        Debug.LogWarning("DA RICORDARE: LA PORTA DI COTROLLO NON VIENE ANCORA INFORMATA QUANDO UNA MASCHERA VIENE ROTTA");
-    }
+    public void InformDoorOfMaskBreaking() { checkingDoor.RemovedMaskOfAnEnemy(); }
     /// <summary>
     /// Ritorna l'ID di questa stanza
     /// </summary>

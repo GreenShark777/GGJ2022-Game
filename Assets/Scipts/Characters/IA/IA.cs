@@ -17,16 +17,21 @@ public class IA : MonoBehaviour
     private CharacterMovement characterMovement;    // Reference allo script del movimento
 
     // Scipts references
-    private CharacterHealth characterHealth;
+    //private CharacterHealth characterHealth;
+
+    //(GABRIELE)COMMENTATO PERCHE' ONDEATH ADESSO PRENDE RIFERIMENTO AD UN'ALTRA FUNZIONE NEL SUO START
 
     private void Awake()
     {
         // Get references
         characterMovement = GetComponent<CharacterMovement>();
-        characterHealth = GetComponent<CharacterHealth>();
+
+
+        //characterHealth = GetComponent<CharacterHealth>();
 
         // Setup listeners
-        characterHealth.onDeath += Death;
+        //characterHealth.onDeath += Death;
+
     }
 
     private void Start()
@@ -101,12 +106,12 @@ public class IA : MonoBehaviour
     /// </summary>
     private void Death()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         // Unsubscribe from listeners
-        if (characterHealth) characterHealth.onDeath -= Death;
+        //if (characterHealth) characterHealth.onDeath -= Death;
     }
 }
