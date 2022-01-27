@@ -12,7 +12,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     [Range(0, 100)] [SerializeField] private int maxHealth;
     private int currentHealth;
 
-    public UnityAction onDeath;
+    //private UnityAction onDeath;
 
     //riferimento allo script di vulnerabilità alla pietrificazione, se questa vita riguarda un nemico
     [SerializeField]
@@ -31,7 +31,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
          * se non è un nemico sarà il giocatore, quindi prende come riferimento la funzione per indicare che il giocatore è morto
          * altrimenti, essendo nemico, gli toglie la maschera e lo rende vulnerabile alla pietrificazione
         */
-        onDeath += (!pv) ? PlayerStateManager.PlayerDied : pv.BreakMask;
+        //onDeath += (!pv) ? PlayerStateManager.PlayerDied : pv.BreakMask;
 
     }
 
@@ -58,19 +58,23 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         // Se la vita scende a 0 per la prima volta...
         if (currentHealth < 1 && !lostAllHealth)
         {
-            //...richiama la funzione che gestisce la fine della vita di quest'entità...
-            onDeath?.Invoke();
+            //...se è il giocatore, comunica che è morto...
+            if (!pv) { PlayerStateManager.SetPlayerDeathState(true); }
+            //altrimenti, essendo nemico, gli si rompe la maschera
+            else { pv.BreakMask(); }
+            //onDeath?.Invoke();
             //...e comunica che si è persa tutta la vita
             lostAllHealth = true;
 
         }
     }
 
+    /*
     private void OnDestroy()
     {
 
         onDeath -= onDeath;
 
-    }
+    }*/
 
 }

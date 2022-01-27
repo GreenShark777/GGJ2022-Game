@@ -37,7 +37,7 @@ public class DoorsBehaviour : MonoBehaviour
 
             //DEBUG-------------------------------------------------------------------------------------------------------------------------
             //se il numero di nemici non è uguale al numero di contatori, comunica l'errore
-            if (nEnemies != countersContainer.childCount)
+            if (nEnemies != allCounters.Length)
             { Debug.LogError("IL NUMERO DI NEMICI NON E' UGUALE AL NUMERO DI CONTATORI PER LA STANZA: " + transform.parent.name); }
 
         }

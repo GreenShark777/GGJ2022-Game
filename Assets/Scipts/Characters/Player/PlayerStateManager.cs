@@ -41,9 +41,5 @@ public class PlayerStateManager : MonoBehaviour
         else { Debug.LogError("Il giocatore deve essere respawnato!"); }
 
     }
-    /// <summary>
-    /// Permette di impostare lo stato di morte del giocatore a morto
-    /// </summary>
-    public static void PlayerDied() { SetPlayerDeathState(true); }
 
 }
