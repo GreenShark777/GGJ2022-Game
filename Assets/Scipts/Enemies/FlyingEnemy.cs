@@ -27,6 +27,7 @@ public class FlyingEnemy : IA
         positionBeforeAttack = transform.position;
 
         isAttacking = false;
+        attackCollider.enabled = false;
         isComputing = true;
 
         StartCoroutine(WaitBeforeAttack());
@@ -37,17 +38,18 @@ public class FlyingEnemy : IA
     /// </summary>
     protected override void PlayerExitRange() { }
 
-    protected override void InRangeUpdate()
+    protected override void HierarchyUpdate()
     {
         if(isAttacking)
         {
             Vector2 diff = attackPosition - transform.position;
-            characterMovement.Move(diff, attackSpeed);
+            characterMovement.Move(diff.normalized, attackSpeed);
 
             // Ho raggiunto il punto in cui volevo arrivare
             if(diff.magnitude <= .4f)
             {
                 isAttacking = false;
+                attackCollider.enabled = false;
                 ResetPosition();
             }
         }
@@ -59,8 +61,6 @@ public class FlyingEnemy : IA
             // Ho raggiunto il punto in cui volevo arrivare
             if (diff.magnitude <= .4f)
             {
-                Debug.Log("Punto raggiunto");
-
                 isResetting = false;
 
                 if (isPlayerInRange)
@@ -91,6 +91,7 @@ public class FlyingEnemy : IA
         yield return new WaitForSeconds(beforeAttackTime);
 
         isAttacking = true;
+        attackCollider.enabled = true;
     }
 
     IEnumerator WaitStunTime()
@@ -116,6 +117,7 @@ public class FlyingEnemy : IA
         if(collision.gameObject.CompareTag("Ground"))
         {
             isAttacking = false;
+            attackCollider.enabled = false;
             StartCoroutine(WaitStunTime());
         }
     }

@@ -26,9 +26,10 @@ public class IA : MonoBehaviour
     [Header("Attack settings")]
     [Tooltip("Distanza a cui il mostro vede il player")]
     [SerializeField] private float spotRange = 5f;
+    [SerializeField] protected Collider2D attackCollider;
     protected Transform playerTransform;
-    protected bool isPlayerInRange = false;
-    protected bool isComputing;
+    protected bool isPlayerInRange = false; // True quando il player entra in range d'attacco
+    protected bool isComputing; // Se true permette di abilitare il ciclo Update ai figli ereditati
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class IA : MonoBehaviour
         // Se ci sono checkpoint, inizia il movimento
         isPatrolMoving = checkpoints.Length > 0;
 
-        // Parti dal primo indice
+        // Segui i checkpoints dal primo indice
         index = 0;
         indexIncrease = true;
 
@@ -61,6 +62,8 @@ public class IA : MonoBehaviour
 
         isPlayerInRange = false;
         isComputing = false;
+
+        attackCollider.enabled = false;
     }
 
     private void Update()
@@ -73,6 +76,7 @@ public class IA : MonoBehaviour
         // Verifichiamo se il giocatore sia in range oppure no
         if (dist <= spotRange)
         {
+            // Triggera l'evento solo se non era precedentemente in range
             if (!isPlayerInRange)
             {
                 isPlayerInRange = true;
@@ -85,9 +89,11 @@ public class IA : MonoBehaviour
             PlayerExitRange();
         }
 
+        // Se la variabile isComputing è true, permettiamo alle classi ereditate di inserirsi su questo ciclo update
         if (isComputing)
-            InRangeUpdate();
+            HierarchyUpdate();
 
+        // Se è true, seguiamo il nostro percorso di checkpoints
         if (isPatrolMoving)
         {
             CheckpointsMovement();
@@ -97,9 +103,9 @@ public class IA : MonoBehaviour
     }
 
     /// <summary>
-    /// Update ereditato utilizzato quando il player è in range
+    /// Update ereditato
     /// </summary>
-    virtual protected void InRangeUpdate() { }
+    virtual protected void HierarchyUpdate() { }
 
     virtual protected void OnDrawGizmosSelected()
     {
@@ -170,19 +176,5 @@ public class IA : MonoBehaviour
 
         if (isMoveGrounded)
             movement.y = 0;
-    }
-
-    /// <summary>
-    /// Richiamato quando la vita scende a 0
-    /// </summary>
-    private void Death()
-    {
-        //gameObject.SetActive(false);
-    }
-
-    private void OnDestroy()
-    {
-        // Unsubscribe from listeners
-        //if (characterHealth) characterHealth.onDeath -= Death;
     }
 }
