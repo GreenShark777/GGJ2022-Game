@@ -34,4 +34,10 @@ public class CameraFollow : MonoBehaviour
         transform.position = newCamPosition;
     }
 
+    // Set toFollow target
+    public void SetTarget(Transform newTarget)
+    {
+        if (newTarget)
+            toFollow = newTarget; 
+    }
 }

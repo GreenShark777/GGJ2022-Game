@@ -25,6 +25,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
     //indica se quest'entità ha perso tutta la vita
     private bool lostAllHealth = false;
 
+    [SerializeField] private Tutorial tutorial;
 
     void Start()
     {
@@ -75,6 +76,10 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
             //...e comunica che si è persa tutta la vita
             lostAllHealth = true;
 
+            // Alla morte del nemico del tutorial, esegui l'animazione
+            // P.S: This is really a horror... use actions...
+            if (tutorial)
+                tutorial.StartAnim();
         }
     }
 
