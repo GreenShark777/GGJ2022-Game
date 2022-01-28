@@ -1,4 +1,5 @@
 //Si occupa del comportamento delle porte nelle stanze
+using System.Collections;
 using UnityEngine;
 
 public class DoorsBehaviour : MonoBehaviour
@@ -12,6 +13,11 @@ public class DoorsBehaviour : MonoBehaviour
     //riferimento all'Animator del testo che indica che tutte le maschere sono state distrutte
     [SerializeField]
     private Animator adviseTextAnim = default;
+    //riferimento alle metà della porta
+    [SerializeField]
+    private Transform leftDoor = default,
+        rightDoor = default;
+
     //indica il numero di nemici presenti inizialmente nella stanza
     private int nEnemies;
     //indica se in questa stanza questa è la porta che controlla i nemici
@@ -21,6 +27,9 @@ public class DoorsBehaviour : MonoBehaviour
     private int removedMasks = 0;
     //indica l'ID della stanza in cui si trova questa porta
     private int ownRoomID;
+    //indica quanto velocemente si apre la porta
+    [SerializeField]
+    private float openingSpeed = 1;
 
 
     private void Awake()
@@ -51,7 +60,8 @@ public class DoorsBehaviour : MonoBehaviour
     private void Update()
     {
         //DEBUG-----------------------------------------------------------------------------------------------------------------------------
-        if (Input.GetKeyDown(KeyCode.F1) && checkingDoor) { RemovedMaskOfAnEnemy(); }
+        //if (Input.GetKeyDown(KeyCode.F1) && checkingDoor) { RemovedMaskOfAnEnemy(); }
+        //if (Input.GetKeyDown(KeyCode.F3)) { StartCoroutine(OpenDoor()); }
         //DEBUG-----------------------------------------------------------------------------------------------------------------------------
     }
 
@@ -88,6 +98,8 @@ public class DoorsBehaviour : MonoBehaviour
         else if (!doorColl.enabled)
         {
             //...la porta si apre...
+            StartCoroutine(OpenDoor());
+            //...ne attiva il collider...
             doorColl.enabled = true;
             //...e fa partire l'animazione del testo che indica al giocatore che può andare avanti
             adviseTextAnim.SetTrigger("Advise");
@@ -112,6 +124,24 @@ public class DoorsBehaviour : MonoBehaviour
 
         }
         else { Debug.LogError("Chiamato controllo dalla porta sbagliata! Porta: " + name + " della stanza : " + transform.parent.name); }
+
+    }
+    /// <summary>
+    /// Apre la porta visualmente
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator OpenDoor()
+    {
+        //ottiene le grandezze delle metà della porta
+        Vector3 leftDoorScale = leftDoor.localScale;
+        Vector3 rightDoorScale = rightDoor.localScale;
+        //diminuisce di poco la grandezza delle metà
+        leftDoor.localScale = Vector2.Lerp(leftDoorScale, new Vector3(0, leftDoorScale.y), openingSpeed * Time.deltaTime);
+        rightDoor.localScale = Vector2.Lerp(rightDoorScale, new Vector3(0, rightDoorScale.y), openingSpeed * Time.deltaTime);
+        //aspetta il fixedUpdate
+        yield return new WaitForFixedUpdate();
+        //continua ad aprire la porta
+        StartCoroutine(OpenDoor());
 
     }
 

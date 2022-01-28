@@ -278,6 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adviseTextAnim: {fileID: 0}
+  leftDoor: {fileID: 4237039257521293065}
+  rightDoor: {fileID: 7288159845736929182}
   checkingDoor: 1
 --- !u!61 &4942638537706358037
 BoxCollider2D:

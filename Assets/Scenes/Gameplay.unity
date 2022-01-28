@@ -1922,6 +1922,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 184397320}
     m_Modifications:
+    - target: {fileID: 717161046018359794, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
+      propertyPath: petrifiedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5c9b1983b4d4fcd499ba92f5a4d1ae8a, type: 3}
     - target: {fileID: 2097170213001112574, guid: d9059c83d7a01a1498aa3ad9bdc28096, type: 3}
       propertyPath: tutorial
       value: 
