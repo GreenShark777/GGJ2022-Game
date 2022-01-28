@@ -45,11 +45,6 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F4)) { TakeDmg(10); }
-    }
-
     /// <summary>
     /// Update the slider value
     /// </summary>
