@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222247667c1a0e24fa6a038bfc342e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sam: {fileID: 0}
   characterBody: {fileID: 8264489673372026755}
   speed: 7
   maxVelocity: 5
@@ -129,6 +130,9 @@ MonoBehaviour:
   jumpForce: 500
   jumpFallMultiplier: 2.5
   lowJumpMultiplier: 2
+  walkAnimationLimits: 0000000000000000
+  runAnimationLimits: 0000000000000000
+  jumpAnimationLimits: 0000000000000000
   isPhysiqueDriven: 0
 --- !u!114 &2508236755948002281
 MonoBehaviour:
@@ -146,6 +150,7 @@ MonoBehaviour:
   maxHealth: 10
   pv: {fileID: 3730138669455094284}
   g: {fileID: 0}
+  tutorial: {fileID: 0}
 --- !u!114 &1856878791572876795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +169,7 @@ MonoBehaviour:
   pauseAtCheckpoint: 0.5
   checkMinDist: 0.2
   isMoveGrounded: 0
+  peacefulMode: 0
   spotRange: 10
   attackCollider: {fileID: 1607275766984879044}
   beforeAttackTime: 2
@@ -350,7 +356,7 @@ MonoBehaviour:
   scriptsToStop: []
   sr: {fileID: 1856878791929826030}
   enemyMask: {fileID: 6638068082107720927}
-  petrifiedSprite: {fileID: 21300000, guid: 81a0f5fba0a9c434683c779a6a418988, type: 3}
+  petrifiedSprite: {fileID: 21300000, guid: ab87260e9bbe57d40b9c5a22b3d1e14b, type: 3}
   isVulnerable: 0
 --- !u!70 &6861632494788994852
 CapsuleCollider2D:
