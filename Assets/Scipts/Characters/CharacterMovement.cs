@@ -78,7 +78,7 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
     private void StartMovementAnimation(bool running)
     {
         //ottiene i limiti dell'animazione da far partire(camminata o corsa)
-        int[] limits = running ? walkAnimationLimits : runAnimationLimits;
+        int[] limits = !running ? walkAnimationLimits : runAnimationLimits;
         //fa partire l'animazione di movimento(camminata o corsa)
         sam.StartNewAnimation(1, limits[0], limits[1]);
 
