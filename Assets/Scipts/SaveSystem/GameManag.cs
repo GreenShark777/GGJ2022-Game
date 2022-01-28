@@ -58,6 +58,11 @@ public class GameManag : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F10)) { SceneChange.StaticGoToScene(2); }
+    }
+
     /// <summary>
     /// Carica i dati salvati in SaveData
     /// </summary>
