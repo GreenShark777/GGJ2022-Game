@@ -229,7 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scriptsToStop:
   - {fileID: 2743075167701147107}
-  - {fileID: 0}
   sr: {fileID: 2743075166413323001}
   enemyMask: {fileID: 3774423823141237577}
   petrifiedSprite: {fileID: 21300000, guid: 81a0f5fba0a9c434683c779a6a418988, type: 3}
