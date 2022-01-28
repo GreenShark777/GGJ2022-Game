@@ -18,6 +18,9 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         maxFallSpeed = 7, //indica quanto velocemente può cadere al massimo il giocatore
         jumpForce = 1; //indica quanto potente è il salto del giocatore
 
+    //indica la velocità massima iniziale
+    private float startMaxVelocity;
+
     [SerializeField]
     private float jumpFallMultiplier = 2.5f, // Aggiungi un moltiplicatore alla gravità durante la discesa
         lowJumpMultiplier = 2f; // Aggiungi un moltiplicatore al salto, durante la prima metà 
@@ -36,6 +39,8 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
 
     private void Start()
     {
+        //ottiene la velocità massima iniziale
+        startMaxVelocity = maxVelocity;
         //ottiene il riferimento al Rigidbody2D del giocatore
         if(isPhysiqueDriven)
             rb = GetComponent<Rigidbody2D>();
@@ -55,12 +60,14 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
     /// <param name="newVelocity">the movement direction</param>
     public void Move(Vector2 newVelocity, bool running = false)
     {
+        //imposta la velocità massima, in base a se si sta correndo o meno
+        maxVelocity = !running ? startMaxVelocity : (startMaxVelocity * 2);
         //fa partire l'animazione di movimento
         StartMovementAnimation(running);
 
         if(isPhysiqueDriven)
         {
-            PhysicMovement(newVelocity);
+            PhysicMovement(newVelocity, running);
             return;
         }
 
@@ -93,8 +100,10 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         transform.Translate(newVelocity * overSpeed * Time.deltaTime);
     }
 
-    private void PhysicMovement(Vector2 newVelocity)
+    private void PhysicMovement(Vector2 newVelocity, bool running = false)
     {
+        //se si sta correndo, raddoppia la velocità
+        if (running) { speed *= 2; }
         //muove il giocatore, aggiungendo forza al Rigidbody del giocatore in base alla direzione ricevuta per la velocità
         rb.AddForce(newVelocity * speed);
         //crea una variabile locale che indica la nuova rotazione che deve avere il giocatore
@@ -121,7 +130,8 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         }
         //se la rotazione è cambiata, cambia la rotazione del giocatore con quella calcolata
         if (checkedRotation != facingRight) { characterBody.eulerAngles = newRotation; }
-
+        //se si stava correndo, riporta al suo valore originale la velocità
+        if (running) { speed /= 2; }
         // rb.velocity = Vector2.SmoothDamp(rb.velocity, movement, ref m_Velocity, m_MovementSmoothing);
     }
 

@@ -16,6 +16,8 @@ public class SpriteAnimationManager : MonoBehaviour
     //indica quanto velocemente va l'animazione
     [SerializeField]
     private float animationSpeed = 0.1f;
+    //indica la velocità impostata inizialmente
+    private float startSpeed;
     //indica il numero di sprite presenti nello spritesheet
     private int nSprites;
     //indica la priorità dell'animazione corrente
@@ -38,6 +40,8 @@ public class SpriteAnimationManager : MonoBehaviour
         nSprites = spriteSheet.Length;
         //se l'animazione da fare è automatica, fa partire l'animazione dall'inizio alla fine
         if (automatic) { StartNewAnimation(0, 0, nSprites - 1, false); }
+        //salva la velocità impostata inizialmente
+        startSpeed = animationSpeed;
 
     }
     /// <summary>
@@ -50,7 +54,7 @@ public class SpriteAnimationManager : MonoBehaviour
     {
         //impedisce di rifare l'animazione corrente
         if (lastAnimationIndex == currentAnimationLastIndex) { priority = -1; }
-        Debug.Log("Prova a fare animazione");
+        //Debug.Log("Prova a fare animazione");
         //se la priorità di questa animazione è abbastanza alta...
         if (priority >= currentAnimationPriority)
         {
@@ -60,7 +64,7 @@ public class SpriteAnimationManager : MonoBehaviour
             //...e fa partire l'animazione richiesta
             if (currentAnimationRoutine != null) { StopCoroutine(currentAnimationRoutine); }
             currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex, lastAnimationIndex, realtime));
-            Debug.Log("Sta facendo animazione");
+            //Debug.Log("Sta facendo animazione");
         }
 
     }
@@ -82,8 +86,8 @@ public class SpriteAnimationManager : MonoBehaviour
             //...fa tornare la priorità e l'indice finale ai valori minimi...
             currentAnimationPriority = -1;
             currentAnimationLastIndex = -1;
-            //...se non è in loop, fa terminare l'animazione...
-            if (!isLoop) yield break;
+            //...se non è in loop, fa terminare l'animazione e riporta alla velocità iniziale...
+            if (!isLoop) { animationSpeed = startSpeed; yield break; }
             //...altrimenti, la fa ripartire dall'inizio
             else { nextAnimationIndex = 0; }
         
@@ -104,7 +108,14 @@ public class SpriteAnimationManager : MonoBehaviour
     /// </summary>
     /// <param name="newSr"></param>
     public void ChangeSpriteToChange(SpriteRenderer newSr) { spriteToChange = newSr; }
-
+    /// <summary>
+    /// Riporta all'animazione idle
+    /// </summary>
     public void GoBackToIdle() { StartNewAnimation(1, idleAnimationLimits[0], idleAnimationLimits[1]); }
+    /// <summary>
+    /// Permette di impostare una nuova velocità
+    /// </summary>
+    /// <param name="newSpeed"></param>
+    public void SetAnimationSpeed(float newSpeed) { animationSpeed = newSpeed; }
 
 }
