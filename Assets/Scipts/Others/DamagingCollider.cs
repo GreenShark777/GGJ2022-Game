@@ -18,6 +18,12 @@ public class DamagingCollider : MonoBehaviour, IGiveDamage
         
     }
 
+    /// <summary>
+    /// Permette di impostare il danno che deve fare questo collider
+    /// </summary>
+    /// <param name="newDmg"></param>
+    public void SetNewDamage(int newDmg) { dmg = newDmg; }
+
     //INTERFACCIA-------------------------------------------------------------------------------------------------------------
     public int GiveDamage() { return dmg; }
     public bool IsEnemyOrTrapAttack() { return enemyOrTrapAttack; }

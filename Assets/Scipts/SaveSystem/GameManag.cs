@@ -27,6 +27,8 @@ public class GameManag : MonoBehaviour
     public int savedHealth = 100;
     //indica quanti nemici il giocatore ha pietrificato
     public int enemiesPetrified = 0;
+    //indica se il giocatore si è trasformato o meno
+    public bool transformed = false;
 
     //riferimento a tutti gli script che usano l'interfaccia per l'aggiornamento dei dati nel GameManag
     public static List<IUpdateData> dataToSave = new List<IUpdateData>();
@@ -73,6 +75,7 @@ public class GameManag : MonoBehaviour
             lastEnteredRoom = sd.lastEnteredRoom;
             savedHealth = sd.savedHealth;
             enemiesPetrified = sd.enemiesPetrified;
+            transformed = sd.transformed;
 
             //Debug.Log("Caricati dati salvati");
         } //altrimenti, tutti i dati vengono messi al loro valore originale, in quanto non si è trovato un file di salvataggio
@@ -100,6 +103,7 @@ public class GameManag : MonoBehaviour
         lastEnteredRoom = 0;
         savedHealth = 100;
         enemiesPetrified = 0;
+        transformed = false;
 
         //tutti gli array vengono svuotati
         EmptyArrays();

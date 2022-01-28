@@ -15,6 +15,15 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
     private GameManag g = default;
     //riferimento allo script che si occupa dell'attacco speciale del giocatore
     private PietrificationAttack pa;
+    //riferimento al collider di danno del giocatore
+    [SerializeField]
+    private DamagingCollider playerDmgColl = default;
+    //riferimento allo SpriteRenderer per la luce attorno al giocatore
+    [SerializeField]
+    private SpriteRenderer playerLightSr = default;
+    //riferimento allo sprite della luce oscura
+    [SerializeField]
+    private Sprite blackLightSprite = default;
     //indica quanti nemici il giocatore ha ucciso
     private int enemiesKilled = default;
     //indica quanti nemici deve uccidere il giocatore per arrivare al punto di non ritorno
@@ -43,6 +52,8 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
         sliderCG = dualitySlider.GetComponent<CanvasGroup>();
         //nasconde lo slider all'inizio
         sliderCG.alpha = 0;
+        //se il giocatore si era trasformato, impostato lo stato di trasformazione
+        if (g.transformed) { SetTransformationState(); }
         //ottiene il riferimento allo script che si occupa dell'attacco speciale del giocatore
         pa = GetComponent<PietrificationAttack>();
 
@@ -51,7 +62,7 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F2)) { KilledAnEnemy(); }
-        Debug.LogError("RICORDA: NON VIENE FATTA ANCORA BENE L'ANIMAZIONE DI TRASFORMAZIONE");
+        //Debug.LogError("RICORDA: NON VIENE FATTA ANCORA BENE L'ANIMAZIONE DI TRASFORMAZIONE");
     }
 
     /// <summary>
@@ -107,11 +118,31 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
     /// </summary>
     private IEnumerator TransformPlayer()
     {
+        //Debug.LogError("Giocatore si trasforma");
         //fa usare l'attacco pietrificazione al giocatore, indicando che è per la trasformazione
         pa.UsePetrificationAttack(true);
+        //toglie la luce attorno al giocatore
+        playerLightSr.sprite = null;
         //aspetta che l'animazione di trasformazione arrivi a metà
         yield return new WaitForSecondsRealtime(pa.GetAttackDuration() / 2);
-        Debug.LogError("Giocatore si trasforma");
+        //imposta tutti gli stati di quando il giocatore viene trasformato
+        SetTransformationState();
+
+        //indica al GameManag che il giocatore si è trasformato
+        g.transformed = true;
+
+    }
+    /// <summary>
+    /// Imposta tutti gli stati di quando il giocatore viene trasformato
+    /// </summary>
+    private void SetTransformationState()
+    {
+        //imposta il danno del giocatore al valore massimo
+        playerDmgColl.SetNewDamage(999);
+        //cambia la luce attorno al giocatore
+        playerLightSr.sprite = blackLightSprite;
+        Debug.LogError("Cambiate statistiche e altro");
+        Debug.LogError("APPENA SI HANNO LE ANIMAZIONI, CONTROLLARE SE BISOGNA CAMBIARE I LIMITI PER LE ANIMAZIONI");
     }
 
     public void UpdateData()

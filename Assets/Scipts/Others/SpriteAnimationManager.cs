@@ -19,12 +19,20 @@ public class SpriteAnimationManager : MonoBehaviour
     private int currentAnimationPriority = -1;
     //riferimento alla coroutine che si sta occupando dell'animazione in corso
     private Coroutine currentAnimationRoutine;
+    //indica se questo manager parte da solo
+    [SerializeField]
+    private bool automatic = false;
+    //indica se questo manager esegue le animazioni in loop
+    [SerializeField]
+    private bool isLoop = false;
 
 
     private void Awake()
     {
         //ottiene il numero di sprite presenti nello spritesheet
         nSprites = spriteSheet.Length;
+        //se l'animazione da fare è automatica, fa partire l'animazione dall'inizio alla fine
+        if (automatic) { StartNewAnimation(0, 0, nSprites - 1, false); }
 
     }
     /// <summary>
@@ -59,8 +67,17 @@ public class SpriteAnimationManager : MonoBehaviour
         if (!realtime) { yield return new WaitForSeconds(animationSpeed); }
         else { yield return new WaitForSecondsRealtime(animationSpeed); }
 
-        //se si è arrivati all'ultimo sprite d'animazione, fa terminare l'animazione e fa tornare la priorità a quella minima
-        if (nextAnimationIndex > lastAnimationIndex) { currentAnimationPriority = -1; yield break; }
+        //se si è arrivati all'ultimo sprite d'animazione...
+        if (nextAnimationIndex > lastAnimationIndex)
+        {
+            //...fa tornare la priorità a quella minima...
+            currentAnimationPriority = -1;
+            //...se non è in loop, fa terminare l'animazione...
+            if (!isLoop) yield break;
+            //...altrimenti, la fa ripartire dall'inizio
+            else { nextAnimationIndex = 0; }
+        
+        }
         //cambia lo sprite, continuando l'animazione
         spriteToChange.sprite = spriteSheet[nextAnimationIndex];
         //infine, fa continuare il ciclo d'animazione

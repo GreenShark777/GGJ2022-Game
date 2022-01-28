@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PietrificationAttack : MonoBehaviour
 {
     //indica il numero massimo di collider da poter controllare con un singolo attacco
-    private int NCOLLIDERS = 50;
+    private const int NCOLLIDERS = 50;
 
     [Header("References")]
     //riferimento al manager delle animazioni dello sprite
@@ -100,6 +100,8 @@ public class PietrificationAttack : MonoBehaviour
             canUse = false;
             //...scarica lo slider...
             specialAttackSlider.value = 0;
+            //..se ci si sta trasformando, ferma tutte le coroutine...
+            if (isTransforming) { StopAllCoroutines(); }
             //...e fa partire la coroutine d'attacco
             StartCoroutine(ManagePietrificationAttackTiming(isTransforming));
         
@@ -115,7 +117,7 @@ public class PietrificationAttack : MonoBehaviour
         //mette il gioco in pausa
         PauseManager.SetPauseState(true);
         //prende i limiti dell'animazione da far fare al giocatore in base al parametro ricevuto
-        int[] animationLimits = isTransforming ? pietrificationAnimationLimits : transformationAnimationLimits;
+        int[] animationLimits = !isTransforming ? pietrificationAnimationLimits : transformationAnimationLimits;
         //fa partire l'animazione di attacco speciale del giocatore
         sam.StartNewAnimation(2, animationLimits[0], animationLimits[1], true);
         //fa partire una coroutine per il fadeIn dell'immagine di animazione

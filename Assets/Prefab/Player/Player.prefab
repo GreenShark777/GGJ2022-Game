@@ -852,6 +852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sam: {fileID: 3679570832527477672}
   pietrificationAnimationLimits: 1400000016000000
+  transformationAnimationLimits: 0000000000000000
   specialAttackSlider: {fileID: 0}
   lightsOutSprite: {fileID: 8488793905721058311}
   attackStartPoint: {fileID: 6541468864916059424}
@@ -904,8 +905,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dualitySlider: {fileID: 0}
   g: {fileID: 0}
+  playerDmgColl: {fileID: 3218655641519014997}
+  playerLightSr: {fileID: 7209301318441158814}
+  blackLightSprite: {fileID: 21300000, guid: 6fafcd4748126fa46a3e57660bf28023, type: 3}
   killsToBad: 10
   numberOfAlerts: 3
+  showForHowMuch: 4
+  showSpeed: 0.01
 --- !u!50 &8731005625130238305
 Rigidbody2D:
   serializedVersion: 4

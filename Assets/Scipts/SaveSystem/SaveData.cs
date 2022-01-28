@@ -18,6 +18,8 @@ public class SaveData
     public int savedHealth = 100;
     //indica quanti nemici il giocatore ha pietrificato
     public int enemiesPetrified = 0;
+    //indica se il giocatore si è trasformato o meno
+    public bool transformed = false;
 
 
     public SaveData(GameManag g)
@@ -30,6 +32,7 @@ public class SaveData
         lastEnteredRoom = g.lastEnteredRoom;
         savedHealth = g.savedHealth;
         enemiesPetrified = g.enemiesPetrified;
+        transformed = g.transformed;
 
     }
 
