@@ -23,29 +23,60 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
     private bool facingRight = true, //indica la rotazione del giocatore
         canJump = true; //indica se il giocatore può saltare o meno
 
+    [SerializeField] private bool isPhysiqueDriven = true;
+
 
     private void Start()
     {
         //ottiene il riferimento al Rigidbody2D del giocatore
-        rb = GetComponent<Rigidbody2D>();
+        if(isPhysiqueDriven)
+            rb = GetComponent<Rigidbody2D>();
 
     }
 
     private void FixedUpdate()
     {
         //corregge problemi nella nuova velocità del Rigidbody del giocatore
-        CorrectVelocity();
+        if(isPhysiqueDriven)
+            CorrectVelocity();
     }
 
     /// <summary>
     /// Muove il giocatore in base alla direzione ricevuta come parametro
     /// </summary>
-    /// <param name="newVelocity"></param>
+    /// <param name="newVelocity">the movement direction</param>
     public void Move(Vector2 newVelocity)
+    {
+        if(isPhysiqueDriven)
+        {
+            PhysicMovement(newVelocity);
+            return;
+        }
+
+        transform.Translate(newVelocity * speed * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Muove il giocatore in base alla direzione ricevuta come parametro, facendo l'override della velocità
+    /// </summary>
+    /// <param name="newVelocity">the movement direction</param>
+    /// <param name="overSpeed">The speed to use</param>
+    public void Move(Vector2 newVelocity, float overSpeed)
+    {
+        if (isPhysiqueDriven)
+        {
+            PhysicMovement(newVelocity);
+            return;
+        }
+
+        transform.Translate(newVelocity * overSpeed * Time.deltaTime);
+    }
+
+    private void PhysicMovement(Vector2 newVelocity)
     {
         //muove il giocatore, aggiungendo forza al Rigidbody del giocatore in base alla direzione ricevuta per la velocità
         rb.AddForce(newVelocity * speed);
-        
+
         //crea una variabile locale che indica la nuova rotazione che deve avere il giocatore
         Vector3 newRotation = transform.eulerAngles;
         //crea una variabile locale che indica la rotazione del giocatore prima del controllo
@@ -70,10 +101,10 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         }
         //se la rotazione è cambiata, cambia la rotazione del giocatore con quella calcolata
         if (checkedRotation != facingRight) { characterBody.eulerAngles = newRotation; }
-        
-        // rb.velocity = Vector2.SmoothDamp(rb.velocity, movement, ref m_Velocity, m_MovementSmoothing);
 
+        // rb.velocity = Vector2.SmoothDamp(rb.velocity, movement, ref m_Velocity, m_MovementSmoothing);
     }
+
     /// <summary>
     /// Corregge errori nella velocity del giocatore
     /// </summary>
