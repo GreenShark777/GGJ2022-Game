@@ -3038,10 +3038,6 @@ PrefabInstance:
       propertyPath: specialAttackSlider
       value: 
       objectReference: {fileID: 2102714566}
-    - target: {fileID: 3078300578244952323, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: transformationAnimationLimits.Array.data[1]
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 4575795001643433994, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: g
       value: 

@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    //riferimento al manager delle animazioni del giocatore
+    [SerializeField]
+    private SpriteAnimationManager playerSam = default;
     //riferimento allo script che si occupa del movimento del giocatore
     private CharacterMovement cm;
     //riferimento allo script che si occupa dell'attacco del giocatore
@@ -48,9 +51,11 @@ public class PlayerControls : MonoBehaviour
         {
             //...controlla se il giocatore si sta muovendo...
             float movement = Input.GetAxisRaw("Horizontal");
-            //...e se vuole muoversi, si muove(se non sta attaccando)...
-            if (movement != 0) { cm.Move(new Vector2(movement, 0)); }
-            //...e se il giocatore preme il tasto di salto, lo fa saltare se puÃ²
+            //...se vuole muoversi, si muove(se non sta attaccando)...
+            if (movement != 0) { cm.Move(new Vector2(movement, 0), Input.GetButton("Run")); }
+            //...altrimenti, lo fa rimanere in idle...
+            else { playerSam.GoBackToIdle(); }
+            //...e se il giocatore preme il tasto di salto, lo fa saltare se può
             if (Input.GetButtonDown("Jump")) { cm.Jump(); }
 
         }

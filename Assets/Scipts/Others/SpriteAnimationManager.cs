@@ -10,6 +10,9 @@ public class SpriteAnimationManager : MonoBehaviour
     //riferimenti a tutti gli sprite di tutti gli attacchi
     [SerializeField]
     private Sprite[] spriteSheet = default;
+    //limiti dell'animazione idle
+    [SerializeField]
+    private int[] idleAnimationLimits = new int[2];
     //indica quanto velocemente va l'animazione
     [SerializeField]
     private float animationSpeed = 0.1f;
@@ -17,6 +20,8 @@ public class SpriteAnimationManager : MonoBehaviour
     private int nSprites;
     //indica la priorità dell'animazione corrente
     private int currentAnimationPriority = -1;
+    //indica l'indice finale dell'animaizione corrente
+    private int currentAnimationLastIndex = -1;
     //riferimento alla coroutine che si sta occupando dell'animazione in corso
     private Coroutine currentAnimationRoutine;
     //indica se questo manager parte da solo
@@ -43,15 +48,19 @@ public class SpriteAnimationManager : MonoBehaviour
     /// <param name="lastAnimationIndex"></param>
     public void StartNewAnimation(int priority, int nextAnimationIndex, int lastAnimationIndex, bool realtime = false)
     {
+        //impedisce di rifare l'animazione corrente
+        if (lastAnimationIndex == currentAnimationLastIndex) { priority = -1; }
+        Debug.Log("Prova a fare animazione");
         //se la priorità di questa animazione è abbastanza alta...
         if (priority >= currentAnimationPriority)
         {
-            //...salva la priorità dell'animazione da far partire...
+            //...salva la priorità e l'indice finale dell'animazione da far partire...
             currentAnimationPriority = priority;
+            currentAnimationLastIndex = lastAnimationIndex;
             //...e fa partire l'animazione richiesta
             if (currentAnimationRoutine != null) { StopCoroutine(currentAnimationRoutine); }
             currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex, lastAnimationIndex, realtime));
-
+            Debug.Log("Sta facendo animazione");
         }
 
     }
@@ -70,8 +79,9 @@ public class SpriteAnimationManager : MonoBehaviour
         //se si è arrivati all'ultimo sprite d'animazione...
         if (nextAnimationIndex > lastAnimationIndex)
         {
-            //...fa tornare la priorità a quella minima...
+            //...fa tornare la priorità e l'indice finale ai valori minimi...
             currentAnimationPriority = -1;
+            currentAnimationLastIndex = -1;
             //...se non è in loop, fa terminare l'animazione...
             if (!isLoop) yield break;
             //...altrimenti, la fa ripartire dall'inizio
@@ -94,5 +104,7 @@ public class SpriteAnimationManager : MonoBehaviour
     /// </summary>
     /// <param name="newSr"></param>
     public void ChangeSpriteToChange(SpriteRenderer newSr) { spriteToChange = newSr; }
+
+    public void GoBackToIdle() { StartNewAnimation(1, idleAnimationLimits[0], idleAnimationLimits[1]); }
 
 }
