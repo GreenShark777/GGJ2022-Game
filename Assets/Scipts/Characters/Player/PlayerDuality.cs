@@ -52,10 +52,15 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
         sliderCG = dualitySlider.GetComponent<CanvasGroup>();
         //nasconde lo slider all'inizio
         sliderCG.alpha = 0;
-        //se il giocatore si era trasformato, impostato lo stato di trasformazione
-        if (g.transformed) { SetTransformationState(); }
         //ottiene il riferimento allo script che si occupa dell'attacco speciale del giocatore
         pa = GetComponent<PietrificationAttack>();
+
+    }
+
+    private void Start()
+    {
+        //se il giocatore si era trasformato, viene impostato lo stato di trasformazione
+        if (g.transformed) { SetTransformationState(); }
 
     }
 
@@ -127,7 +132,6 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
         yield return new WaitForSecondsRealtime(pa.GetAttackDuration() / 2);
         //imposta tutti gli stati di quando il giocatore viene trasformato
         SetTransformationState();
-
         //indica al GameManag che il giocatore si è trasformato
         g.transformed = true;
 

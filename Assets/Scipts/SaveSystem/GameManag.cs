@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameManag : MonoBehaviour
 {
+    //indica da quale stanza in poi ci si trova alla seconda area di gioco
+    public const int SECOND_AREA_ROOM = 5;
+
     //riferimento all'Animator che comunica che i dati stanno venendo salvati
     [SerializeField]
     private Animator savingDataAnim = default;
@@ -56,6 +59,11 @@ public class GameManag : MonoBehaviour
         //inizializza la lista di script che devono salvare i dati, aggiungendo tutti gli elementi nella lista recipiente
         foreach (IUpdateData elem in recipient) { dataToSave.Add(elem); }
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F10)) { SceneChange.StaticGoToScene(2); }
     }
 
     /// <summary>

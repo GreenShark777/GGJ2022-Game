@@ -26,9 +26,9 @@ public class VolumesManager : MonoBehaviour, IUpdateData
     private void Start()
     {
         //ottiene il volume salvato per tutti gli slider
-        musicSlider.value = g.savedMusicVolume;
-        sfxSlider.value = g.savedSfxVolume;
-        globalSlider.value = g.savedMasterVolume;
+        if (musicSlider) musicSlider.value = g.savedMusicVolume;
+        if (sfxSlider) sfxSlider.value = g.savedSfxVolume;
+        if (globalSlider) globalSlider.value = g.savedMasterVolume;
         //cambia il volume in base ai valori salvati
         ChangeMasterVolume();
         ChangeMusicVolume();
@@ -39,15 +39,15 @@ public class VolumesManager : MonoBehaviour, IUpdateData
     /// <summary>
     /// Cambia il volume della musica in base al valore dello slider(questa funzione viene richiamata dall'appositi slider)
     /// </summary>
-    public void ChangeMusicVolume() { musicValue = musicSlider.value; master.SetFloat("musicVolume", musicValue); }
+    public void ChangeMusicVolume() { if (musicSlider) musicValue = musicSlider.value; master.SetFloat("musicVolume", musicValue); }
     /// <summary>
     /// Cambia il volume degli effetti sonori in base al valore dello slider(questa funzione viene richiamata dall'appositi slider)
     /// </summary>
-    public void ChangeSfxVolume() { sfxValue = sfxSlider.value; master.SetFloat("sfxVolume", sfxValue); }
+    public void ChangeSfxVolume() { if (sfxSlider) sfxValue = sfxSlider.value; master.SetFloat("sfxVolume", sfxValue); }
     /// <summary>
     /// Cambia il volume globale di gioco in base al valore dello slider(questa funzione viene richiamata dall'appositi slider)
     /// </summary>
-    public void ChangeMasterVolume() { globalValue = globalSlider.value; master.SetFloat("globalVolume", globalValue); }
+    public void ChangeMasterVolume() { if (globalSlider) globalValue = globalSlider.value; master.SetFloat("globalVolume", globalValue); }
 
     public void UpdateData()
     {
