@@ -38,12 +38,18 @@ public class SpriteAnimationManager : MonoBehaviour
     {
         //ottiene il numero di sprite presenti nello spritesheet
         nSprites = spriteSheet.Length;
-        //se l'animazione da fare è automatica, fa partire l'animazione dall'inizio alla fine
-        if (automatic) { StartNewAnimation(0, 0, nSprites - 1, false); }
         //salva la velocità impostata inizialmente
         startSpeed = animationSpeed;
 
     }
+
+    private void OnEnable()
+    {
+        //se l'animazione da fare è automatica, fa partire l'animazione dall'inizio alla fine
+        if (automatic) { StartNewAnimation(0, 0, nSprites - 1, false); }
+
+    }
+
     /// <summary>
     /// Fa partire una nuova animazione, se la priorità di quella da far partire è abbastanza alta
     /// </summary>
@@ -52,8 +58,8 @@ public class SpriteAnimationManager : MonoBehaviour
     /// <param name="lastAnimationIndex"></param>
     public void StartNewAnimation(int priority, int nextAnimationIndex, int lastAnimationIndex, bool realtime = false)
     {
-        //impedisce di rifare l'animazione corrente
-        if (lastAnimationIndex == currentAnimationLastIndex) { priority = -1; }
+        //impedisce di rifare l'animazione corrente, se non è in loop
+        if (!isLoop && lastAnimationIndex == currentAnimationLastIndex) { priority = -1; }
         //Debug.Log("Prova a fare animazione");
         //se la priorità di questa animazione è abbastanza alta...
         if (priority >= currentAnimationPriority)
@@ -90,13 +96,13 @@ public class SpriteAnimationManager : MonoBehaviour
             if (!isLoop) { animationSpeed = startSpeed; yield break; }
             //...altrimenti, la fa ripartire dall'inizio
             else { nextAnimationIndex = 0; }
-        
+            
         }
         //cambia lo sprite, continuando l'animazione
         spriteToChange.sprite = spriteSheet[nextAnimationIndex];
         //infine, fa continuare il ciclo d'animazione
         currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex + 1, lastAnimationIndex, realtime));
-
+        
     }
     /// <summary>
     /// Ritorna il numero di sprite nello spritesheet
