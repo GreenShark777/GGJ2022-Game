@@ -12,7 +12,6 @@ public class GroundedEnemy : IA
 
     private Vector3 positionBeforeAttack;
     private bool isFollowing = false;
-    private bool isAttacking = false;
     private bool isResetting = false;
 
     protected override void PlayerEnteredRange()
@@ -67,7 +66,6 @@ public class GroundedEnemy : IA
                 else
                 {
                     isPatrolMoving = true;
-                    isAttacking = false;
                     isComputing = false;
                 }
             }

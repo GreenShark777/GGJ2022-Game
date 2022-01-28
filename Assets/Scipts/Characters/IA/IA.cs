@@ -12,6 +12,7 @@ public class IA : MonoBehaviour
     private int index;  // Indice nell'array dei checkpoint da raggiungere
     private bool indexIncrease; // Indica se l'indice è crescente o decrescente
     protected bool isPatrolMoving;  // Se true passa il movimento
+    private bool hasCheckpoints;
 
     private Vector2 movement;   // Vettore di movimento target
 
@@ -48,7 +49,7 @@ public class IA : MonoBehaviour
     {
         
         // Se ci sono checkpoint, inizia il movimento
-        isPatrolMoving = checkpoints.Length > 0;
+        hasCheckpoints = isPatrolMoving = checkpoints.Length > 0;
 
         // Segui i checkpoints dal primo indice
         index = 0;
@@ -94,7 +95,7 @@ public class IA : MonoBehaviour
             HierarchyUpdate();
 
         // Se è true, seguiamo il nostro percorso di checkpoints
-        if (isPatrolMoving)
+        if (isPatrolMoving && hasCheckpoints)
         {
             CheckpointsMovement();
             // E passalo al componente
