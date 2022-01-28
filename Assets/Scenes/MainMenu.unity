@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8045153569303841647, guid: cf8a8cbc69ae82248bc67d096b699e1e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7979664363038304239, guid: f915cf16e56cd8a42921cb4c55dc6c5a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf8a8cbc69ae82248bc67d096b699e1e, type: 3}
 --- !u!114 &340852615 stripped
@@ -1846,8 +1850,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1326900484816700176}
   m_HandleRect: {fileID: 646347025405300788}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -20
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -3304,8 +3308,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 8087828699842948581}
   m_HandleRect: {fileID: 4010338220991324861}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -20
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -4820,8 +4824,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 3919663030397644334}
   m_HandleRect: {fileID: 6638392806097425298}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -20
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

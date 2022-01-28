@@ -24,7 +24,7 @@ public class BgMusicManager : MonoBehaviour
     private int sceneIndex = 0;
     //indica quanto velocemente deve essere fatto il fade della musica
     [SerializeField]
-    private float fadeRatio = 0.05f;
+    private float fadeRatio = 0.45f;
 
 
     private void Start()
