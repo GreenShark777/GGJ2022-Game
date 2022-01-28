@@ -25,6 +25,7 @@ public class IA : MonoBehaviour
 
     [Space]
     [Header("Attack settings")]
+    [SerializeField] private bool peacefulMode = false; // Se true il nemico non attaccaa il player
     [Tooltip("Distanza a cui il mostro vede il player")]
     [SerializeField] private float spotRange = 5f;
     [SerializeField] protected Collider2D attackCollider;
@@ -71,6 +72,17 @@ public class IA : MonoBehaviour
     {
         if (PauseManager.IsGamePaused()) return;
 
+        // Se è true, seguiamo il nostro percorso di checkpoints
+        if (isPatrolMoving && hasCheckpoints)
+        {
+            CheckpointsMovement();
+            // E passalo al componente
+            characterMovement.Move(movement);
+        }
+
+        // Se il nemico non vuole attaccare, allora non eseguire il resto
+        if (peacefulMode) return;
+
         // Check player distance
         float dist = Vector2.Distance(playerTransform.position, transform.position);
 
@@ -93,14 +105,6 @@ public class IA : MonoBehaviour
         // Se la variabile isComputing è true, permettiamo alle classi ereditate di inserirsi su questo ciclo update
         if (isComputing)
             HierarchyUpdate();
-
-        // Se è true, seguiamo il nostro percorso di checkpoints
-        if (isPatrolMoving && hasCheckpoints)
-        {
-            CheckpointsMovement();
-            // E passalo al componente
-            characterMovement.Move(movement);
-        }
     }
 
     /// <summary>
