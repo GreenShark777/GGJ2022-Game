@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EndingManager : MonoBehaviour
+public class EndingManager : MonoBehaviour, IUpdateData
 {
     //riferimento al GameManag di scena
     [SerializeField]
@@ -24,6 +24,8 @@ public class EndingManager : MonoBehaviour
         endingImage = GetComponent<Image>();
         //se il giocatore si è trasformato, cambia lo sprite con quello per il finale cattivo
         if (g.transformed) { ChangeToBadEnding(); }
+        //salva i dati
+        g.SaveDataAfterUpdate();
 
     }
     /// <summary>
@@ -47,6 +49,14 @@ public class EndingManager : MonoBehaviour
         //carica la scena di gameplay
         SceneChange.StaticGoToScene("MainMenu");
 
+    }
+
+    public void UpdateData()
+    {
+        //aggiorna l'highscore
+        g.highscore = (g.points > g.highscore) ? g.points : g.highscore;
+        g.points = 0;
+        Debug.LogError(g.highscore);
     }
 
 }

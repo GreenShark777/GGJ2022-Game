@@ -20,6 +20,10 @@ public class SaveData
     public int enemiesPetrified = 0;
     //indica se il giocatore si è trasformato o meno
     public bool transformed = false;
+    //indica quanti punti ha il giocatore correntemente
+    public int points = 0;
+    //indica il punteggio massimo fatto adl giocatore
+    public int highscore = 0;
 
 
     public SaveData(GameManag g)
@@ -33,6 +37,8 @@ public class SaveData
         savedHealth = g.savedHealth;
         enemiesPetrified = g.enemiesPetrified;
         transformed = g.transformed;
+        points = g.points;
+        highscore = g.highscore;
 
     }
 

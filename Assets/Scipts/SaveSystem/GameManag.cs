@@ -32,6 +32,10 @@ public class GameManag : MonoBehaviour
     public int enemiesPetrified = 0;
     //indica se il giocatore si è trasformato o meno
     public bool transformed = false;
+    //indica quanti punti ha il giocatore correntemente
+    public int points = 0;
+    //indica il punteggio massimo fatto adl giocatore
+    public int highscore = 0;
 
     //riferimento a tutti gli script che usano l'interfaccia per l'aggiornamento dei dati nel GameManag
     public static List<IUpdateData> dataToSave = new List<IUpdateData>();
@@ -84,6 +88,8 @@ public class GameManag : MonoBehaviour
             savedHealth = sd.savedHealth;
             enemiesPetrified = sd.enemiesPetrified;
             transformed = sd.transformed;
+            points = sd.points;
+            highscore = sd.highscore;
 
             //Debug.Log("Caricati dati salvati");
         } //altrimenti, tutti i dati vengono messi al loro valore originale, in quanto non si è trovato un file di salvataggio
