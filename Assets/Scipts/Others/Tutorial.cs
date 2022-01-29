@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Tutorial : MonoBehaviour
+public class Tutorial : MonoBehaviour, iScriptableScene
 {
     [SerializeField] float animTime = 2f;
 
@@ -16,7 +16,7 @@ public class Tutorial : MonoBehaviour
 
     private Transform playerTransform;
 
-    public void StartAnim()
+    public void StartScene()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 

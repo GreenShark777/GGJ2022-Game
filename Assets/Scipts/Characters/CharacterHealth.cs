@@ -25,7 +25,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
     //indica se quest'entità ha perso tutta la vita
     private bool lostAllHealth = false;
 
-    [SerializeField] private Tutorial tutorial;
+    [SerializeField] private iScriptableScene tutorial;
 
     void Start()
     {
@@ -33,8 +33,6 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
         currentHealth = (!pv) ? g.savedHealth : maxHealth;
         //aggiorna lo slider di vita
         UpdateSlider();
-
-
 
         /*
          * ottiene il riferimento alla funzione da cambiare quando finisce la vita
@@ -78,8 +76,8 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
 
             // Alla morte del nemico del tutorial, esegui l'animazione
             // P.S: This is really a horror... use actions...
-            if (tutorial)
-                tutorial.StartAnim();
+            if (tutorial is null) return;
+                tutorial.StartScene();
         }
     }
 

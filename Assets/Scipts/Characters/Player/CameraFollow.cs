@@ -34,6 +34,15 @@ public class CameraFollow : MonoBehaviour
         transform.position = newCamPosition;
     }
 
+    public void SetFollowSpeed(float newSpeed)
+    {
+        followSpeed = newSpeed;
+    }
+    public void SetYOffset(float newOffs)
+    {
+        camYPosOffset = newOffs;
+    }
+
     // Set toFollow target
     public void SetTarget(Transform newTarget)
     {

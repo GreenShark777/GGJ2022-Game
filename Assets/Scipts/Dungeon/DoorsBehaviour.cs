@@ -1,4 +1,5 @@
 //Si occupa del comportamento delle porte nelle stanze
+using System;
 using UnityEngine;
 
 public class DoorsBehaviour : MonoBehaviour
@@ -27,6 +28,11 @@ public class DoorsBehaviour : MonoBehaviour
     {
         //ottiene il riferimento al collider di questa porta
         doorColl = GetComponent<Collider2D>();
+    }
+
+    internal void OpenDoor()
+    {
+        throw new NotImplementedException();
     }
 
     private void Start()
