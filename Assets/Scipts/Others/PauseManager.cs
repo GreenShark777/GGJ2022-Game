@@ -16,6 +16,8 @@ public class PauseManager : MonoBehaviour
         //disattiva il menù di pausa e imposta il gioco allo stato di non-pausa
         SetPauseMenuState(false);
 
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     /// <summary>
@@ -29,6 +31,7 @@ public class PauseManager : MonoBehaviour
         //in base allo stato di pausa, imposta il timeScale
         Time.timeScale = isPaused ? 0 : 1;
 
+        Cursor.lockState = (!state) ? CursorLockMode.Locked : CursorLockMode.None;
     }
     /// <summary>
     /// Permette di impostare in una sola volta lo stato del menù di pausa e di pausa del gioco(usato per i bottoni del menù di pausa)
