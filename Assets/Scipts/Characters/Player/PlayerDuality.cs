@@ -148,8 +148,7 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
         //comunica che il giocatore si è trasformato
         PlayerStateManager.hasTransformed = true;
 
-        Debug.LogError("Cambiate statistiche e altro");
-        Debug.LogError("APPENA SI HANNO LE ANIMAZIONI, CONTROLLARE SE BISOGNA CAMBIARE I LIMITI PER LE ANIMAZIONI");
+        //Debug.LogError("Cambiate statistiche e altro");
     }
 
     public void UpdateData()

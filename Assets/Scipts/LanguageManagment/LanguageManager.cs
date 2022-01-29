@@ -80,7 +80,7 @@ public class LanguageManager : MonoBehaviour
 			textsToChangeLanguage[i].ChangeLanguage(g.savedLanguage);
 
         }
-		Debug.Log("Lingua cambiata in: " + g.savedLanguage);
+		//Debug.Log("Lingua cambiata in: " + g.savedLanguage);
 	}
 	/// <summary>
 	/// Permette ad altri script di sapere la lingua corrente nel gioco

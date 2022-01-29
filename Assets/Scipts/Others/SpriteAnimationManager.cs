@@ -32,6 +32,8 @@ public class SpriteAnimationManager : MonoBehaviour
     //indica se questo manager parte da solo
     [SerializeField]
     private bool automatic = false;
+
+    private bool startAutomatic;
     //indica se questo manager esegue le animazioni in loop
     [SerializeField]
     private bool isLoop = false;
@@ -49,12 +51,29 @@ public class SpriteAnimationManager : MonoBehaviour
         //salva la velocità impostata inizialmente
         startSpeed = animationSpeed;
 
+        startAutomatic = automatic;
+
     }
 
     private void OnEnable()
     {
+
+        if (!isPlayer && startAutomatic) 
+        {
+            automatic = true;
+            isLoop = true;
+        }
+
         //se l'animazione da fare è automatica, fa partire l'animazione dall'inizio alla fine
         if (automatic) { StartNewAnimation(0, 0, idleAnimationLimits[1], false); }
+
+    }
+
+    private void OnDisable()
+    {
+        //se viene disabilitato, non è più automatico
+        automatic = false;
+        isLoop = false;
 
     }
 
@@ -66,33 +85,38 @@ public class SpriteAnimationManager : MonoBehaviour
     /// <param name="lastAnimationIndex"></param>
     public void StartNewAnimation(int priority, int nextAnimationIndex, int lastAnimationIndex, bool realtime = false)
     {
-        //se è il giocatore...
-        if (isPlayer)
+        //se lo script è abilitato esegue le animazioni
+        if (enabled)
         {
-            //...se si è trasformato e la priorità indica che sono solo idle, movimenti e attacchi...
-            if (PlayerStateManager.hasTransformed && priority < 100)
+            //se è il giocatore...
+            if (isPlayer)
             {
-                //...cambia l'animazione in modo che usi invece la versione cattiva
-                int previousStartIndex = nextAnimationIndex;
-                nextAnimationIndex = lastAnimationIndex + 1;
-                lastAnimationIndex += (lastAnimationIndex - previousStartIndex)/* - 1*/;
-                Debug.LogWarning("Cambiato in -> " + nextAnimationIndex + " : " + lastAnimationIndex);
+                //...se si è trasformato e la priorità indica che sono solo idle, movimenti e attacchi...
+                if (PlayerStateManager.hasTransformed && priority < 100)
+                {
+                    //...cambia l'animazione in modo che usi invece la versione cattiva
+                    int previousStartIndex = nextAnimationIndex;
+                    nextAnimationIndex = lastAnimationIndex + 1;
+                    lastAnimationIndex += (lastAnimationIndex - previousStartIndex)/* - 1*/;
+                    //Debug.LogWarning("Cambiato in -> " + nextAnimationIndex + " : " + lastAnimationIndex);
+                }
+
+            }
+            //impedisce di rifare l'animazione corrente, se non è in loop
+            if (!isLoop && lastAnimationIndex == currentAnimationLastIndex) { priority = -1; }
+            //Debug.Log("Prova a fare animazione");
+            //se la priorità di questa animazione è abbastanza alta...
+            if (priority >= currentAnimationPriority)
+            {
+                //...salva la priorità e l'indice finale dell'animazione da far partire...
+                currentAnimationPriority = priority;
+                currentAnimationLastIndex = lastAnimationIndex;
+                //...e fa partire l'animazione richiesta
+                if (currentAnimationRoutine != null) { StopCoroutine(currentAnimationRoutine); }
+                currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex, lastAnimationIndex, realtime));
+                //Debug.Log("Sta facendo animazione");
             }
 
-        }
-        //impedisce di rifare l'animazione corrente, se non è in loop
-        if (!isLoop && lastAnimationIndex == currentAnimationLastIndex) { priority = -1; }
-        //Debug.Log("Prova a fare animazione");
-        //se la priorità di questa animazione è abbastanza alta...
-        if (priority >= currentAnimationPriority)
-        {
-            //...salva la priorità e l'indice finale dell'animazione da far partire...
-            currentAnimationPriority = priority;
-            currentAnimationLastIndex = lastAnimationIndex;
-            //...e fa partire l'animazione richiesta
-            if (currentAnimationRoutine != null) { StopCoroutine(currentAnimationRoutine); }
-            currentAnimationRoutine = StartCoroutine(ManageAnimation(nextAnimationIndex, lastAnimationIndex, realtime));
-            //Debug.Log("Sta facendo animazione");
         }
 
     }

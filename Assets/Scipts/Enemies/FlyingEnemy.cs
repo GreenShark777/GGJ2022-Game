@@ -4,6 +4,9 @@ using UnityEngine;
 public class FlyingEnemy : IA
 {
 
+    [SerializeField]
+    private SpriteAnimationManager enemySam = default;
+
     [Space]
     [Header("Flying enemy settings")]
     [SerializeField] private float beforeAttackTime = 2f; // Quanto tempo aspettare prima di iniziare la picchiata verso il player
@@ -85,6 +88,9 @@ public class FlyingEnemy : IA
 
     IEnumerator WaitBeforeAttack()
     {
+
+        enemySam.StartNewAnimation(1, 24, 32);
+
         attackPosition = playerTransform.position + (playerTransform.position - transform.position).normalized * playerAttackOffset;
 
         // Aspettiamo tot secondi prima di attaccare

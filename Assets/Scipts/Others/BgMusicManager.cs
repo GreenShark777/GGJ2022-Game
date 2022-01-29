@@ -27,7 +27,7 @@ public class BgMusicManager : MonoBehaviour
     private float fadeRatio = 0.45f;
 
 
-    private void Start()
+    private void Awake()
     {
         //crea il riferimento all'istanza
         instance = this;
@@ -75,7 +75,8 @@ public class BgMusicManager : MonoBehaviour
     /// <summary>
     /// Permette di cambiare musica in base a dove ci si trova
     /// </summary>
-    public void ChangeMusic() { StartCoroutine(FadeMusic(true, true)); }
+    public void ChangeMusic(bool isFighting)
+    { if (!isFighting || (isFighting && bgMusic.clip != fightingMusic)) StartCoroutine(FadeMusic(true, isFighting)); }
     /// <summary>
     /// Gestisce fade-in e fade-out della musica per poi cambiarla
     /// </summary>

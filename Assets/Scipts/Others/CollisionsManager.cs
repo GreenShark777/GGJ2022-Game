@@ -95,4 +95,11 @@ public class CollisionsManager : MonoBehaviour
 
     public void GetCured(int amount) { healthManager.TakeDmg(-amount); }
 
+    private void OnDestroy()
+    {
+
+        if (gameObject) { Destroy(gameObject); }
+
+    }
+
 }

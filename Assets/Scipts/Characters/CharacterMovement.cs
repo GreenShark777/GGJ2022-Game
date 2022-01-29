@@ -45,10 +45,17 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
     {
         //ottiene la velocità massima iniziale
         startMaxVelocity = maxVelocity;
-        //ottiene il riferimento al Rigidbody2D del giocatore
-        if(isPhysiqueDriven)
+        //ottiene il riferimento al Rigidbody2D dell'entità
+        //if(isPhysiqueDriven)
             rb = GetComponent<Rigidbody2D>();
 
+    }
+
+    private void OnDestroy()
+    {
+
+        if (rb) { Destroy(rb); }
+        
     }
 
     private void FixedUpdate()

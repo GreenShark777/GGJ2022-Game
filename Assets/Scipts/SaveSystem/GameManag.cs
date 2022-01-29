@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManag : MonoBehaviour
 {
     //indica da quale stanza in poi ci si trova alla seconda area di gioco
-    public const int SECOND_AREA_ROOM = 5;
+    public const int SECOND_AREA_ROOM = 6;
 
     //riferimento all'Animator che comunica che i dati stanno venendo salvati
     [SerializeField]

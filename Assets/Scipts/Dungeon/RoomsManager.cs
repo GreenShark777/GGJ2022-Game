@@ -6,6 +6,9 @@ public class RoomsManager : MonoBehaviour, IUpdateData
 {
     //riferimento statico a questo manager delle stanze
     public static RoomsManager instance;
+    //riferimento al manager delle musiche
+    [SerializeField]
+    private BgMusicManager bgMusicManager = default;
     //riferimento all'Animator dell'immagine di transizione
     [SerializeField]
     private Animator transitionAnim = default;
@@ -37,6 +40,8 @@ public class RoomsManager : MonoBehaviour, IUpdateData
         enteredRoom = g.lastEnteredRoom;
         //comunica alla stanza in cui il giocatore è entrato per l'ultima volta che il giocatore è entrato
         allRooms[enteredRoom].PlayerEntered(player);
+        //effettua il primo controllo sulla musica
+        CheckMusic(true);
 
     }
 
@@ -73,9 +78,22 @@ public class RoomsManager : MonoBehaviour, IUpdateData
         PauseManager.SetPauseState(false);
         //fa partire l'animazione di transizione in fadeOut
         transitionAnim.SetBool("FadeIn", false);
-        //infine, salva i dati
+        //infine, salva i dati...
         g.SaveDataAfterUpdate();
+        //...e controlla che la musica sia adatta per la stanza in cui ci si trova
+        CheckMusic();
 
+    }
+    /// <summary>
+    /// Controlla la musica in base alla stanza in cui ci si trova
+    /// </summary>
+    private void CheckMusic(bool firstCheck = false)
+    {
+
+        bool changeMusic = g.lastEnteredRoom == GameManag.SECOND_AREA_ROOM || (firstCheck && g.lastEnteredRoom >= GameManag.SECOND_AREA_ROOM);
+
+        if (changeMusic) { bgMusicManager.ChangeMusic(false); Debug.Log("Cambiata musica"); }
+        Debug.Log("Effettuato controllo sulla musica");
     }
 
     //IUpdateData---------------------------------------------------------------------------------------------------------

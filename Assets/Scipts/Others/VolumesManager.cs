@@ -55,7 +55,7 @@ public class VolumesManager : MonoBehaviour, IUpdateData
         g.savedMusicVolume = musicValue;
         g.savedSfxVolume = sfxValue;
         g.savedMasterVolume = globalValue;
-        Debug.Log("Dati dei volumi aggiornati");
+        //Debug.Log("Dati dei volumi aggiornati");
     }
 
 }

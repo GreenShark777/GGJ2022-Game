@@ -27,6 +27,9 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
 
     [SerializeField] private iScriptableScene tutorial;
 
+    [SerializeField]
+    private GameObject objToGetInterfaceFrom = default;
+
     void Start()
     {
         //imposta la vita corrente a quella salvata, se è i giocatore, altrimenti la imposta alla vita massima
@@ -34,12 +37,21 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
         //aggiorna lo slider di vita
         UpdateSlider();
 
+        if (objToGetInterfaceFrom) tutorial = objToGetInterfaceFrom.GetComponent<iScriptableScene>();
+
         /*
          * ottiene il riferimento alla funzione da cambiare quando finisce la vita
          * se non è un nemico sarà il giocatore, quindi prende come riferimento la funzione per indicare che il giocatore è morto
          * altrimenti, essendo nemico, gli toglie la maschera e lo rende vulnerabile alla pietrificazione
         */
         //onDeath += (!pv) ? PlayerStateManager.PlayerDied : pv.BreakMask;
+
+    }
+
+    private void OnDestroy()
+    {
+
+        if (healthSlider) healthSlider.gameObject.SetActive(false);
 
     }
 

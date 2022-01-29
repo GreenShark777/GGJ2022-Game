@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GroundedEnemy : IA
 {
+    
+    [SerializeField]
+    private SpriteAnimationManager enemySam = default;
 
     [Space]
     [Header("Grounded enemy settings")]
@@ -81,6 +84,9 @@ public class GroundedEnemy : IA
 
     IEnumerator Attack()
     {
+
+        enemySam.StartNewAnimation(1, 24, 47);
+
         isFollowing = false;
         attackCollider.enabled = true;
 
