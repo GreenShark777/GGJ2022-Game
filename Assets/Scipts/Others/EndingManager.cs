@@ -56,7 +56,7 @@ public class EndingManager : MonoBehaviour, IUpdateData
         //aggiorna l'highscore
         g.highscore = (g.points > g.highscore) ? g.points : g.highscore;
         g.points = 0;
-        Debug.LogError(g.highscore);
+
     }
 
 }
