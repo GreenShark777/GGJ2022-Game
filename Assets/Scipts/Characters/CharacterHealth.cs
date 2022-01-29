@@ -100,7 +100,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
     public void UpdateData()
     {
         //se è il giocatore, aggiorna la vita rimasta al giocatore
-        if (!pv) { g.savedHealth = currentHealth; }
+        if (!pv && g) { g.savedHealth = currentHealth; }
 
     }
 

@@ -217,9 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b11a801c01529409e9302250cd600e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  checkpoints: []
   pauseAtCheckpoint: 0.5
   checkMinDist: 0.2
   isMoveGrounded: 0
@@ -422,6 +420,7 @@ MonoBehaviour:
   enemyMask: {fileID: 6638068082107720927}
   petrifiedSprite: {fileID: 21300000, guid: ab87260e9bbe57d40b9c5a22b3d1e14b, type: 3}
   isVulnerable: 0
+  isAnObject: 0
 --- !u!70 &6861632494788994852
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

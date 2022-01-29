@@ -30,6 +30,10 @@ public class EndingManager : MonoBehaviour, IUpdateData
         //salva i dati
         g.SaveDataAfterUpdate();
 
+        Cursor.lockState = CursorLockMode.None;
+
+        Time.timeScale = 1;
+
     }
     /// <summary>
     /// Cambia lo sprite con quello per il finale cattivo

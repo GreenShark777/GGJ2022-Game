@@ -55,6 +55,8 @@ public class PlayerStateManager : MonoBehaviour
             //...viene fatta apparire la schermata di morte
             staticDeathScreen.SetActive(true);
 
+            Cursor.lockState = CursorLockMode.None;
+
             Debug.LogError("Il giocatore è morto!");
         }
         else { Debug.LogError("Il giocatore deve essere respawnato!"); }

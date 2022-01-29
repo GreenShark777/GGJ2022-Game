@@ -138,10 +138,10 @@ public class DoorsBehaviour : MonoBehaviour
         Vector3 leftDoorScale = leftDoor.localScale;
         Vector3 rightDoorScale = rightDoor.localScale;
         //diminuisce di poco la grandezza delle metà
-        leftDoor.localScale = Vector2.Lerp(leftDoorScale, new Vector3(0, leftDoorScale.y), openingSpeed * Time.deltaTime);
-        rightDoor.localScale = Vector2.Lerp(rightDoorScale, new Vector3(0, rightDoorScale.y), openingSpeed * Time.deltaTime);
-        //aspetta il fixedUpdate
-        yield return new WaitForFixedUpdate();
+        leftDoor.localScale = Vector2.Lerp(leftDoorScale, new Vector3(0, leftDoorScale.y), openingSpeed * 0.08f);
+        rightDoor.localScale = Vector2.Lerp(rightDoorScale, new Vector3(0, rightDoorScale.y), openingSpeed * 0.08f);
+        
+        yield return new WaitForSecondsRealtime(0.08f);
         //continua ad aprire la porta
         StartCoroutine(OpenDoor());
 

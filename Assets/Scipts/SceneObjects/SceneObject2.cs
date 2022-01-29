@@ -57,11 +57,16 @@ public class SceneObject2 : MonoBehaviour
         this.enabled = true;
     }
 
+    private void OnEnable()
+    {
+        eye.SetActive(true);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!isPetrified) return;
 
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(collision.gameObject.tag);
 
         if (collision.gameObject.CompareTag("Ground"))
         {

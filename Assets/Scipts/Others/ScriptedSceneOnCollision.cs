@@ -39,6 +39,9 @@ public class ScriptedSceneOnCollision : MonoBehaviour, iScriptableScene
 
     IEnumerator ScriptedScene()
     {
+
+        PauseManager.SetPauseState(true);
+
         // Muovi la telecamera sulla porta finale
         if (cameraFollow)
         {
@@ -47,13 +50,13 @@ public class ScriptedSceneOnCollision : MonoBehaviour, iScriptableScene
             cameraFollow.SetTarget(doorTransform);
         }
 
-        yield return new WaitForSeconds(waitTimeAfterMoveCamera);
+        yield return new WaitForSecondsRealtime(waitTimeAfterMoveCamera);
 
         // Avvia l'apertura della porta
         if (doorBehaviour)
             StartCoroutine(doorBehaviour.OpenDoor());
 
-        yield return new WaitForSeconds(waitTimeAfterDoorOpen);
+        yield return new WaitForSecondsRealtime(waitTimeAfterDoorOpen);
 
         // Avvia il fade dell'immagine bianca
         Image image = uiAnimator.transform.GetComponent<Image>();
@@ -63,7 +66,7 @@ public class ScriptedSceneOnCollision : MonoBehaviour, iScriptableScene
         uiAnimator.speed = .5f;
         uiAnimator.SetBool(fadeBoolHash, true);
 
-        yield return new WaitForSeconds(waitTimeAfterFade);
+        yield return new WaitForSecondsRealtime(waitTimeAfterFade);
 
         SceneManager.LoadScene("Endings");
     }

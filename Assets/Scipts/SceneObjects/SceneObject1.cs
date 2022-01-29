@@ -26,6 +26,11 @@ public class SceneObject1 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void OnEnable()
+    {
+        eye.SetActive(true);
+    }
+
     public void PlayerTrigger()
     {
         if (isExecuting) return;
@@ -84,7 +89,7 @@ public class SceneObject1 : MonoBehaviour
 
     private void OnDisable()
     {
-        rb.simulated = false;
+        if (rb) rb.simulated = false;
 
         eye.SetActive(false);
         if (isExecuting)

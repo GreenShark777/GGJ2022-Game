@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 8894563096137356023}
   - component: {fileID: 8894563096137356021}
   - component: {fileID: 8894563096137356024}
+  - component: {fileID: 8003122412245059490}
   m_Layer: 0
   m_Name: SceneObject1_Twompa
   m_TagString: Untagged
@@ -262,6 +263,17 @@ MonoBehaviour:
   petrifiedSprite: {fileID: 21300000, guid: a4665646be7cbab4dad9dc1a5af29afa, type: 3}
   isVulnerable: 1
   isAnObject: 1
+--- !u!210 &8003122412245059490
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5443774282909860498}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1001 &3522938458240920985
 PrefabInstance:
   m_ObjectHideFlags: 0
