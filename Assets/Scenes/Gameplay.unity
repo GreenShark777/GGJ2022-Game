@@ -2791,7 +2791,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1772574046 stripped
 Animator:
@@ -4026,7 +4026,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2249243852368370681, guid: 97aa712fb298ae1429a8316f57b8f8cd, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2249243852368370681, guid: 97aa712fb298ae1429a8316f57b8f8cd, type: 3}
       propertyPath: m_LocalPosition.x

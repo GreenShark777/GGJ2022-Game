@@ -22,6 +22,7 @@ public class StartPlaying : MonoBehaviour
         //se il giocatore è ancora alla prima stanza, vuol dire che non ha ancora salvataggi, quindi rende il bottone per caricare dati non interagibile
         if (g.lastEnteredRoom == 0) { loadButton.interactable = false; }
 
+        Cursor.lockState = CursorLockMode.None;
     }
 
     /// <summary>
