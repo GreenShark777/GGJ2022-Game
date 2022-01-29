@@ -1130,6 +1130,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &660390284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8735168896394801052, guid: 049c307e637032b43a8b58d3eccfcab4, type: 3}
+  m_PrefabInstance: {fileID: 6227552299819350512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &727198055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,7 +1624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sconfiggi ogni mostro nella camera per poter passare al prossimo livello
+  m_text: 'Sconfiggi ogni mostro nella stanza per poter passare al prossimo livello
 
 '
   m_isRightToLeft: 0
@@ -2003,7 +2008,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1482168543 stripped
 MonoBehaviour:
@@ -2146,7 +2151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textToChange: {fileID: 1567163345}
-  italianText: Salta con SPACE
+  italianText: Salta con SPAZIO
   englishText: Jump with SPACE
   isNoTextButton: 0
   buttonImageToChange: {fileID: 0}
@@ -2299,7 +2304,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1772574046 stripped
 Animator:
@@ -2651,8 +2656,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textToChange: {fileID: 2128239973}
-  italianText: Usa i tasti direzionali per muoverti
-  englishText: Use directional arrows to move
+  italianText: Puoi correre tenendo premuto Shift
+  englishText: You can run by holding Shift
   isNoTextButton: 0
   buttonImageToChange: {fileID: 0}
   italianButton: {fileID: 0}
@@ -3059,7 +3064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5814016868268630279, guid: d2879a0802c5c784385bd1bef48a83f3, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5814016868268630279, guid: d2879a0802c5c784385bd1bef48a83f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3436,9 +3441,13 @@ PrefabInstance:
       propertyPath: playerSam
       value: 
       objectReference: {fileID: 562295989}
+    - target: {fileID: 3831279187474212689, guid: cf8a8cbc69ae82248bc67d096b699e1e, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 660390284}
     - target: {fileID: 5751312053753628989, guid: cf8a8cbc69ae82248bc67d096b699e1e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5751312053753628989, guid: cf8a8cbc69ae82248bc67d096b699e1e, type: 3}
       propertyPath: m_LocalPosition.x

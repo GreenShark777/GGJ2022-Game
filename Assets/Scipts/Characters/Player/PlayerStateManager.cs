@@ -5,19 +5,37 @@ public class PlayerStateManager : MonoBehaviour
 {
     //comunica se il giocatore è morto o meno
     public static bool isDead = false;
+    //comunica se il giocatore è già trasformato
+    public static bool hasTransformed = false;
+    //riferimento al GameManag di scena
+    private GameManag g;
     //riferimento al manager delle animazioni del giocatore
     [SerializeField]
     private SpriteAnimationManager playerSam = default;
     //riferimento statico al manager delle animazioni del giocatore
     private static SpriteAnimationManager staticPlayerSam;
+    //riferimento alla schermata da attivare quando si è morti
+    [SerializeField]
+    private GameObject deathScreen = default;
+    //riferimento statico alla schermata da attivare quando si è morti
+    private static GameObject staticDeathScreen;
 
 
     private void Awake()
     {
         //comunica all'inizio che il giocatore non è morto
         isDead = false;
-        //rende statico il riferimento al manager delle animazioni del giocatore
+        //rende statici i riferimenti
         staticPlayerSam = playerSam;
+        staticDeathScreen = deathScreen;
+
+    }
+
+    private void Start()
+    {
+        //ottiene dal GameManag lo stato di trasformazione del giocatore
+        g = GetComponent<GameManag>();
+        hasTransformed = g.transformed;
 
     }
 
@@ -32,9 +50,10 @@ public class PlayerStateManager : MonoBehaviour
         //se è morto...
         if (isDead)
         {
-            //...verrà fatta partire l'animazione di morte del giocatore
-            Debug.LogError("NON VIENE ANCORA RICHIAMATA L'ANIMAZIONE DI MORTE DEL GIOCATORE!");
-            //staticPlayerSam.StartNewAnimation(999, da mettere, da mettere, true);
+            //...verrà fatta partire l'animazione di morte del giocatore...
+            staticPlayerSam.GoToDeath();
+            //...viene fatta apparire la schermata di morte
+            staticDeathScreen.SetActive(true);
 
             Debug.LogError("Il giocatore è morto!");
         }

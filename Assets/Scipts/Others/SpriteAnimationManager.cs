@@ -13,6 +13,9 @@ public class SpriteAnimationManager : MonoBehaviour
     //limiti dell'animazione idle
     [SerializeField]
     private int[] idleAnimationLimits = new int[2];
+    //limiti dell'animazione di morte
+    [SerializeField]
+    private int[] deathAnimationLimits = new int[2];
     //indica quanto velocemente va l'animazione
     [SerializeField]
     private float animationSpeed = 0.1f;
@@ -32,12 +35,17 @@ public class SpriteAnimationManager : MonoBehaviour
     //indica se questo manager esegue le animazioni in loop
     [SerializeField]
     private bool isLoop = false;
+    //indica se è il giocatore
+    [SerializeField]
+    private bool isPlayer = false;
 
 
     private void Awake()
     {
         //ottiene il numero di sprite presenti nello spritesheet
         nSprites = spriteSheet.Length;
+        //se non è stata impostata la idle, viene impostata al numero di sprites nello spriteSheet
+        if (idleAnimationLimits[1] == 0) { idleAnimationLimits[1] = nSprites - 1; }
         //salva la velocità impostata inizialmente
         startSpeed = animationSpeed;
 
@@ -46,7 +54,7 @@ public class SpriteAnimationManager : MonoBehaviour
     private void OnEnable()
     {
         //se l'animazione da fare è automatica, fa partire l'animazione dall'inizio alla fine
-        if (automatic) { StartNewAnimation(0, 0, nSprites - 1, false); }
+        if (automatic) { StartNewAnimation(0, 0, idleAnimationLimits[1], false); }
 
     }
 
@@ -64,6 +72,19 @@ public class SpriteAnimationManager : MonoBehaviour
         //se la priorità di questa animazione è abbastanza alta...
         if (priority >= currentAnimationPriority)
         {
+            //...se è il giocatore...
+            if (isPlayer)
+            {
+                //...se si è trasformato e la priorità indica che sono solo idle, movimenti e attacchi...
+                if (PlayerStateManager.hasTransformed && priority < 100)
+                {
+                    //...cambia l'animazione in modo che usi invece la versione cattiva
+                    nextAnimationIndex = lastAnimationIndex + 1;
+                    lastAnimationIndex += nextAnimationIndex;
+                    Debug.LogWarning("Cambiato in -> " + nextAnimationIndex + " : " + lastAnimationIndex);
+                }
+
+            }
             //...salva la priorità e l'indice finale dell'animazione da far partire...
             currentAnimationPriority = priority;
             currentAnimationLastIndex = lastAnimationIndex;
@@ -118,6 +139,10 @@ public class SpriteAnimationManager : MonoBehaviour
     /// Riporta all'animazione idle
     /// </summary>
     public void GoBackToIdle() { StartNewAnimation(1, idleAnimationLimits[0], idleAnimationLimits[1]); }
+    /// <summary>
+    /// Fa partire l'animazione di morte
+    /// </summary>
+    public void GoToDeath() { StartNewAnimation(1000, deathAnimationLimits[0], deathAnimationLimits[1]); }
     /// <summary>
     /// Permette di impostare una nuova velocità
     /// </summary>
