@@ -465,60 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteToChange: {fileID: 8070378814464694200}
-  spriteSheet:
-  - {fileID: 21300000, guid: 0fcf239bdb7e02e4b8166d38043f4c78, type: 3}
-  - {fileID: 21300000, guid: bb7032f565a9bc6438f92b3d0d5965d4, type: 3}
-  - {fileID: 21300000, guid: 61528c1a9a8067f4c9f52eb8b3075081, type: 3}
-  - {fileID: 21300000, guid: 09126ab3b75f7ce42b3743839c3deee5, type: 3}
-  - {fileID: 21300000, guid: 2ab7e2afd67f2dc4f82dc757d361e805, type: 3}
-  - {fileID: 21300000, guid: 16f649f9e40beb446bd82d4905696013, type: 3}
-  - {fileID: 21300000, guid: f59e14574c1f40e4398d58114fd3548d, type: 3}
-  - {fileID: 21300000, guid: 0676d69fc83f56f47884cae6f503d9a5, type: 3}
-  - {fileID: 21300000, guid: d0f07b9001cf97f459c2b64b58c4972a, type: 3}
-  - {fileID: 21300000, guid: acfdfdfe0e7eb064cad0d742ec617d5b, type: 3}
-  - {fileID: 21300000, guid: 43ec916bd9172ef44a7b486ac3750071, type: 3}
-  - {fileID: 21300000, guid: e4c0c8eb07def074285c6863427e6488, type: 3}
-  - {fileID: 21300000, guid: 68af01e52ed9945459b04ff88ca1e857, type: 3}
-  - {fileID: 21300000, guid: 11befdd0e9a442740aca985a4c51b5d9, type: 3}
-  - {fileID: 21300000, guid: 40f4c35077158f14cab0a9d0ab0efd03, type: 3}
-  - {fileID: 21300000, guid: 7601d6796ab72ec42a76d42846280fec, type: 3}
-  - {fileID: 21300000, guid: 8b70e12286ed92e409ae2094e90873e4, type: 3}
-  - {fileID: 21300000, guid: 355c93bdff1f9924db08684004f384ec, type: 3}
-  - {fileID: 21300000, guid: ececd67277b3e544993a0f2f927130ef, type: 3}
-  - {fileID: 21300000, guid: c450b7da11fc6c44487191fc9621bb55, type: 3}
-  - {fileID: 21300000, guid: 6e2f974f06891bf41a73c7fca43f2212, type: 3}
-  - {fileID: 21300000, guid: 501031889d6b7e34fa797312af97dc43, type: 3}
-  - {fileID: 21300000, guid: 8b3487b5c6aadb6449cace87528dcd46, type: 3}
-  - {fileID: 21300000, guid: aa401f392af00a64281dd9b25b91e125, type: 3}
-  - {fileID: 21300000, guid: 90de0de01876ba746bae4f4f9309e8fb, type: 3}
-  - {fileID: 21300000, guid: cf77d4f7d83905743b1127d910d9dd8d, type: 3}
-  - {fileID: 21300000, guid: 9d8e62be64aa91143b6e768baaf119d4, type: 3}
-  - {fileID: 21300000, guid: 0a40461111999d24aa87a7c19307098f, type: 3}
-  - {fileID: 21300000, guid: 599b62523975a304da3762bd05242e2a, type: 3}
-  - {fileID: 21300000, guid: d5854c12e898c3741a4467f374a582fd, type: 3}
-  - {fileID: 21300000, guid: 8bb5f1fcf6abb1b45a96558bc8e59d57, type: 3}
-  - {fileID: 21300000, guid: 5f88ed9246bf9ce48b4ccc8f31c1d167, type: 3}
-  - {fileID: 21300000, guid: 0a7243cc563c97442a157dae77ad5762, type: 3}
-  - {fileID: 21300000, guid: 3bac3a6cd1d26d146aadc96d6be0705c, type: 3}
-  - {fileID: 21300000, guid: 4caba30ed88039445b8c33368edadf81, type: 3}
-  - {fileID: 21300000, guid: 84750f0cec353ce4dba75e0b15fe31e0, type: 3}
-  - {fileID: 21300000, guid: 3fac3259bc08a1041b3eea07bcd122eb, type: 3}
-  - {fileID: 21300000, guid: b8af6f00eb1ea5c47b258971860dd17b, type: 3}
-  - {fileID: 21300000, guid: fc06cede406015945aabda29faf8acd9, type: 3}
-  - {fileID: 21300000, guid: 4441fd143b09cbd40abaee29657394a1, type: 3}
-  - {fileID: 21300000, guid: 66ddbdd92a392684a873e808482b8903, type: 3}
-  - {fileID: 21300000, guid: 4627651f6714b2e428654d562933ab76, type: 3}
-  - {fileID: 21300000, guid: db700d88dc707f943ad7c9e84c8edf92, type: 3}
-  - {fileID: 21300000, guid: 82d7677f4fe6e4d43876596bb4b7f494, type: 3}
-  - {fileID: 21300000, guid: 7c31b882329edbe47bd83d309930f533, type: 3}
-  - {fileID: 21300000, guid: fb2986eb0c1bda449b1e4af3e6e7347f, type: 3}
-  - {fileID: 21300000, guid: 3f0666bb5e80906468a2259e4b780706, type: 3}
-  - {fileID: 21300000, guid: 38b6a7e43e8c0d745abe6f5c28abb175, type: 3}
-  - {fileID: 21300000, guid: 1f88f76c148c17746a2fe6c935b9aecb, type: 3}
-  - {fileID: 21300000, guid: 27573be619a1f74438980dd299a20b60, type: 3}
-  - {fileID: 21300000, guid: 04e139aa2ec0a314bbe536a5f4cf331c, type: 3}
-  - {fileID: 21300000, guid: 477fa459bfac3664e900b7fc584a79e4, type: 3}
-  - {fileID: 21300000, guid: 74d786a894c5ced43a0d9ee7f066f631, type: 3}
+  spriteSheet: []
   idleAnimationLimits: 0000000034000000
   deathAnimationLimits: 0000000000000000
   animationSpeed: 0.05

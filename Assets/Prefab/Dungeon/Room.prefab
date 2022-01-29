@@ -111,8 +111,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983188248226104784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.78, y: -1.2600012, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: -10.78, y: -0.17, z: 0}
+  m_LocalScale: {x: 5.4, y: 5.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1582662934318258237}
@@ -135,6 +135,7 @@ MonoBehaviour:
   leftDoor: {fileID: 0}
   rightDoor: {fileID: 0}
   checkingDoor: 0
+  openingSpeed: 1
 --- !u!61 &983188248226104798
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1133,7 +1134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4942638537706358042, guid: ed60d599fc3b96f44a58ec1462e8d2be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.26
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 4942638537706358042, guid: ed60d599fc3b96f44a58ec1462e8d2be, type: 3}
       propertyPath: m_LocalPosition.z

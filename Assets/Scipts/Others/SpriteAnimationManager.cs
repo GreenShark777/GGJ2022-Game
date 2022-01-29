@@ -66,25 +66,25 @@ public class SpriteAnimationManager : MonoBehaviour
     /// <param name="lastAnimationIndex"></param>
     public void StartNewAnimation(int priority, int nextAnimationIndex, int lastAnimationIndex, bool realtime = false)
     {
+        //se è il giocatore...
+        if (isPlayer)
+        {
+            //...se si è trasformato e la priorità indica che sono solo idle, movimenti e attacchi...
+            if (PlayerStateManager.hasTransformed && priority < 100)
+            {
+                //...cambia l'animazione in modo che usi invece la versione cattiva
+                nextAnimationIndex = lastAnimationIndex + 1;
+                lastAnimationIndex += nextAnimationIndex - 1;
+                Debug.LogWarning("Cambiato in -> " + nextAnimationIndex + " : " + lastAnimationIndex);
+            }
+
+        }
         //impedisce di rifare l'animazione corrente, se non è in loop
         if (!isLoop && lastAnimationIndex == currentAnimationLastIndex) { priority = -1; }
         //Debug.Log("Prova a fare animazione");
         //se la priorità di questa animazione è abbastanza alta...
         if (priority >= currentAnimationPriority)
         {
-            //...se è il giocatore...
-            if (isPlayer)
-            {
-                //...se si è trasformato e la priorità indica che sono solo idle, movimenti e attacchi...
-                if (PlayerStateManager.hasTransformed && priority < 100)
-                {
-                    //...cambia l'animazione in modo che usi invece la versione cattiva
-                    nextAnimationIndex = lastAnimationIndex + 1;
-                    lastAnimationIndex += nextAnimationIndex;
-                    Debug.LogWarning("Cambiato in -> " + nextAnimationIndex + " : " + lastAnimationIndex);
-                }
-
-            }
             //...salva la priorità e l'indice finale dell'animazione da far partire...
             currentAnimationPriority = priority;
             currentAnimationLastIndex = lastAnimationIndex;
