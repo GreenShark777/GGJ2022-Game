@@ -259,6 +259,7 @@ MonoBehaviour:
   enemyMask: {fileID: 0}
   petrifiedSprite: {fileID: 21300000, guid: a4665646be7cbab4dad9dc1a5af29afa, type: 3}
   isVulnerable: 1
+  isAnObject: 1
 --- !u!1001 &3522938458240920985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,15 +273,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4639246850010718722, guid: 4d66ea8202cc34041b3722d14d73524a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1638225
+      value: 0.391159
       objectReference: {fileID: 0}
     - target: {fileID: 4639246850010718722, guid: 4d66ea8202cc34041b3722d14d73524a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1638225
+      value: 0.391159
       objectReference: {fileID: 0}
     - target: {fileID: 4639246850010718722, guid: 4d66ea8202cc34041b3722d14d73524a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1638225
+      value: 0.391159
       objectReference: {fileID: 0}
     - target: {fileID: 4639246850010718722, guid: 4d66ea8202cc34041b3722d14d73524a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -325,6 +326,10 @@ PrefabInstance:
     - target: {fileID: 4639246850010718780, guid: 4d66ea8202cc34041b3722d14d73524a, type: 3}
       propertyPath: m_Name
       value: Occhio 3 mostro ali
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386769766204385754, guid: 4d66ea8202cc34041b3722d14d73524a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d66ea8202cc34041b3722d14d73524a, type: 3}

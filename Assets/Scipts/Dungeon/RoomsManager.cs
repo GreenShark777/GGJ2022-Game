@@ -92,8 +92,8 @@ public class RoomsManager : MonoBehaviour, IUpdateData
 
         bool changeMusic = g.lastEnteredRoom == GameManag.SECOND_AREA_ROOM || (firstCheck && g.lastEnteredRoom >= GameManag.SECOND_AREA_ROOM);
 
-        if (changeMusic) { bgMusicManager.ChangeMusic(false); Debug.Log("Cambiata musica"); }
-        Debug.Log("Effettuato controllo sulla musica");
+        if (changeMusic) { bgMusicManager.ChangeMusic(false); /*Debug.Log("Cambiata musica");*/ }
+        //Debug.Log("Effettuato controllo sulla musica");
     }
 
     //IUpdateData---------------------------------------------------------------------------------------------------------

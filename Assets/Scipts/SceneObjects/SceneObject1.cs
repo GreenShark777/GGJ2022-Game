@@ -33,13 +33,14 @@ public class SceneObject1 : MonoBehaviour
         terrainCollided = false;
         isExecuting = true;
         StartCoroutine(Fall());
+
     }
 
     IEnumerator Fall()
     {
         yield return new WaitForSeconds(beforeFallTime);
 
-        while(!terrainCollided)
+        while (!terrainCollided)
         {
             transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
             yield return null;

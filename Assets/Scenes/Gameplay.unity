@@ -205,7 +205,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &160286617
 PrefabInstance:
@@ -642,7 +642,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &347865307
 GameObject:
@@ -3505,7 +3505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3019972897362531381, guid: 68987adba0e4ce74db8c07cfeb449154, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3019972897362531381, guid: 68987adba0e4ce74db8c07cfeb449154, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3655,7 +3655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5814016868268630279, guid: d2879a0802c5c784385bd1bef48a83f3, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5814016868268630279, guid: d2879a0802c5c784385bd1bef48a83f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3947,10 +3947,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1692902379, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078300578244952323, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
+      propertyPath: attackRange
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3078300578244952323, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: specialAttackSlider
       value: 
       objectReference: {fileID: 2102714566}
+    - target: {fileID: 3679570832527477672, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
+      propertyPath: deathAnimationLimits.Array.data[1]
+      value: 961
+      objectReference: {fileID: 0}
     - target: {fileID: 4575795001643433994, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: g
       value: 
@@ -3967,6 +3979,10 @@ PrefabInstance:
       propertyPath: dualitySlider
       value: 
       objectReference: {fileID: 6227552299819350515}
+    - target: {fileID: 8731005623569892086, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8731005625130238304, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4026,7 +4042,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2249243852368370681, guid: 97aa712fb298ae1429a8316f57b8f8cd, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2249243852368370681, guid: 97aa712fb298ae1429a8316f57b8f8cd, type: 3}
       propertyPath: m_LocalPosition.x

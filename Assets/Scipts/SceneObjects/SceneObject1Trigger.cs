@@ -13,7 +13,10 @@ public class SceneObject1Trigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+
+        CollisionsManager cm = collision.GetComponent<CollisionsManager>();
+
+        if(/*collision.gameObject.CompareTag("Player")*/cm && cm.IsPlayer())
         {
             sceneObject.PlayerTrigger();
         }

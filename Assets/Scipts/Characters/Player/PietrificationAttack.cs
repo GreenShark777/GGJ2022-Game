@@ -171,7 +171,7 @@ public class PietrificationAttack : MonoBehaviour
     /// </summary>
     private void PetrifyEnemies()
     {
-        Debug.Log("Inizio pietrificazione");
+        //Debug.Log("Inizio pietrificazione");
         //array locale che conterrà tutti i collider dentro il raggio d'azione dell'attacco
         Collider2D[] overlaps = new Collider2D[NCOLLIDERS];
         //prende tutti i collider degli oggetti vicini al punto d'inizio dell'attacco in un cerchio con come diametro il raggio d'azione dell'attacco
@@ -198,11 +198,11 @@ public class PietrificationAttack : MonoBehaviour
                     //...se l'angolo è minore o uguale all' angolo massimo...
                     if (Angle <= maxAngle)
                     {
-                        Debug.LogError("Provato a pietrificare oggetto: " + objFound.name);
+                        //Debug.LogError("Provato a pietrificare oggetto: " + objFound.name);
                         //...si prova a pietrificare il nemico...
                         bool petrified = pv.TryToPetrify();
-                        //...se il nemico è stato pietrificato, comunica che è stato ucciso un nemico
-                        if (petrified) { pd.KilledAnEnemy(); }
+                        //...se il nemico è stato pietrificato(e non era un oggetto), comunica che è stato ucciso un nemico
+                        if (pv.IsAnEnemy() && petrified) { pd.KilledAnEnemy(); }
 
                     }
 

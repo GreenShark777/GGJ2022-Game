@@ -187,6 +187,7 @@ MonoBehaviour:
   enemyMask: {fileID: 0}
   petrifiedSprite: {fileID: 21300000, guid: 1c656aba0b0ec184b999c193c0d76e80, type: 3}
   isVulnerable: 1
+  isAnObject: 1
 --- !u!251 &8498039860937744031
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -311,3 +312,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4783423592297390425, guid: ad73e4c50fbba2b46bc5d20f940fa024, type: 3}
   m_PrefabInstance: {fileID: 2967426183701394818}
   m_PrefabAsset: {fileID: 0}
+--- !u!210 &6399820356680549636
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731633883202786523}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
