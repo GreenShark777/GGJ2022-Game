@@ -158,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 4135338002116118119}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.11, y: 0.22, z: 0.11}
+  m_LocalScale: {x: 0.11, y: 0.11, z: 0.11}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1103547640942961839}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e9d3c101834314291204f84bb8e47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedSprite: {fileID: 21300000, guid: d0713b4135ed3084c9ff333aa8da0c7b, type: 3}
+  activatedSprite: {fileID: 21300000, guid: 45ff4293aea779748a545d10e88ab5c9, type: 3}
 --- !u!212 &8441349937435985105
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -218,8 +218,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 3a9940869571fb545be4a72522a1b2ce, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: fc64f11904b480741939ca4601d41ff4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -281,6 +281,7 @@ MonoBehaviour:
   leftDoor: {fileID: 4237039257521293065}
   rightDoor: {fileID: 7288159845736929182}
   checkingDoor: 1
+  openingSpeed: 1
 --- !u!61 &4942638537706358037
 BoxCollider2D:
   m_ObjectHideFlags: 0
