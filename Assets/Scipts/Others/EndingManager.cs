@@ -16,6 +16,9 @@ public class EndingManager : MonoBehaviour, IUpdateData
     //riferimento allo sprite per il finale cattivo
     [SerializeField]
     private Sprite badEndingSprite = default;
+    //riferimento al gameObject del testo di nuovo highscore
+    [SerializeField]
+    private GameObject newHighScoreText = default;
 
 
     private void Start()
@@ -53,6 +56,9 @@ public class EndingManager : MonoBehaviour, IUpdateData
 
     public void UpdateData()
     {
+        //se non è un nuovo highscore, disattiva il testo che lo comunica
+        bool newHighscore = g.points > g.highscore;
+        if (!newHighscore) { newHighScoreText.SetActive(false); }
         //aggiorna l'highscore
         g.highscore = (g.points > g.highscore) ? g.points : g.highscore;
         g.points = 0;
