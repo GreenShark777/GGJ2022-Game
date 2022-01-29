@@ -109,6 +109,8 @@ public class GameManag : MonoBehaviour
             savedMusicVolume = 0;
             savedSfxVolume = 0;
             savedLanguage = 0;
+
+            highscore = 0;
             //Debug.LogError("Cancellati anche dati intoccabili");
         }
         //else { Debug.LogError("Cancellati solo dati di gameplay"); }
@@ -118,6 +120,7 @@ public class GameManag : MonoBehaviour
         savedHealth = 100;
         enemiesPetrified = 0;
         transformed = false;
+        points = 0;
 
         //tutti gli array vengono svuotati
         EmptyArrays();
