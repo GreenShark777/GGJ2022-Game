@@ -255,6 +255,8 @@ MonoBehaviour:
   scriptsToStop:
   - {fileID: 9164620618228651368}
   - {fileID: 205289854}
+  - {fileID: 8894563096137356024}
+  - {fileID: 8894563096137356021}
   sr: {fileID: 5443774282909860525}
   enemyMask: {fileID: 0}
   petrifiedSprite: {fileID: 21300000, guid: a4665646be7cbab4dad9dc1a5af29afa, type: 3}

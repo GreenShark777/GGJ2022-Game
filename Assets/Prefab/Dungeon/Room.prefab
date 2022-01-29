@@ -367,7 +367,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3019972897328610278}
   m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: -0, w: 0}
-  m_LocalPosition: {x: 14.877844, y: 4.6192, z: 0}
+  m_LocalPosition: {x: 15.72, y: 4.6192, z: 0}
   m_LocalScale: {x: 15.295465, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -532,8 +532,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3019972897473904831}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6386, y: 12.27, z: 0}
-  m_LocalScale: {x: 29.4785, y: 1, z: 1}
+  m_LocalPosition: {x: 1.0598, y: 12.27, z: 0}
+  m_LocalScale: {x: 30.321585, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7298285638895599808}
@@ -643,8 +643,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3019972897560830533}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6386, y: -2.57, z: 0}
-  m_LocalScale: {x: 29.4785, y: 1, z: 1}
+  m_LocalPosition: {x: 1.0598, y: -2.57, z: 0}
+  m_LocalScale: {x: 30.321585, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7298285638895599808}
@@ -754,7 +754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3019972898770769366}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -13.6, y: 4.6192, z: 0}
+  m_LocalPosition: {x: -13.94, y: 4.6192, z: 0}
   m_LocalScale: {x: 15.295465, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1458,6 +1458,10 @@ PrefabInstance:
     - target: {fileID: 4942638537706358043, guid: ed60d599fc3b96f44a58ec1462e8d2be, type: 3}
       propertyPath: m_Name
       value: CheckingDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371780306790774613, guid: ed60d599fc3b96f44a58ec1462e8d2be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.358
       objectReference: {fileID: 0}
     - target: {fileID: 8441349937435985105, guid: ed60d599fc3b96f44a58ec1462e8d2be, type: 3}
       propertyPath: m_SortingOrder
