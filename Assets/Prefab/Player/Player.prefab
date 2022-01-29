@@ -903,7 +903,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d8fe805918aa9924cb65c83955661837, type: 3}
   - {fileID: 21300000, guid: c7d1cb380cac0e843b397b82e2507d44, type: 3}
   idleAnimationLimits: 0000000034000000
-  animationSpeed: 0.016
+  animationSpeed: 0.05
   automatic: 0
   isLoop: 0
 --- !u!1 &7675265968060289744
@@ -1148,7 +1148,7 @@ MonoBehaviour:
   speed: 1.5
   maxVelocity: 5
   maxFallSpeed: 100
-  jumpForce: 500
+  jumpForce: 600
   jumpFallMultiplier: 2.5
   lowJumpMultiplier: 2
   walkAnimationLimits: 3500000063000000

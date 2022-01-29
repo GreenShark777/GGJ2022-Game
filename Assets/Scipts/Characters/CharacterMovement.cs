@@ -31,6 +31,10 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         runAnimationLimits = new int[2], //CORSA
         jumpAnimationLimits = new int[2]; //SALTO
 
+    //indica quanto veloce l'animazione di movimento deve andare
+    [SerializeField]
+    private float movementAnimationSpeed = 0.016f;
+
     private bool facingRight = true, //indica la rotazione del giocatore
         canJump = true; //indica se il giocatore può saltare o meno
 
@@ -81,6 +85,7 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         int[] limits = !running ? walkAnimationLimits : runAnimationLimits;
         //fa partire l'animazione di movimento(camminata o corsa)
         sam.StartNewAnimation(1, limits[0], limits[1]);
+        sam.SetAnimationSpeed(movementAnimationSpeed);
 
     }
 
@@ -189,6 +194,7 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
         {
             //...fa partire l'animazione di salto...
             sam.StartNewAnimation(2, jumpAnimationLimits[0], jumpAnimationLimits[1]);
+            sam.SetAnimationSpeed(movementAnimationSpeed);
             //...rimuove ogni forza di movimento nell'asse Y...
             rb.velocity = new Vector2(rb.velocity.x, 0);
             //...calcola la forza da aggiungere per far saltare il giocatore...

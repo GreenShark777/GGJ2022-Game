@@ -3355,10 +3355,6 @@ PrefabInstance:
       propertyPath: specialAttackSlider
       value: 
       objectReference: {fileID: 2102714566}
-    - target: {fileID: 3679570832527477672, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: animationSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 4575795001643433994, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: g
       value: 
