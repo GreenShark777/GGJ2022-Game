@@ -145,6 +145,9 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
         playerDmgColl.SetNewDamage(999);
         //cambia la luce attorno al giocatore
         playerLightSr.sprite = blackLightSprite;
+        //comunica che il giocatore si è trasformato
+        PlayerStateManager.hasTransformed = true;
+
         Debug.LogError("Cambiate statistiche e altro");
         Debug.LogError("APPENA SI HANNO LE ANIMAZIONI, CONTROLLARE SE BISOGNA CAMBIARE I LIMITI PER LE ANIMAZIONI");
     }

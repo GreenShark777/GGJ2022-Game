@@ -17,6 +17,9 @@ public class AttacksManager : MonoBehaviour
      */
     [SerializeField]
     private Vector2[] attacksAnimationLimits = default;
+    //indica quanto velocemente deve andare l'animazione d'attacco
+    [SerializeField]
+    private float attackAnimationSpeed = default;
     //indica se è già in corso un attacco o meno
     private bool isAttacking = false;
 
@@ -90,8 +93,9 @@ public class AttacksManager : MonoBehaviour
         if (comboIndex >= nCombos) { comboIndex = 0; }
         //crea nua variabile locale che contiene l'indice iniziale dello spritesheet d'attacco per l'indice della combo
         int animationStartIndex = (int)attacksAnimationLimits[comboIndex].x;
-        //infine, fa partire una nuova coroutine per l'animazione d'attacco attuale
-        sam.StartNewAnimation(1, animationStartIndex, (int)attacksAnimationLimits[comboIndex].y);
+        //infine, fa partire una nuova coroutine per l'animazione d'attacco attuale impostando la velocità adatta
+        sam.StartNewAnimation(2, animationStartIndex, (int)attacksAnimationLimits[comboIndex].y);
+        sam.SetAnimationSpeed(attackAnimationSpeed);
 
     }
     /// <summary>

@@ -12,6 +12,9 @@ public class PietrificationAttack : MonoBehaviour
     //riferimento al manager delle animazioni dello sprite
     [SerializeField]
     private SpriteAnimationManager sam = default;
+    //indica quanto velocemente deve andare l'animazione d'attacco
+    [SerializeField]
+    private float attackAnimationSpeed = default;
     //indica i limiti per l'animazione dell'attacco pietrificazione
     [SerializeField]
     private int[] pietrificationAnimationLimits = new int[2];
@@ -104,7 +107,7 @@ public class PietrificationAttack : MonoBehaviour
             if (isTransforming) { StopAllCoroutines(); }
             //...e fa partire la coroutine d'attacco
             StartCoroutine(ManagePietrificationAttackTiming(isTransforming));
-        
+
         }
 
     }
@@ -120,6 +123,7 @@ public class PietrificationAttack : MonoBehaviour
         int[] animationLimits = !isTransforming ? pietrificationAnimationLimits : transformationAnimationLimits;
         //fa partire l'animazione di attacco speciale del giocatore
         sam.StartNewAnimation(2, animationLimits[0], animationLimits[1], true);
+        sam.SetAnimationSpeed(attackAnimationSpeed);
         //fa partire una coroutine per il fadeIn dell'immagine di animazione
         StartCoroutine(FadeInOutImage(lightsOutAlpha, true));
         //aspetta metà del tempo d'attacco

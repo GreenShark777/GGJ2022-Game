@@ -93,4 +93,6 @@ public class CollisionsManager : MonoBehaviour
 
     public bool IsPlayer() { return thisCollType == CollisionType.player; }
 
+    public void GetCured(int amount) { healthManager.TakeDmg(-amount); }
+
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScriptedSceneOnCollision : MonoBehaviour, iScriptableScene
@@ -13,9 +14,9 @@ public class ScriptedSceneOnCollision : MonoBehaviour, iScriptableScene
 
     [Space]
     [Header("Timers")]
-    [SerializeField]
-    private float waitTimeAfterMoveCamera = 2f, // Tempo di attesa tra il movimento della camera sulla porta e l'apertura della stessa
-        waitTimeAfterDoorOpen = 2f; // Tempo di attesa tra l'apertura della porta ed il fade in del bianco
+    [SerializeField] private float waitTimeAfterMoveCamera = 2f; // Tempo di attesa tra il movimento della camera sulla porta e l'apertura della stessa
+    [SerializeField] private float waitTimeAfterDoorOpen = 2f; // Tempo di attesa tra l'apertura della porta ed il fade in del bianco
+    [SerializeField] private float waitTimeAfterFade = 2f; // Tempo di attesa tra il fade in bianco ed lo switch di scena
 
     private int fadeBoolHash = Animator.StringToHash("FadeIn");
 
@@ -49,10 +50,8 @@ public class ScriptedSceneOnCollision : MonoBehaviour, iScriptableScene
         yield return new WaitForSeconds(waitTimeAfterMoveCamera);
 
         // Avvia l'apertura della porta
-        Debug.Log("Apriti sesamo");
-
         if (doorBehaviour)
-            doorBehaviour.OpenDoor();
+            StartCoroutine(doorBehaviour.OpenDoor());
 
         yield return new WaitForSeconds(waitTimeAfterDoorOpen);
 
@@ -63,5 +62,9 @@ public class ScriptedSceneOnCollision : MonoBehaviour, iScriptableScene
 
         uiAnimator.speed = .5f;
         uiAnimator.SetBool(fadeBoolHash, true);
+
+        yield return new WaitForSeconds(waitTimeAfterFade);
+
+        SceneManager.LoadScene("Endings");
     }
 }

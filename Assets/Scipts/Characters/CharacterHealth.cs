@@ -63,6 +63,9 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
         // Dopo aver calcolato il nuovo valore, aggiorniamolo a schermo 
         UpdateSlider();
 
+        //se si sta ricevendo danno e non cura, fa partire l'animazione di danno
+        if (dmgValue < 0) { /*FAR PARTIRE ANIMAZIONE DI DANNO*/ }
+
         // Se la vita scende a 0 per la prima volta...
         if (currentHealth < 1 && !lostAllHealth)
         {
