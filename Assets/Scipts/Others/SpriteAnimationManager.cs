@@ -73,8 +73,9 @@ public class SpriteAnimationManager : MonoBehaviour
             if (PlayerStateManager.hasTransformed && priority < 100)
             {
                 //...cambia l'animazione in modo che usi invece la versione cattiva
+                int previousStartIndex = nextAnimationIndex;
                 nextAnimationIndex = lastAnimationIndex + 1;
-                lastAnimationIndex += nextAnimationIndex - 1;
+                lastAnimationIndex += (lastAnimationIndex - previousStartIndex)/* - 1*/;
                 Debug.LogWarning("Cambiato in -> " + nextAnimationIndex + " : " + lastAnimationIndex);
             }
 

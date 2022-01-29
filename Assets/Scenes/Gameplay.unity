@@ -3481,22 +3481,6 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 6227552299819350513}
-    - target: {fileID: 8070378814464694200, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: m_Size.x
-      value: 19.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8070378814464694200, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: m_Size.y
-      value: 10.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8070378814464694200, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 61528c1a9a8067f4c9f52eb8b3075081, type: 3}
-    - target: {fileID: 8070378814464694200, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8684965353633929664, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: g
       value: 
@@ -3508,10 +3492,6 @@ PrefabInstance:
     - target: {fileID: 8731005625130238304, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731005625130238306, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
-      propertyPath: speed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8731005625130238307, guid: 0b0fcbb2c3848754f928a626fb4cfca1, type: 3}
       propertyPath: m_RootOrder

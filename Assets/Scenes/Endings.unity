@@ -431,7 +431,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 354b697acd4c72f46b7c238f5afeb81e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   g: {fileID: 1473046707}
   transitionImage: {fileID: 2563183586545223476}
-  badEndingSprite: {fileID: 21300000, guid: bb5e25eff1ec2494597fc961374a3fb8, type: 3}
+  badEndingSprite: {fileID: 21300000, guid: f4c3b1fed499e6d42ae1bf5b165f3ffe, type: 3}
 --- !u!1 &1572261675
 GameObject:
   m_ObjectHideFlags: 0
