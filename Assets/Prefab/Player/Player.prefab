@@ -382,7 +382,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8.74, y: 13}
+  m_Size: {x: 20.400002, y: 23.082432}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1154,6 +1154,7 @@ MonoBehaviour:
   walkAnimationLimits: 3500000063000000
   runAnimationLimits: 6400000098000000
   jumpAnimationLimits: 99000000cd000000
+  movementAnimationSpeed: 0.016
   isPhysiqueDriven: 1
 --- !u!114 &7075149852685066865
 MonoBehaviour:
