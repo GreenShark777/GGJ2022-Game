@@ -1,5 +1,6 @@
 //Si occupa del movimento del giocatore
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterMovement : MonoBehaviour, INeedGroundCheck
 {
@@ -40,6 +41,7 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
 
     [SerializeField] private bool isPhysiqueDriven = true;
 
+    public UnityAction onLandedCallback;
 
     private void Start()
     {
@@ -216,6 +218,11 @@ public class CharacterMovement : MonoBehaviour, INeedGroundCheck
     /// <summary>
     /// Permette di impostare se il giocatore può saltare o meno
     /// </summary>
-    public void HasLanded(bool landed) { canJump = landed; }
+    public void HasLanded(bool landed) { 
+        canJump = landed;
+
+        if (canJump)
+            onLandedCallback?.Invoke();
+    }
 
 }
