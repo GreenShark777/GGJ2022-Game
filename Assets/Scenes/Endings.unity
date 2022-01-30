@@ -379,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8279576592334154531, guid: 795bcae7b7e84994a91034913c524a85, type: 3}
       propertyPath: m_Name
-      value: HighscoreText (TMP)
+      value: ScoreText (TMP)
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1742449810833471474, guid: 795bcae7b7e84994a91034913c524a85, type: 3}
@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   g: {fileID: 1473046707}
+  showHighscore: 0
 --- !u!1001 &1165052813
 PrefabInstance:
   m_ObjectHideFlags: 0

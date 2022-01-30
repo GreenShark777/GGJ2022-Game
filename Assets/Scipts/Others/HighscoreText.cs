@@ -10,15 +10,30 @@ public class HighscoreText : MonoBehaviour
     [SerializeField]
     private GameManag g = default;
 
+    [SerializeField]
+    private bool showHighscore = true;
 
-    private void Start()
+
+    private void Awake()
     {
         //ottiene il riferimento al testo di highscore
         highscoreText = GetComponent<TextMeshProUGUI>();
-        //se si ha un highscore, cambia il testo
-        if (g.highscore != 0) highscoreText.text = "Highscore: " + g.highscore;
-        //altrimenti disattiva il testo
-        else { gameObject.SetActive(false); }
+
+        if (!showHighscore) { g.OnGameLoad(SaveSystem.LoadGame()); highscoreText.text = "Score: " + g.points; }
+
+    }
+
+    private void Start()
+    {
+
+        if (showHighscore)
+        {
+            //se si ha un highscore, cambia il testo
+            if (g.highscore != 0) highscoreText.text = "Highscore: " + g.highscore;
+            //altrimenti disattiva il testo
+            else { gameObject.SetActive(false); }
+
+        }
 
     }
 

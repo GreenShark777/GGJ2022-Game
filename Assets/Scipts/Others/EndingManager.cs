@@ -21,6 +21,11 @@ public class EndingManager : MonoBehaviour, IUpdateData
     private GameObject newHighScoreText = default;
 
 
+    private void Awake()
+    {
+        //g.SaveDataAfterUpdate();
+    }
+
     private void Start()
     {
         //ottiene il riferimento all'immagine che mostra il finale ottenuto dal giocatore
@@ -60,13 +65,17 @@ public class EndingManager : MonoBehaviour, IUpdateData
 
     public void UpdateData()
     {
+        Debug.LogWarning(g.points + " : " + g.highscore);
+
         //se non è un nuovo highscore, disattiva il testo che lo comunica
         bool newHighscore = g.points > g.highscore;
         if (!newHighscore) { newHighScoreText.SetActive(false); }
         //aggiorna l'highscore
         g.highscore = (g.points > g.highscore) ? g.points : g.highscore;
-        g.points = 0;
+        //g.points = 0;
 
     }
+
+
 
 }
