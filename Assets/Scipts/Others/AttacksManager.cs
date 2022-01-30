@@ -94,7 +94,7 @@ public class AttacksManager : MonoBehaviour
         //crea nua variabile locale che contiene l'indice iniziale dello spritesheet d'attacco per l'indice della combo
         int animationStartIndex = (int)attacksAnimationLimits[comboIndex].x;
         //infine, fa partire una nuova coroutine per l'animazione d'attacco attuale impostando la velocità adatta
-        sam.StartNewAnimation(2, animationStartIndex, (int)attacksAnimationLimits[comboIndex].y);
+        sam.StartNewAnimation(3, animationStartIndex, (int)attacksAnimationLimits[comboIndex].y);
         sam.SetAnimationSpeed(attackAnimationSpeed);
 
     }

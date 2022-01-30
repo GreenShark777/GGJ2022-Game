@@ -122,7 +122,8 @@ public class PietrificationAttack : MonoBehaviour
         //prende i limiti dell'animazione da far fare al giocatore in base al parametro ricevuto
         int[] animationLimits = !isTransforming ? pietrificationAnimationLimits : transformationAnimationLimits;
         //fa partire l'animazione di attacco speciale del giocatore
-        sam.StartNewAnimation(100, animationLimits[0], animationLimits[1], true);
+        sam.StartNewAnimation(101, animationLimits[0], animationLimits[1], true);
+        sam.SetSpriteColor(Color.white);
         sam.SetAnimationSpeed(attackAnimationSpeed);
         //fa partire una coroutine per il fadeIn dell'immagine di animazione
         StartCoroutine(FadeInOutImage(lightsOutAlpha, true));

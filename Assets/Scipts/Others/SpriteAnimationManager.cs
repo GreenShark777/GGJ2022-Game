@@ -97,7 +97,7 @@ public class SpriteAnimationManager : MonoBehaviour
                     //...cambia l'animazione in modo che usi invece la versione cattiva
                     int previousStartIndex = nextAnimationIndex;
                     nextAnimationIndex = lastAnimationIndex + 1;
-                    lastAnimationIndex += (lastAnimationIndex - previousStartIndex)/* - 1*/;
+                    lastAnimationIndex += (lastAnimationIndex - previousStartIndex);
                     //Debug.LogWarning("Cambiato in -> " + nextAnimationIndex + " : " + lastAnimationIndex);
                 }
 

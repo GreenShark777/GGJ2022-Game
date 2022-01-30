@@ -106,7 +106,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
 
         sam.SetSpriteColor(Color.red);
 
-        sam.StartNewAnimation(3, (int)takenDmgAnimationLimits.x, (int)takenDmgAnimationLimits.y);
+        sam.StartNewAnimation(100, (int)takenDmgAnimationLimits.x, (int)takenDmgAnimationLimits.y);
 
         yield return new WaitForSeconds(1);
 
