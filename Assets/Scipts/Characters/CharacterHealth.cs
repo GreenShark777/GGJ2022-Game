@@ -8,6 +8,12 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
 {
     [Tooltip("Reference to the helth slider used by this character")]
     [SerializeField] private Slider healthSlider;
+
+    [SerializeField]
+    private SpriteAnimationManager sam = default;
+
+    [SerializeField]
+    private Vector2 takenDmgAnimationLimits = default;
     
     [Range(0, 100)] [SerializeField]
     private int maxHealth;
@@ -76,8 +82,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
         UpdateSlider();
 
         //se si sta ricevendo danno e non cura, fa partire l'animazione di danno
-        if (dmgValue < 0) { /*FAR PARTIRE ANIMAZIONE DI DANNO*/ }
-
+        if (dmgValue > 0) { StartCoroutine(ShowTakenDmg()); }
         // Se la vita scende a 0 per la prima volta...
         if (currentHealth < 1 && !lostAllHealth)
         {
@@ -94,6 +99,19 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
             if (tutorial is null) return;
                 tutorial.StartScene();
         }
+    }
+
+    private IEnumerator ShowTakenDmg()
+    {
+
+        sam.SetSpriteColor(Color.red);
+
+        sam.StartNewAnimation(3, (int)takenDmgAnimationLimits.x, (int)takenDmgAnimationLimits.y);
+
+        yield return new WaitForSeconds(1);
+
+        sam.SetSpriteColor(Color.white);
+
     }
 
     //IUpdateData---------------------------------------------------------------------------------------------------------

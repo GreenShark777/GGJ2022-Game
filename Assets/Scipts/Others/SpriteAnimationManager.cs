@@ -174,4 +174,6 @@ public class SpriteAnimationManager : MonoBehaviour
     /// <param name="newSpeed"></param>
     public void SetAnimationSpeed(float newSpeed) { animationSpeed = newSpeed; }
 
+    public void SetSpriteColor(Color newColor) { spriteToChange.color = newColor; }
+
 }

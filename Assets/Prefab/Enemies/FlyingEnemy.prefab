@@ -201,6 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 7191563508385526944}
+  sam: {fileID: 7918285859378219101}
+  takenDmgAnimationLimits: {x: 0, y: 0}
   maxHealth: 10
   pv: {fileID: 3730138669455094284}
   g: {fileID: 0}

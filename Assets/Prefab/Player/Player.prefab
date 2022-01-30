@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1692902380}
   - component: {fileID: 351111674669959794}
   - component: {fileID: 1692902381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerGroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1429,7 +1429,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c735b71cfaa571e4c8adaf25031dabf5, type: 3}
   - {fileID: 21300000, guid: 8c9b96f82bb106f4d91055ee18572b92, type: 3}
   idleAnimationLimits: 0000000034000000
-  deathAnimationLimits: aa030000c2030000
+  deathAnimationLimits: aa030000c1030000
   animationSpeed: 0.05
   automatic: 0
   isLoop: 0
@@ -1529,7 +1529,7 @@ GameObject:
   - component: {fileID: 8731005623569892087}
   - component: {fileID: 8676037853515517189}
   - component: {fileID: 1659035275238692346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCollisionsManager
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   speed: 5
   maxVelocity: 5
   maxFallSpeed: 100
-  jumpForce: 600
+  jumpForce: 650
   jumpFallMultiplier: 2.5
   lowJumpMultiplier: 2
   walkAnimationLimits: 6a00000098000000
@@ -1729,7 +1729,7 @@ MonoBehaviour:
   attackDuration: 4
   lightsOutAlpha: 0.7
   fadeInOutRatio: 0.08
-  attackRange: 12.5
+  attackRange: 15
   maxAngle: 75
 --- !u!114 &8731005625130238332
 MonoBehaviour:
@@ -1757,6 +1757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
+  sam: {fileID: 3679570832527477672}
+  takenDmgAnimationLimits: {x: 921, y: 937}
   maxHealth: 100
   pv: {fileID: 0}
   g: {fileID: 0}
