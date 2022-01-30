@@ -126,7 +126,7 @@ public class DoorsBehaviour : MonoBehaviour
             //...attiva il contatore corrispondente...
             allCounters[removedMasks - 1].ActivateThis();
 
-            SFXManager.PlayNewSFX(activatedCounterClip);
+            if (activatedCounterClip) SFXManager.PlayNewSFX(activatedCounterClip);
 
             //...e controlla se ci sono ancora nemici con la maschera
             CheckForEnemiesWithMasks();

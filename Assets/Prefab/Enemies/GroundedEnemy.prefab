@@ -545,7 +545,7 @@ MonoBehaviour:
   checkMinDist: 0.2
   isMoveGrounded: 1
   peacefulMode: 0
-  spotRange: 3
+  spotRange: 6
   attackCollider: {fileID: 2998159248092290003}
   enemySam: {fileID: 8700127324224194790}
   attackRange: 2

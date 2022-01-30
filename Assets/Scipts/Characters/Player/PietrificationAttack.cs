@@ -134,14 +134,14 @@ public class PietrificationAttack : MonoBehaviour
         //fa partire una coroutine per il fadeIn dell'immagine di animazione
         StartCoroutine(FadeInOutImage(lightsOutAlpha, true));
 
-        SFXManager.PlayNewSFX(darknessClip);
+        if (darknessClip) SFXManager.PlayNewSFX(darknessClip);
 
         //aspetta metà del tempo d'attacco
         yield return new WaitForSecondsRealtime(attackDuration / 2);
         //pietrifica i nemici di fronte al giocatore
         PetrifyEnemies();
 
-        SFXManager.PlayNewSFX(petrificationClip);
+        if (petrificationClip) SFXManager.PlayNewSFX(petrificationClip);
 
         //aspetta che finisca l'attacco
         yield return new WaitForSecondsRealtime(attackDuration / 2);

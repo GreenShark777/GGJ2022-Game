@@ -65,7 +65,7 @@ public class SpriteAnimationManager : MonoBehaviour
         }
 
         //se l'animazione da fare è automatica, fa partire l'animazione dall'inizio alla fine
-        if (automatic) { StartNewAnimation(0, 0, idleAnimationLimits[1], false); }
+        if (startAutomatic) { StartNewAnimation(0, 0, idleAnimationLimits[1], false); }
 
     }
 
