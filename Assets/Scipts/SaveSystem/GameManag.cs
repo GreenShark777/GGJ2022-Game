@@ -188,7 +188,7 @@ public class GameManag : MonoBehaviour
         //carica la scena del menù principale
         SceneChange.StaticGoToScene("MainMenu");
 
-        Debug.LogError("CANCELLATI TUTTI I DATI!");
+        //Debug.LogError("CANCELLATI TUTTI I DATI!");
     }
 
     private void OnDestroy()
