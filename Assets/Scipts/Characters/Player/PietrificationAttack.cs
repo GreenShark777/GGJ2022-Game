@@ -9,6 +9,12 @@ public class PietrificationAttack : MonoBehaviour
     private const int NCOLLIDERS = 50;
 
     [Header("References")]
+
+    [SerializeField]
+    private AudioClip darknessClip = default;
+    [SerializeField]
+    private AudioClip petrificationClip = default;
+
     //riferimento al manager delle animazioni dello sprite
     [SerializeField]
     private SpriteAnimationManager sam = default;
@@ -127,10 +133,16 @@ public class PietrificationAttack : MonoBehaviour
         sam.SetAnimationSpeed(attackAnimationSpeed);
         //fa partire una coroutine per il fadeIn dell'immagine di animazione
         StartCoroutine(FadeInOutImage(lightsOutAlpha, true));
+
+        SFXManager.PlayNewSFX(darknessClip);
+
         //aspetta metà del tempo d'attacco
         yield return new WaitForSecondsRealtime(attackDuration / 2);
         //pietrifica i nemici di fronte al giocatore
         PetrifyEnemies();
+
+        SFXManager.PlayNewSFX(petrificationClip);
+
         //aspetta che finisca l'attacco
         yield return new WaitForSecondsRealtime(attackDuration / 2);
         //toglie il gioco dalla pausa

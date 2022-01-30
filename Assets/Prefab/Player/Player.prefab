@@ -1696,6 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ee66435a49a10478d43731a0fc6515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSfx: {fileID: 8300000, guid: 14d7cab1d20ef7b418595f6ed3a3e8d9, type: 3}
   attackColl: {fileID: 3023962816041899087}
   sam: {fileID: 3679570832527477672}
   attacksAnimationLimits:
@@ -1717,6 +1718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73fb1b9b6e524044d9365f0d886ab85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  darknessClip: {fileID: 8300000, guid: 4efe6a18d9ca7ac44bafb212366f532a, type: 3}
+  petrificationClip: {fileID: 8300000, guid: bc1f75bf4dc27ae4eb4e9f089fbaa18b, type: 3}
   sam: {fileID: 3679570832527477672}
   attackAnimationSpeed: 0.04
   pietrificationAnimationLimits: d902000038030000
@@ -1757,6 +1760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
+  takenDmgClip: {fileID: 8300000, guid: 086dd52708eb59f43a6e6e83cf2c36b8, type: 3}
   sam: {fileID: 3679570832527477672}
   takenDmgAnimationLimits: {x: 921, y: 937}
   maxHealth: 100
@@ -1815,4 +1819,4 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2

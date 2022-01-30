@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6060506d47d1c7d4abde2d95d2f9b9a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activatedCounterClip: {fileID: 8300000, guid: b6b7c557a9579594ea0bdada442ef7ba, type: 3}
   adviseTextAnim: {fileID: 0}
   leftDoor: {fileID: 4237039257521293065}
   rightDoor: {fileID: 7288159845736929182}

@@ -66,7 +66,7 @@ public class PlayerDuality : MonoBehaviour, IUpdateData
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F2)) { KilledAnEnemy(); }
+        //if (Input.GetKeyDown(KeyCode.F2)) { KilledAnEnemy(); }
         //Debug.LogError("RICORDA: NON VIENE FATTA ANCORA BENE L'ANIMAZIONE DI TRASFORMAZIONE");
     }
 

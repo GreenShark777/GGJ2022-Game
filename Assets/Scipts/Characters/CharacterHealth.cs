@@ -10,6 +10,9 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
     [SerializeField] private Slider healthSlider;
 
     [SerializeField]
+    private AudioClip takenDmgClip = default;
+
+    [SerializeField]
     private SpriteAnimationManager sam = default;
 
     [SerializeField]
@@ -103,6 +106,8 @@ public class CharacterHealth : MonoBehaviour, IDamageable, IUpdateData
 
     private IEnumerator ShowTakenDmg()
     {
+
+        if (takenDmgClip) SFXManager.PlayNewSFX(takenDmgClip);
 
         sam.SetSpriteColor(Color.red);
 

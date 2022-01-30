@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DoorsBehaviour : MonoBehaviour
 {
+
+    [SerializeField]
+    private AudioClip activatedCounterClip = default;
+
     //riferimento al contenitore dei contatori di nemici
     private Transform countersContainer;
     //array di riferimenti agli script dei contatori di nemici
@@ -121,6 +125,9 @@ public class DoorsBehaviour : MonoBehaviour
             removedMasks++;
             //...attiva il contatore corrispondente...
             allCounters[removedMasks - 1].ActivateThis();
+
+            SFXManager.PlayNewSFX(activatedCounterClip);
+
             //...e controlla se ci sono ancora nemici con la maschera
             CheckForEnemiesWithMasks();
 

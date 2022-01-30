@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AttacksManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private AudioClip attackSfx = default;
     //riferimento al gameObject con il collider di danno
     [SerializeField]
     private GameObject attackColl = default;
@@ -70,6 +73,9 @@ public class AttacksManager : MonoBehaviour
         ManageCombos();
         //attiva il collider d'attacco
         attackColl.SetActive(true);
+
+        if (attackSfx) SFXManager.PlayNewSFX(attackSfx);
+
         //aspetta il tempo che finisce l'attacco
         yield return new WaitForSeconds(endOfAttack);
         //disattiva il collider d'attacco

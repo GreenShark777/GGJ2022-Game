@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2d413aacae96549a76b4c59257bf74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maskBreakClip: {fileID: 8300000, guid: 05b07cc508b3e78418cefee9cfd0ce76, type: 3}
   scriptsToStop:
   - {fileID: 2743075167701147107}
   - {fileID: 8700127324224194790}
@@ -520,6 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 6636117617811047607}
+  takenDmgClip: {fileID: 8300000, guid: 086dd52708eb59f43a6e6e83cf2c36b8, type: 3}
   sam: {fileID: 8700127324224194790}
   takenDmgAnimationLimits: {x: 0, y: 0}
   maxHealth: 10
@@ -580,7 +582,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!1 &2825733956320429864
 GameObject:
   m_ObjectHideFlags: 0
