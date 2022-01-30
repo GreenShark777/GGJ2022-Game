@@ -21,15 +21,14 @@ public class RoomsBehaviour : MonoBehaviour
     {
         //informa i nemici della stanza in cui si trovano
         InformEnemiesOfTheirRoom();
-
+        //la stanza viene disattivata, in modo che non sia visibile finchè il giocatore non ci entri
+        gameObject.SetActive(false);
     }
 
     private void Start()
     {
         //comunica alla porta di controllo la stanza in cui si trova
         checkingDoor.SetOwnRoomID(roomID);
-        //la stanza viene disattivata, in modo che non sia visibile finchè il giocatore non ci entri
-        gameObject.SetActive(false);
 
     }
 
